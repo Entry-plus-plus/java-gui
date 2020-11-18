@@ -8,6 +8,9 @@ public class GUI extends JDialog {
 
 
     public void LoggedIn(){
-        Rooms room = new Rooms();
+        Dashboard dashboard = new Dashboard();
+    }
+    public void viewRooms(){
+        Rooms rooms = new Rooms();
     }
 }
