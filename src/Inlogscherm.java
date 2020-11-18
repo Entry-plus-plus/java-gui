@@ -15,7 +15,7 @@ public class Inlogscherm extends GUI{
         setSize(300,200);
         setVisible(true);
 
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener() { //dit is wat er gebeurt als je op de login knop drukt
             public void actionPerformed(ActionEvent e) {
                 Login();
             }
@@ -23,8 +23,8 @@ public class Inlogscherm extends GUI{
     }
     public void Login() {
         if (Username.getText().equals("user")) {
-            dispose();
-            LoggedIn();
+            dispose(); //Inlogscherm wordt afgesloten
+            LoggedIn(); //method uit GUI, start Rooms op
         }
         else {
             WrongUserText.setText("Wrong username");
