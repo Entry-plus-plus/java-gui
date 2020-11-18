@@ -7,7 +7,10 @@ public class GUI extends JDialog {
     }
 
 
-    public void LoggedIn(){ //deze wordt aangeroepen van uit Inlogscherm
-        Rooms room = new Rooms();
+    public void LoggedIn(){
+        Dashboard dashboard = new Dashboard();
+    }
+    public void viewRooms(){
+        Rooms rooms = new Rooms();
     }
 }
