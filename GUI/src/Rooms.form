@@ -55,7 +55,7 @@
               <text value="room 4"/>
             </properties>
           </component>
-          <component id="41142" class="javax.swing.JLabel" binding="room1amount">
+          <component id="41142" class="javax.swing.JLabel" binding="room1Amount">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -71,7 +71,7 @@
               <text value="/"/>
             </properties>
           </component>
-          <component id="99854" class="javax.swing.JLabel" binding="room1max">
+          <component id="99854" class="javax.swing.JLabel" binding="room1Max">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -79,13 +79,13 @@
               <text value="10"/>
             </properties>
           </component>
-          <component id="a81" class="javax.swing.JProgressBar" binding="progressBar1" default-binding="true">
+          <component id="a81" class="javax.swing.JProgressBar" binding="room1ProgressBar">
             <constraints>
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="dc7cd" class="javax.swing.JButton" binding="plusbutton">
+          <component id="dc7cd" class="javax.swing.JButton" binding="room1PlusButton">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -93,7 +93,7 @@
               <text value="++"/>
             </properties>
           </component>
-          <component id="77de9" class="javax.swing.JButton" binding="minusbutton">
+          <component id="77de9" class="javax.swing.JButton" binding="room1MinusButton">
             <constraints>
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -101,12 +101,142 @@
               <text value="--"/>
             </properties>
           </component>
-          <component id="78636" class="javax.swing.JLabel" binding="alert">
+          <component id="56a64" class="javax.swing.JLabel" binding="room2Amount">
             <constraints>
-              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value=" "/>
+              <text value="0"/>
+            </properties>
+          </component>
+          <component id="a2908" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="/"/>
+            </properties>
+          </component>
+          <component id="ab30e" class="javax.swing.JLabel" binding="room2Max">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="20"/>
+            </properties>
+          </component>
+          <component id="5d4da" class="javax.swing.JProgressBar" binding="room2ProgressBar">
+            <constraints>
+              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="157c0" class="javax.swing.JButton" binding="room2PlusButton">
+            <constraints>
+              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="++"/>
+            </properties>
+          </component>
+          <component id="55bb4" class="javax.swing.JButton" binding="room2MinusButton">
+            <constraints>
+              <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="--"/>
+            </properties>
+          </component>
+          <component id="fc804" class="javax.swing.JLabel" binding="room3Amount">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="0"/>
+            </properties>
+          </component>
+          <component id="feb9d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="/"/>
+            </properties>
+          </component>
+          <component id="45676" class="javax.swing.JLabel" binding="room3Max">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="15"/>
+            </properties>
+          </component>
+          <component id="84fe" class="javax.swing.JLabel" binding="room4Amount">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="0"/>
+            </properties>
+          </component>
+          <component id="15511" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="/"/>
+            </properties>
+          </component>
+          <component id="60446" class="javax.swing.JLabel" binding="room4Max">
+            <constraints>
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="30"/>
+            </properties>
+          </component>
+          <component id="9c45b" class="javax.swing.JProgressBar" binding="room3ProgressBar">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="95233" class="javax.swing.JProgressBar" binding="room4ProgressBar">
+            <constraints>
+              <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="d7d66" class="javax.swing.JButton" binding="room3PlusButton">
+            <constraints>
+              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="++"/>
+            </properties>
+          </component>
+          <component id="1ba23" class="javax.swing.JButton" binding="room3MinusButton">
+            <constraints>
+              <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="--"/>
+            </properties>
+          </component>
+          <component id="e8383" class="javax.swing.JButton" binding="room4PlusButton">
+            <constraints>
+              <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="++"/>
+            </properties>
+          </component>
+          <component id="925f3" class="javax.swing.JButton" binding="room4MinusButton">
+            <constraints>
+              <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="--"/>
             </properties>
           </component>
         </children>
