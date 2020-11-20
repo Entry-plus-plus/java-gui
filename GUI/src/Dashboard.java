@@ -11,13 +11,13 @@ public class Dashboard extends GUI{
     private JPanel mainview;
     private JLabel entryLabel;
     private JTable table1;
+    private JPanel tablePanel;
 
     public Dashboard() {
         setContentPane(mainview);
         setSize(900,600);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
         roomsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,6 +25,7 @@ public class Dashboard extends GUI{
                 viewRooms();
             }
         });
+
 //        Notificaties.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -64,5 +65,16 @@ public class Dashboard extends GUI{
 //
 //            }
 //        });
+
+    }
+
+    public void setData(Dashboard data) {
+    }
+
+    public void getData(Dashboard data) {
+    }
+
+    public boolean isModified(Dashboard data) {
+        return false;
     }
 }

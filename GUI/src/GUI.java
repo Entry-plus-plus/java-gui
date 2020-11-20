@@ -3,7 +3,8 @@ import javax.swing.*;
 public class GUI extends JDialog {
 
     public static void main(String[] args) {
-        Inlogscherm inlogscherm = new Inlogscherm();
+        //Inlogscherm inlogscherm = new Inlogscherm();
+        Dashboard dashboard = new Dashboard();
     }
 
 
