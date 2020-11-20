@@ -5,18 +5,18 @@ import java.awt.event.ActionListener;
 
 public class Rooms extends GUI {
 
-    private JPanel roomsPanel = new JPanel();
+    public JPanel roomsPanel = new JPanel();
 
 
     public Rooms(int numberOfRooms) {
         add(roomsPanel);
 
         //int numberOfRooms = 5;
-        Room[] rooms = new Room[numberOfRooms]; //maakt een array waar de Rooms in komen te staan
+        //Room[] rooms = new Room[numberOfRooms]; //maakt een array waar de Rooms in komen te staan
         roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
         for (int i = 0; i < numberOfRooms; i++) {
-            rooms[i] = new Room();      //vult de array met nieuwe Rooms
-            rooms[i].setRoomName("room" + i);
+            //rooms[i] = new Room();      //vult de array met nieuwe Rooms
+            rooms[i].setRoomName("room " + (i+1));
             roomsPanel.add(new JLabel(" "));
             roomsPanel.add(new JLabel(rooms[i].roomName.getText()));
             roomsPanel.add(rooms[i].amountLabel);
@@ -31,7 +31,7 @@ public class Rooms extends GUI {
         setContentPane(roomsPanel);
         setSize(800,200);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
-        setVisible(true);
+        //setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }

@@ -1,11 +1,23 @@
 import javax.swing.*;
 import java.awt.GridLayout;
 
+
 public class GUI extends JDialog {
 
+    static int numberOfRooms = 5;
+    static Room[] rooms = new Room[numberOfRooms];
+
     public static void main(String[] args) {
+
+
+        for (int i = 0; i<numberOfRooms; i++) {
+            rooms[i] = new Room();
+        }
+
+        Dashboard dashboard = new Dashboard();
+
         //Inlogscherm inlogscherm = new Inlogscherm();
-        Rooms rooms = new Rooms(10);
+        //Rooms rooms = new Rooms(10);
         /*Notifications notifications = new Notifications();
         notifications.addNotification("test");
 
@@ -21,6 +33,7 @@ public class GUI extends JDialog {
     }
     public void viewRooms(){
         Rooms rooms = new Rooms(5);
+        rooms.setVisible(true);
     }
 
     public static void createNotification(String message) {

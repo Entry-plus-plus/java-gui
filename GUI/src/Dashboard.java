@@ -14,7 +14,13 @@ public class Dashboard extends GUI{
     private JPanel tablePanel;
 
     public Dashboard() {
-        setContentPane(mainview);
+        //setContentPane(mainview);
+        JPanel test = new JPanel();
+        setContentPane(test);
+        test.setLayout(new BoxLayout(test, BoxLayout.X_AXIS));
+        test.add(mainview);
+        Rooms rooms = new Rooms(5);
+        test.add(rooms.roomsPanel);
         setSize(900,600);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
