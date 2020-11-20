@@ -5,39 +5,39 @@ import java.awt.GridLayout;
 public class GUI extends JDialog {
 
     static int numberOfRooms = 5;
-    static Room[] rooms = new Room[numberOfRooms];
+    static Inlogscherm inlogscherm = new Inlogscherm();
+
+    static Room[] rooms;
+    static Notifications notifications = new Notifications();
 
     public static void main(String[] args) {
 
-
-        for (int i = 0; i<numberOfRooms; i++) {
-            rooms[i] = new Room();
-        }
-
+        rooms = createRooms(5); //maakt een array gevuld met Rooms
         Dashboard dashboard = new Dashboard();
 
-        //Inlogscherm inlogscherm = new Inlogscherm();
-        //Rooms rooms = new Rooms(10);
-        /*Notifications notifications = new Notifications();
-        notifications.addNotification("test");
-
-        notifications.addNotification("hello");
-        for (int i=0; i<5; i++) {
-            System.out.println(notifications.notifications[i]);
-        }*/
     }
 
+    public void viewInlogscherm() {
+        inlogscherm.setVisible(true);
+    }
 
     public void viewDashboard(){
         Dashboard dashboard = new Dashboard();
     }
     public void viewRooms(){
-        Rooms rooms = new Rooms(5);
+        Rooms rooms = new Rooms();
         rooms.setVisible(true);
     }
 
     public static void createNotification(String message) {
-        //code waarmee message aan het notification scherm toegevoegd wordt
-        System.out.println(message); //tijdelijke oplossing
+        notifications.addNotification(message);
+    }
+
+    public static Room[] createRooms(int numberOfRooms) {
+        Room[] rooms = new Room[numberOfRooms];
+        for (int i = 0; i<numberOfRooms; i++) {
+            rooms[i] = new Room();
+        }
+        return rooms;
     }
 }

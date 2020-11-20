@@ -14,7 +14,7 @@ public class Inlogscherm extends GUI {
         setContentPane(Inlogscherm);
         //setSize(300,200);
         setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
-        setVisible(true);
+        //setVisible(true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         loginButton.addActionListener(new ActionListener() {

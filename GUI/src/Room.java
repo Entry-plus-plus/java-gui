@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 public class Room {
     int amount = 0;
     int max = 10;
-    Boolean notificationAlreadySent = false;
 
     JLabel roomName = new JLabel();
     JLabel amountLabel = new JLabel(""+amount);
@@ -22,9 +21,8 @@ public class Room {
     public void plus(){
         amount++;
         updateLabelValues();
-        if (amount > max &&! notificationAlreadySent) {
+        if (amount > max && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
             GUI.createNotification("WARNING: Too many people in " + roomName.getText());
-            notificationAlreadySent = true;
         }
     }
     public void minus() {
@@ -33,8 +31,7 @@ public class Room {
             amount = 0;
         }
         else if (amount == 10) {
-            GUI.createNotification(roomName.getText() + " now has a normal amount of people");
-            notificationAlreadySent = false;
+            GUI.notifications.listModel.removeElement("WARNING: Too many people in " + roomName.getText());
         }
         updateLabelValues();
     }

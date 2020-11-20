@@ -10,17 +10,18 @@ public class Dashboard extends GUI{
     private JButton contactButton;
     private JPanel mainview;
     private JLabel entryLabel;
-    private JTable table1;
-    private JPanel tablePanel;
+
 
     public Dashboard() {
         //setContentPane(mainview);
         JPanel test = new JPanel();
         setContentPane(test);
-        test.setLayout(new BoxLayout(test, BoxLayout.X_AXIS));
+        test.setLayout(new BoxLayout(test, BoxLayout.Y_AXIS));
         test.add(mainview);
-        Rooms rooms = new Rooms(5);
+        Rooms rooms = new Rooms();
         test.add(rooms.roomsPanel);
+        test.add(notifications.notificationsPanel);
+
         setSize(900,600);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

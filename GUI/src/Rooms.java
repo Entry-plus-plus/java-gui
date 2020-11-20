@@ -8,7 +8,7 @@ public class Rooms extends GUI {
     public JPanel roomsPanel = new JPanel();
 
 
-    public Rooms(int numberOfRooms) {
+    public Rooms() {
         add(roomsPanel);
 
         //int numberOfRooms = 5;
