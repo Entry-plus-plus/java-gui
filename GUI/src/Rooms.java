@@ -29,8 +29,8 @@ public class Rooms extends GUI {
         }
 
         setContentPane(roomsPanel);
-        //setSize(600,500);
-        setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+        setSize(800,200);
+        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
