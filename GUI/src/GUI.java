@@ -5,15 +5,17 @@ import java.awt.GridLayout;
 public class GUI extends JDialog {
 
     static int numberOfRooms = 5;
-    static Inlogscherm inlogscherm = new Inlogscherm();
-
+    static Inlogscherm inlogscherm;
     static Room[] rooms;
-    static Notifications notifications = new Notifications();
+    static Notifications notifications;
+    static Dashboard dashboard;
 
     public static void main(String[] args) {
 
-        rooms = createRooms(5); //maakt een array gevuld met Rooms
-        Dashboard dashboard = new Dashboard();
+        inlogscherm = new Inlogscherm();
+        rooms = createRooms(numberOfRooms); //maakt een array gevuld met Rooms
+        notifications = new Notifications();
+        dashboard = new Dashboard();
 
     }
 

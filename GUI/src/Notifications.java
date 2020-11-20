@@ -12,6 +12,7 @@ public class Notifications extends GUI{
 
     public Notifications() {
 
+        listModel.addElement("NOTIFICATIONS:");
         add(notificationsPanel);
         notificationsPanel.add(list);
         //setContentPane(notificationsPanel);
@@ -24,9 +25,5 @@ public class Notifications extends GUI{
 
     public void addNotification(String message) {
         listModel.addElement(message);
-        /*for (int i = numberOfNotifications-1; i>0; i--) {
-            notifications[i] = notifications[i-1];
-        }
-        notifications[0] = message;*/
     }
 }
