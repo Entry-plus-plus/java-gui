@@ -7,15 +7,17 @@ public class Rooms extends GUI {
 
     private JPanel roomsPanel = new JPanel();
 
-    public Rooms() {
+
+    public Rooms(int numberOfRooms) {
         add(roomsPanel);
 
-        int numberOfRooms = 5;
+        //int numberOfRooms = 5;
         Room[] rooms = new Room[numberOfRooms]; //maakt een array waar de Rooms in komen te staan
-        roomsPanel.setLayout(new GridLayout(numberOfRooms, 7));
+        roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
         for (int i = 0; i < numberOfRooms; i++) {
             rooms[i] = new Room();      //vult de array met nieuwe Rooms
             rooms[i].setRoomName("room" + i);
+            roomsPanel.add(new JLabel(" "));
             roomsPanel.add(new JLabel(rooms[i].roomName.getText()));
             roomsPanel.add(rooms[i].amountLabel);
             roomsPanel.add(new JLabel("/"));

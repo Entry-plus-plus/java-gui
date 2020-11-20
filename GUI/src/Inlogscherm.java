@@ -12,8 +12,10 @@ public class Inlogscherm extends GUI {
 
     public Inlogscherm() {
         setContentPane(Inlogscherm);
-        setSize(300,200);
+        //setSize(300,200);
+        setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
         setVisible(true);
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -22,7 +24,7 @@ public class Inlogscherm extends GUI {
                 String password = passwordField.getText();
                 if (usernameField.getText().equals("user") && password.equals("password")) {
                     dispose();
-                    LoggedIn();
+                    viewDashboard();
                 }
                 else {
                     response.setText("Go away");
