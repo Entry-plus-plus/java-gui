@@ -14,6 +14,9 @@ public class GUI extends JDialog {
     static Floor floor1;
     static Rooms rooms;
 
+    //dit is een variabele die aangeeft welke window er op dit moment geopend is
+    static GUI openedWindow;
+
     //static topButtons buttonsPanel = new topButtons();
 
     public static void main(String[] args) {
@@ -36,17 +39,25 @@ public class GUI extends JDialog {
     public static void viewInlogscherm() {
         inlogscherm = new Inlogscherm();
         inlogscherm.setVisible(true);
+        openedWindow = inlogscherm;
     }
 
     public static void viewDashboard(){
+        //maakt dashboard en maakt het zichtbaar
         dashboard = new Dashboard();
         dashboard.setVisible(true);
-        rooms.dispose();
+
+        //past aan welke window nu open is, en sluit de vorige af
+        GUI lastOpenedWindow = openedWindow;
+        openedWindow = dashboard;
+        lastOpenedWindow.dispose();
     }
     public static void viewRooms(){
         rooms = new Rooms();
         rooms.setVisible(true);
-        dashboard.dispose();
+                GUI lastOpenedWindow = openedWindow;
+        openedWindow = rooms;
+        lastOpenedWindow.dispose();
     }
 
     //met deze functie kan een notificatie aangemaakt worden om in het notifications panel gezet te worden

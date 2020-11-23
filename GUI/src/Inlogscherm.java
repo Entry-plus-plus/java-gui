@@ -19,8 +19,10 @@ public class Inlogscherm extends GUI {
         setContentPane(Inlogscherm);
 
         //grootte van inlogscherm bepalen
-        //setSize(300,200);
-        setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+        setSize(300,200);
+        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+
+        //setLocationRelativeTo(null);
 
         //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
         //setVisible(true);
