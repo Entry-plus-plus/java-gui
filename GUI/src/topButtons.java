@@ -16,14 +16,15 @@ public class topButtons extends GUI {
 
     public topButtons() {
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        buttonsPanel.add(entryLabel);
+        //buttonsPanel.add(entryLabel);
         buttonsPanel.add(dashboardButton);
         buttonsPanel.add(roomsButton);
         buttonsPanel.add(settingsButton);
         buttonsPanel.add(dataButton);
         buttonsPanel.add(contactButton);
 
-        //zorgt dat je met de dashboardknop naar het dashboard gaat
+        //onderstaande methods zorgen dat de knoppen naar de juiste window gaan
+
         dashboardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,7 +32,6 @@ public class topButtons extends GUI {
             }
         });
 
-        //zorgt dat je met de rooms knop naar de rooms gaat
         roomsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,6 +39,25 @@ public class topButtons extends GUI {
             }
         });
 
-        //andere knoppen moeten nog geimplementeerd worden
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewSettings();
+            }
+        });
+
+        dataButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewData();
+            }
+        });
+
+        contactButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewContact();
+            }
+        });
     }
 }

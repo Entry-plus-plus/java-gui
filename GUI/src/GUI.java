@@ -13,6 +13,9 @@ public class GUI extends JDialog {
     static Dashboard dashboard;
     static Floor floor1;
     static Rooms rooms;
+    static Settings settings;
+    static Data data;
+    static Contact contact;
 
     //dit is een variabele die aangeeft welke window er op dit moment geopend is
     static GUI openedWindow;
@@ -55,8 +58,32 @@ public class GUI extends JDialog {
     public static void viewRooms(){
         rooms = new Rooms();
         rooms.setVisible(true);
-                GUI lastOpenedWindow = openedWindow;
+        GUI lastOpenedWindow = openedWindow;
         openedWindow = rooms;
+        lastOpenedWindow.dispose();
+    }
+
+    public static void viewSettings(){
+        settings = new Settings();
+        settings.setVisible(true);
+        GUI lastOpenedWindow = openedWindow;
+        openedWindow = settings;
+        lastOpenedWindow.dispose();
+    }
+
+    public static void viewData(){
+        data = new Data();
+        data.setVisible(true);
+        GUI lastOpenedWindow = openedWindow;
+        openedWindow = data;
+        lastOpenedWindow.dispose();
+    }
+
+    public static void viewContact(){
+        contact = new Contact();
+        contact.setVisible(true);
+        GUI lastOpenedWindow = openedWindow;
+        openedWindow = contact;
         lastOpenedWindow.dispose();
     }
 

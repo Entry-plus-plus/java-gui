@@ -14,6 +14,7 @@ public class Inlogscherm extends GUI {
 
 
     public Inlogscherm() {
+        setTitle("Entry++ - Login");
 
         //standaardcode als je zo'n form maakt, weet eigenlijk niet precies wat het doet
         setContentPane(Inlogscherm);
@@ -22,7 +23,8 @@ public class Inlogscherm extends GUI {
         setSize(300,200);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
 
-        //setLocationRelativeTo(null);
+        //laat het in het midden van het scherm openen
+        setLocationRelativeTo(null);
 
         //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
         //setVisible(true);

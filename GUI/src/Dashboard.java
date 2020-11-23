@@ -22,6 +22,7 @@ public class Dashboard extends GUI{
 
 
     public Dashboard() {
+        setTitle("Entry++ - Dashboard");
 
         //als we alleen de .form zouden gebruiken zouden we dit doen. maar we doen het niet
         //setContentPane(mainview);
@@ -48,6 +49,9 @@ public class Dashboard extends GUI{
         //pack(); //past de grootte automatisch aan aan de elementen die er in staan
         setSize(1200,600);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+
+        //laat het in het midden van het scherm openen
+        setLocationRelativeTo(null);
 
         //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

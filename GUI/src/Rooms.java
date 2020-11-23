@@ -18,6 +18,8 @@ public class Rooms extends GUI {
 
 
     public Rooms() {
+        setTitle("Entry++ - Rooms");
+
         //voegt roomsPanel toe aan de frame
         add(roomsPanel);
 
@@ -55,6 +57,9 @@ public class Rooms extends GUI {
         //grootte bepalen
         setSize(1200,600);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+
+        //laat het in het midden van het scherm openen
+        setLocationRelativeTo(null);
 
         //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
