@@ -1,8 +1,12 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Dashboard extends GUI{
+
+    //onderdelen van het dashboard worden gedeclareerd
+    //Inlogscherm werkt met een .form en ook met zelf gemaakte code om dingen weet te geven
     private JButton dashboardButton;
     private JButton roomsButton;
     private JButton settingsButton;
@@ -11,20 +15,53 @@ public class Dashboard extends GUI{
     private JPanel mainview;
     private JLabel entryLabel;
 
+    topButtons buttons = new topButtons();
+
 
     public Dashboard() {
-        //setContentPane(mainview);
-        JPanel test = new JPanel();
-        setContentPane(test);
-        test.setLayout(new BoxLayout(test, BoxLayout.Y_AXIS));
-        test.add(mainview);
-        Rooms rooms = new Rooms();
-        test.add(rooms.roomsPanel);
-        test.add(notifications.notificationsPanel);
 
-        setSize(900,600);
-        setVisible(true);
+        //als we alleen de .form zouden gebruiken zouden we dit doen. maar we doen het niet
+        //setContentPane(mainview);
+
+        //nu maken we een panel dashboardPanel aan waar we verschillende elementen (panels) in stoppen
+        //de elemelnten zijn de knoppen bovenaan het dashboard, de rooms en de notifications
+        //de opmaak van het scherm is nog wel lelijk, daar moet nog aan gewerkt worden
+
+        //niew panel aanmaken en zorgen dat het getoond kan worden
+        JPanel dashboardPanel = new JPanel();
+        setContentPane(dashboardPanel);
+
+        //deze code heb ik gekopieerd van stackoverflow, moet nog uitvogelen wat het doet
+        dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
+
+        //maakt een panel met alle knoppen die aan de bovenkant komen
+        /*buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        buttonsPanel.add(entryLabel);
+        buttonsPanel.add(dashboardButton);
+        buttonsPanel.add(roomsButton);
+        buttonsPanel.add(settingsButton);
+        buttonsPanel.add(dataButton);
+        buttonsPanel.add(contactButton);*/
+
+        //alles toevoegen aan dashboardPanel
+        //dashboardPanel.add(mainview);
+        dashboardPanel.add(buttons.buttonsPanel);
+        Rooms rooms = new Rooms();
+        dashboardPanel.add(rooms.roomsPanel);
+        dashboardPanel.add(notifications.notificationsPanel);
+
+        //zet de grootte van het scherm
+        //pack(); //past de grootte automatisch aan aan de elementen die er in staan
+        setSize(1200,600);
+        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+
+        //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
+        //setVisible(true);
+
+        //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        //hier wordt gepaald dat het Rooms scherm geopend wordt als er op de rooms knop wordt gedrukt
         roomsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,6 +112,8 @@ public class Dashboard extends GUI{
 
     }
 
+
+    //@Shaquille wat doet dit?
     public void setData(Dashboard data) {
     }
 

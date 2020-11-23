@@ -5,104 +5,76 @@ import java.awt.event.ActionListener;
 
 public class Rooms extends GUI {
 
+    //Rooms werkt niet met een .form
+
+    //maakt een panel waar de info over de rooms in komt te staan
     public JPanel roomsPanel = new JPanel();
+
+    //deze panel is voor wanneer rooms als apart scherm wordt geopend. Hier kan namelijk een knop aan toegevoegd worden
+    JPanel mainview = new JPanel();
+
+    //maakt een knop om terug te gaan naar het dashboard
+    JButton backButton = new JButton("Back to dashboard");
+
+    topButtons buttons = new topButtons();
 
 
     public Rooms() {
+        //voegt roomsPanel toe aan de frame
         add(roomsPanel);
 
-        //int numberOfRooms = 5;
-        //Room[] rooms = new Room[numberOfRooms]; //maakt een array waar de Rooms in komen te staan
+        //bepaalt de layout van roomsPanel, het is een grid met numberOfRooms aan rijen en 8 kolommen
+        //als je nu dingen toevoegt aan roomsPanel, wordt van lings naar rechts, boven naar beneden de grid gevuld
         roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
+
+        //in GUI is er een array van Rooms gemaakt, hier wordt roomsPanel gevuld met info uit die array
+        //iedere iteratie van deze for loop is een rij van de grid
         for (int i = 0; i < numberOfRooms; i++) {
-            //rooms[i] = new Room();      //vult de array met nieuwe Rooms
-            rooms[i].setRoomName("room " + (i+1));
+            //als de array nog niet gevuld was in GUI zouden we hem hiermee kunnen vullen met nieuwe Rooms
+            //rooms[i] = new Room();
+
+            //hier wordt de grid van links naar rechts gevuld
+            roomsArray[i].setRoomName("room " + (i+1));
             roomsPanel.add(new JLabel(" "));
-            roomsPanel.add(new JLabel(rooms[i].roomName.getText()));
-            roomsPanel.add(rooms[i].amountLabel);
+            roomsPanel.add(new JLabel(roomsArray[i].roomName.getText()));
+            roomsPanel.add(roomsArray[i].amountLabel);
             roomsPanel.add(new JLabel("/"));
-            roomsPanel.add(rooms[i].maxLabel);
-            roomsPanel.add(rooms[i].progressBar);
-            roomsPanel.add(rooms[i].plusButton);
-            roomsPanel.add(rooms[i].minusButton);
-            rooms[i].makeButtonsWork();
+            roomsPanel.add(roomsArray[i].maxLabel);
+            roomsPanel.add(roomsArray[i].progressBar);
+            roomsPanel.add(roomsArray[i].plusButton);
+            roomsPanel.add(roomsArray[i].minusButton);
+
+            //zorgt dat de knoppen van de room werken
+            //roomsArray[i].makeButtonsWork();
         }
 
-        setContentPane(roomsPanel);
-        setSize(800,200);
+        mainview.add(buttons.buttonsPanel);
+        //mainview.add(backButton);
+        mainview.add(roomsPanel);
+
+
+        setContentPane(mainview);
+        roomsPanel.setVisible(true);
+
+        //grootte bepalen
+        pack();
+        //setSize(800,200);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+
+        //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
         //setVisible(true);
+
+        //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-    }
-
-        //////OUDE CODE (werkt niet helemaal meer)////
-
-    private JPanel panel1;
-    private JProgressBar room1ProgressBar;
-    private JButton room1PlusButton;
-    private JButton room1MinusButton;
-    private JLabel room1Amount;
-    private JLabel room1Max;
-    private JProgressBar room2ProgressBar;
-    private JButton room2PlusButton;
-    private JButton room2MinusButton;
-    private JProgressBar room3ProgressBar;
-    private JProgressBar room4ProgressBar;
-    private JButton room3PlusButton;
-    private JButton room3MinusButton;
-    private JButton room4PlusButton;
-    private JButton room4MinusButton;
-    private JLabel room2Amount;
-    private JLabel room2Max;
-    private JLabel room3Amount;
-    private JLabel room3Max;
-    private JLabel room4Amount;
-    private JLabel room4Max;
-    private JLabel alert;
-
-    /*public Rooms(){
-
-    setContentPane(panel1);
-        //setSize(600,500);
-        setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
-        setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        room1PlusButton.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //amount1++;
-                int amount = Integer.parseInt(room1Amount.getText());
-                int max = Integer.parseInt(room1Max.getText());
-                amount++;
-                if (amount > max1) {
-                    alert.setText("Too many people! >:(");
-                }
-                else if (amount > 0) {
-                    alert.setText(" ");
-                }
-                room1Amount.setText(""+amount);
-                room1ProgressBar.setValue(amount);
+                dispose();
+
+                viewDashboard();
             }
         });
-        room1MinusButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int amount = Integer.parseInt(room1Amount.getText());
-                int max = Integer.parseInt(room1Max.getText());
-                amount--;
-                if (amount < 0) {
-                    amount = 0;
-                    alert.setText("can't have negative amount");
-                }
-                else if (amount <= max) {
-                    alert.setText(" ");
-                }
-                room1Amount.setText(""+amount);
-                room1ProgressBar.setValue(amount);
-            }
-        });*/
 
-
+    }
  }

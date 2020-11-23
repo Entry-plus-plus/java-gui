@@ -13,6 +13,10 @@ public class Room {
     JButton minusButton = new JButton("--");
     JProgressBar progressBar = new JProgressBar();
 
+    public Room() {
+        makeButtonsWork();
+    }
+
     public int getAmount() { return amount; }
     public int getMax() { return max; }
     public void emptyRoom() { amount = 0; }
