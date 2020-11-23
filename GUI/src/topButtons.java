@@ -12,6 +12,7 @@ public class topButtons extends GUI {
     JButton settingsButton = new JButton("Settings");
     JButton dataButton = new JButton("Data");
     JButton contactButton = new JButton("Contact");
+    JButton logOutButton = new JButton("Logout");
     JLabel entryLabel = new JLabel("Entry++");
 
     public topButtons() {
@@ -22,6 +23,8 @@ public class topButtons extends GUI {
         buttonsPanel.add(settingsButton);
         buttonsPanel.add(dataButton);
         buttonsPanel.add(contactButton);
+        buttonsPanel.add(new JLabel("                    "));
+        buttonsPanel.add(logOutButton);
 
         //onderstaande methods zorgen dat de knoppen naar de juiste window gaan
 
@@ -57,6 +60,13 @@ public class topButtons extends GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 viewContact();
+            }
+        });
+
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewInlogscherm();
             }
         });
     }

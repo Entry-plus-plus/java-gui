@@ -50,9 +50,14 @@ public class Inlogscherm extends GUI {
                     dispose();
                     viewDashboard();
                 }
-                //als ze niet kloppen wordt er een melding gegeven
+                //als er een beheerder inlogt gaat hij naar de beheerderspagina
+                else if (usernameField.getText().equals("admin") && password.equals("password")) {
+                    dispose();
+                    viewAdministration();
+                }
+                //als de inloggegevens niet kloppen wordt er een melding gegeven
                 else {
-                    response.setText("Go away");
+                    response.setText("Incorrect username or password");
                 }
             }
         });

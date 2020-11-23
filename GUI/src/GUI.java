@@ -16,6 +16,7 @@ public class GUI extends JDialog {
     static Settings settings;
     static Data data;
     static Contact contact;
+    static Administration administration;
 
     //dit is een variabele die aangeeft welke window er op dit moment geopend is
     static GUI openedWindow;
@@ -42,6 +43,10 @@ public class GUI extends JDialog {
     public static void viewInlogscherm() {
         inlogscherm = new Inlogscherm();
         inlogscherm.setVisible(true);
+        if (openedWindow != null) {
+            GUI lastOpenedWindow = openedWindow;
+            lastOpenedWindow.dispose();
+        }
         openedWindow = inlogscherm;
     }
 
@@ -84,6 +89,14 @@ public class GUI extends JDialog {
         contact.setVisible(true);
         GUI lastOpenedWindow = openedWindow;
         openedWindow = contact;
+        lastOpenedWindow.dispose();
+    }
+
+    public static void viewAdministration(){
+        administration = new Administration();
+        administration.setVisible(true);
+        GUI lastOpenedWindow = openedWindow;
+        openedWindow = administration;
         lastOpenedWindow.dispose();
     }
 
