@@ -13,9 +13,7 @@ public class Rooms extends GUI {
     //deze panel is voor wanneer rooms als apart scherm wordt geopend. Hier kan namelijk een knop aan toegevoegd worden
     JPanel mainview = new JPanel();
 
-    //maakt een knop om terug te gaan naar het dashboard
-    JButton backButton = new JButton("Back to dashboard");
-
+    //maakt de knoppen die aan de bovenkant komen
     topButtons buttons = new topButtons();
 
 
@@ -48,33 +46,17 @@ public class Rooms extends GUI {
             //roomsArray[i].makeButtonsWork();
         }
 
+        //voegt de knoppen bovenaan en de panel met rooms toe aan het scherm
         mainview.add(buttons.buttonsPanel);
-        //mainview.add(backButton);
         mainview.add(roomsPanel);
 
-
         setContentPane(mainview);
-        roomsPanel.setVisible(true);
 
         //grootte bepalen
-        pack();
-        //setSize(800,200);
+        setSize(1200,600);
         //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
-
-        //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
-        //setVisible(true);
 
         //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-
-                viewDashboard();
-            }
-        });
-
     }
  }
