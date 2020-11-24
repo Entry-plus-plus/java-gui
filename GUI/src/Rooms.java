@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Rooms extends GUI {
 
@@ -18,19 +16,20 @@ public class Rooms extends GUI {
 
 
     public Rooms() {
+        //geeft het scherm een titel
         setTitle("Entry++ - Rooms");
 
         //voegt roomsPanel toe aan de frame
         add(roomsPanel);
 
         //bepaalt de layout van roomsPanel, het is een grid met numberOfRooms aan rijen en 8 kolommen
-        //als je nu dingen toevoegt aan roomsPanel, wordt van lings naar rechts, boven naar beneden de grid gevuld
+        //als je nu dingen toevoegt aan roomsPanel, wordt van links naar rechts, boven naar beneden de grid gevuld
         roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
 
         //in GUI is er een array van Rooms gemaakt, hier wordt roomsPanel gevuld met info uit die array
         //iedere iteratie van deze for loop is een rij van de grid
         for (int i = 0; i < numberOfRooms; i++) {
-            //als de array nog niet gevuld was in GUI zouden we hem hiermee kunnen vullen met nieuwe Rooms
+            //als de array nog niet gevuld was in GUI zouden we hem hiermee kunnen vullen met nieuwe Rooms:
             //rooms[i] = new Room();
 
             //hier wordt de grid van links naar rechts gevuld
@@ -43,15 +42,13 @@ public class Rooms extends GUI {
             roomsPanel.add(roomsArray[i].progressBar);
             roomsPanel.add(roomsArray[i].plusButton);
             roomsPanel.add(roomsArray[i].minusButton);
-
-            //zorgt dat de knoppen van de room werken
-            //roomsArray[i].makeButtonsWork();
         }
 
         //voegt de knoppen bovenaan en de panel met rooms toe aan het scherm
         mainview.add(buttons.buttonsPanel);
         mainview.add(roomsPanel);
 
+        //maakt het zichtbaar
         setContentPane(mainview);
 
         //grootte bepalen

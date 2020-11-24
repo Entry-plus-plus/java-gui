@@ -14,6 +14,7 @@ public class Inlogscherm extends GUI {
 
 
     public Inlogscherm() {
+        //geeft het scherm een titel
         setTitle("Entry++ - Login");
 
         //standaardcode als je zo'n form maakt, weet eigenlijk niet precies wat het doet
@@ -37,30 +38,67 @@ public class Inlogscherm extends GUI {
 
         //hiermee wordt bepaald wat er gebeurt als je op login knop drukt
         //eerste deel is standaardcode, ik weet niet precies wat het doet
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        loginButton.addActionListener(e -> {
 
-                //er wordt uitgelezen wat er in de username en password velden is ingevuld
-                String username = usernameField.getText();
-                String password = passwordField.getText();
+            //er wordt uitgelezen wat er in de username en password velden is ingevuld
+            String username = usernameField.getText();
+            String password = passwordField.getText();
 
-                //als de inloggegevens kloppen wordt het inlogscherm afgesloten en wordt het dashboard getoond
-                if (usernameField.getText().equals("user") && password.equals("password")) {
+            //de login method wordt aangeroepen
+            login(username, password);
+
+            //OUDE CODE, eerst ging het zo, nu met de login method
+            //als de inloggegevens kloppen wordt het inlogscherm afgesloten en wordt het dashboard getoond
+            /*if (usernameField.getText().equals("user") && password.equals("password")) {
+                dispose();
+                viewDashboard();
+            }
+            //als er een beheerder inlogt gaat hij naar de beheerderspagina
+            else if (usernameField.getText().equals("admin") && password.equals("password")) {
+                dispose();
+                viewAdministration();
+            }
+            //als de inloggegevens niet kloppen wordt er een melding gegeven
+            else {
+                response.setText("Incorrect username or password");
+            }*/
+        });
+    }
+    public void login(String username, String password) {
+        //hasht het wachtwoord, is veiliger
+        String hashedPassword = passwordHasher.hashPassword(password);
+
+        //itereert door lijst met users
+        for (User user : users) {
+
+            //kijkt of de meegegeven username voorkomt in de lijst met users
+            if (user.username.equals(username)) {
+
+                //kijkt of het meegegeven wachtwoord overeenkomt met het wachtwoord van de gebruiker
+                if (user.password.equals(hashedPassword)) {
+
+                    //sluit het inlogscherm af, opent dashboard en zet currentuser op de user die net heeft ingelogd
                     dispose();
                     viewDashboard();
-                }
-                //als er een beheerder inlogt gaat hij naar de beheerderspagina
-                else if (usernameField.getText().equals("admin") && password.equals("password")) {
-                    dispose();
-                    viewAdministration();
-                }
-                //als de inloggegevens niet kloppen wordt er een melding gegeven
-                else {
-                    response.setText("Incorrect username or password");
+                    currentUser = user;
+                    return;
                 }
             }
-        });
+        }
+        //werkt vergelijkbaar met vorige stuk code, maar dan in de lijst met admins.
+        //Hierbij wordt niet het dashboard geopend maar de administration pagina
+        for (int i=0; i<admins.size(); i++) {
+            if (admins.get(i).username.equals(username)) {
+                if (admins.get(i).password.equals(hashedPassword)) {
+                    dispose();
+                    viewAdministration();
+                    currentUser = users.get(i);
+                    return;
+                }
+            }
+        }
+        //als de inloggegevens niet kloppen wordt er een bericht getoond
+        response.setText("Login failed");
     }
 }
 

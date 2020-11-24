@@ -1,11 +1,12 @@
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GUI extends JDialog {
 
     //hier worden variabelen gedeclareerd zodat er naar verwezen kan worden vanuit methods en andere klassen
-    //(als je dat in de main pas valt het niet in de scope)
+    //(als je dat in de main pas doet valt het niet in de scope)
     static int numberOfRooms = 7; //deze waarde is willekeurig gekozen, mag aangepast worden
     static Inlogscherm inlogscherm;
     static Room[] roomsArray;
@@ -17,6 +18,10 @@ public class GUI extends JDialog {
     static Data data;
     static Contact contact;
     static Administration administration;
+    static List<User> users = new ArrayList<>();
+    static List<User> admins = new ArrayList<>();
+    static User currentUser = null;
+
 
     //dit is een variabele die aangeeft welke window er op dit moment geopend is
     static GUI openedWindow;
@@ -34,15 +39,26 @@ public class GUI extends JDialog {
         //notifications wordt geinitialiseerd zodat het gebruikt kan worden in dashboard
         notifications = new Notifications();
 
-        //Toont het inlogscherm
+        //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
         viewInlogscherm();
         //viewDashboard();
+        //viewContact();
+        //viewSettings();
+        //viewAdministration();
+
+        //voegt een aantal users toe waamee ingelogd kan worden
+        users.add(new User("user", null, null));
+        users.add(new User("Mariska", "Mariska", "van Beek"));
+        admins.add(new User("admin", null, null));
     }
 
     //met de volgende methods kan je de verschillende schermen tonen
     public static void viewInlogscherm() {
+        //maakt inlogscherm en maakt het zichtbaar
         inlogscherm = new Inlogscherm();
         inlogscherm.setVisible(true);
+
+        //past aan welke window nu open is, en sluit de vorige af
         if (openedWindow != null) {
             GUI lastOpenedWindow = openedWindow;
             lastOpenedWindow.dispose();
@@ -51,11 +67,8 @@ public class GUI extends JDialog {
     }
 
     public static void viewDashboard(){
-        //maakt dashboard en maakt het zichtbaar
         dashboard = new Dashboard();
         dashboard.setVisible(true);
-
-        //past aan welke window nu open is, en sluit de vorige af
         GUI lastOpenedWindow = openedWindow;
         openedWindow = dashboard;
         lastOpenedWindow.dispose();

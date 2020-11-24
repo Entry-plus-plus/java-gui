@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Room {
     //zet aantal mensen in de kamer en max aantal mensen vast. De waarde van max is willekeurig gekozen en mag veranderd worden
@@ -34,7 +32,7 @@ public class Room {
         //de labels op het scherm worden geupdate
         updateLabelValues();
 
-        //als er te veel mensen zijn komt er een melding
+        //als er te veel mensen zijn komt er een melding (als er nog geen melding was)
         if (amount > max && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
             GUI.createNotification("WARNING: Too many people in " + roomName.getText());
         }
@@ -57,6 +55,7 @@ public class Room {
         updateLabelValues();
     }
 
+    //zorgt dat de waarden op het scherm geupdate worden met nieuwe waarden
     public void updateLabelValues() {
         amountLabel.setText(""+amount);
         maxLabel.setText(""+max);
@@ -64,6 +63,7 @@ public class Room {
         progressBar.setValue(amount);
     }
 
+    //zorgt dat de plus en min knop werken
     public void makeButtonsWork() {
         plusButton.addActionListener(e -> plus());
         minusButton.addActionListener(e -> minus());

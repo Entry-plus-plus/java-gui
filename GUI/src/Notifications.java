@@ -1,7 +1,4 @@
 import javax.swing.*;
-import java.util.LinkedList;
-import java.util.Queue;
-import javax.swing.ListModel;
 
 public class Notifications extends GUI{
 
@@ -10,18 +7,24 @@ public class Notifications extends GUI{
 
     //maakt een listModel waar de notificaties in komen
     //listModel maakt het makkelijk om notificaties toe te voegen, aan te passen, te verplaatsen en te verwijderen
-    DefaultListModel<String> listModel = new DefaultListModel<String>();
+    DefaultListModel<String> listModel = new DefaultListModel<>();
 
-    //een list die de waarden van listModel aanneemt (ook als listModel veranderd wordt)
-    private JList list1 = new JList();
+    //maakt een list die de waarden van listModel aanneemt (ook als listModel veranderd wordt)
     JList list = new JList(listModel);
 
     public Notifications() {
 
+        //zet bovenaan de lijst NOTIFICATIONS om te laten zien dat het notificaties zijn
         listModel.addElement("NOTIFICATIONS:");
+
+        //voegt alles toe
         add(notificationsPanel);
         notificationsPanel.add(list);
+
+        //bepaat grootte
         //setSize(200,200);
+
+        //zorgt dat het scherm zich afsluit als je op kruisje drukt
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 

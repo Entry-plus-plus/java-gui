@@ -1,12 +1,11 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Dashboard extends GUI{
 
     //onderdelen van het dashboard worden gedeclareerd
-    //Inlogscherm werkt met een .form en ook met zelf gemaakte code om dingen weet te geven
+    //Inlogscherm werkt met een .form en ook met zelf gemaakte code om dingen weer te geven
     private JButton dashboardButton;
     private JButton roomsButton;
     private JButton settingsButton;
@@ -18,7 +17,7 @@ public class Dashboard extends GUI{
     private JPanel mainview;
 
     //maakt de knoppen die aan de bovenkant komen
-    topButtons buttons = new topButtons();
+    final topButtons buttons = new topButtons();
 
 
     public Dashboard() {
@@ -29,13 +28,12 @@ public class Dashboard extends GUI{
 
         //nu maken we een panel dashboardPanel aan waar we verschillende elementen (panels) in stoppen
         //de elementen zijn de knoppen bovenaan het dashboard, de rooms en de notifications
-        //de opmaak van het scherm is nog wel lelijk, daar moet nog aan gewerkt worden
 
         //niew panel aanmaken en zorgen dat het getoond kan worden
         JPanel dashboardPanel = new JPanel();
         setContentPane(dashboardPanel);
 
-        //deze code heb ik gekopieerd van stackoverflow, moet nog uitvogelen wat het doet
+        //deze code heb ik gekopieerd van stackoverflow, moet nog uitvogelen wat het precies doet
         dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
 
         //alles toevoegen aan dashboardPanel
@@ -58,13 +56,13 @@ public class Dashboard extends GUI{
 
         //hier wordt gepaald dat het Rooms scherm geopend wordt als er op de rooms knop wordt gedrukt
         //(wordt niet gebruikt nu omdat ik niet met de .form werk)
-        roomsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                viewRooms();
-            }
+        roomsButton.addActionListener(e -> {
+            dispose();
+            viewRooms();
         });
+
+        //Alles hieronder wordt nu niet gebruikt
+
 
 //        Notificaties.addActionListener(new ActionListener() {
 //            @Override
@@ -108,8 +106,7 @@ public class Dashboard extends GUI{
 
     }
 
-
-    //@Shaquille wat doet dit?
+    /*
     public void setData(Dashboard data) {
     }
 
@@ -117,6 +114,5 @@ public class Dashboard extends GUI{
     }
 
     public boolean isModified(Dashboard data) {
-        return false;
-    }
+    }*/
 }

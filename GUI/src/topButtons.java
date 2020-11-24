@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 //door de knoppen als een aparte klasse te programmeren is het makkelijker om het boven ieder scherm te zetten
 
 public class topButtons extends GUI {
+
+    //Alle noppen worden gedeclareerd en geinitieerd
     JPanel buttonsPanel = new JPanel();
     JButton dashboardButton = new JButton("Dashboard");
     JButton roomsButton = new JButton("Rooms");
@@ -16,6 +18,8 @@ public class topButtons extends GUI {
     JLabel entryLabel = new JLabel("Entry++");
 
     public topButtons() {
+
+        //voegt alle knoppen toe aan de panel
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
         //buttonsPanel.add(entryLabel);
         buttonsPanel.add(dashboardButton);
@@ -28,46 +32,20 @@ public class topButtons extends GUI {
 
         //onderstaande methods zorgen dat de knoppen naar de juiste window gaan
 
-        dashboardButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewDashboard();
-            }
-        });
+        dashboardButton.addActionListener(e -> viewDashboard());
 
-        roomsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewRooms();
-            }
-        });
+        roomsButton.addActionListener(e -> viewRooms());
 
-        settingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewSettings();
-            }
-        });
+        settingsButton.addActionListener(e -> viewSettings());
 
-        dataButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewData();
-            }
-        });
+        dataButton.addActionListener(e -> viewData());
 
-        contactButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewContact();
-            }
-        });
+        contactButton.addActionListener(e -> viewContact());
 
-        logOutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewInlogscherm();
-            }
+        //met deze knop kan je uitloggen
+        logOutButton.addActionListener(e -> {
+            currentUser = null;
+            viewInlogscherm();
         });
     }
 }
