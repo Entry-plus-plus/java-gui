@@ -57,7 +57,7 @@ public class Room {
             amount = 0;
         }
         //als het weer bij 10 is, zijn er niet meer te veel mensen. dus de notificatie wordt verwijderd
-        else if (amount == 10) {
+        else if (amount == max) {
             GUI.notifications.listModel.removeElement("WARNING: Too many people in " + roomName.getText());
         }
         updateLabelValues();

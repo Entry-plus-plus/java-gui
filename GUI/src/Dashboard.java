@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +13,8 @@ public class Dashboard extends GUI{
     private JButton dataButton;
     private JButton contactButton;
     private JLabel entryLabel;
+    Rooms rooms;
+    JPanel dashboardPanel = new JPanel();
 
     //mainview hoort bij de .form, gebruik ik op dit moment niet
     private JPanel mainview;
@@ -23,26 +26,27 @@ public class Dashboard extends GUI{
     public Dashboard() {
         setTitle("Entry++ - Dashboard");
 
-        //als we alleen de .form zouden gebruiken zouden we dit doen. maar we doen het niet
-        //setContentPane(mainview);
-
-        //nu maken we een panel dashboardPanel aan waar we verschillende elementen (panels) in stoppen
-        //de elementen zijn de knoppen bovenaan het dashboard, de rooms en de notifications
-
         //niew panel aanmaken en zorgen dat het getoond kan worden
-        JPanel dashboardPanel = new JPanel();
+
         setContentPane(dashboardPanel);
 
         //deze code heb ik gekopieerd van stackoverflow, moet nog uitvogelen wat het precies doet
-        dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
+        //dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
+
 
         //alles toevoegen aan dashboardPanel
         //dashboardPanel.add(mainview);
+
+        rooms = new Rooms();
+
+        /**dit is hoe de layout normaal is, niet verwijderen!!**/
+        /*
         dashboardPanel.add(buttons.buttonsPanel);
-        Rooms rooms = new Rooms();
         dashboardPanel.add(rooms.roomsPanel);
         dashboardPanel.add(notifications.notificationsPanel);
-        dashboardPanel.add(heatmap.heatmapPanel);
+        dashboardPanel.add(heatmap.heatmapPanel);*/
+
+        createDashboardLayout();
 
         //zet de grootte van het scherm
         //pack(); //past de grootte automatisch aan aan de elementen die er in staan
@@ -61,6 +65,8 @@ public class Dashboard extends GUI{
             dispose();
             viewRooms();
         });
+
+
 
         //Alles hieronder wordt nu niet gebruikt
 
@@ -105,6 +111,47 @@ public class Dashboard extends GUI{
 //            }
 //        });
 
+    }
+
+    public void createDashboardLayout() {
+        GridBagLayout dashboardLayout = new GridBagLayout();
+        dashboardPanel.setLayout(dashboardLayout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.weighty = 1.0;
+        gbc.weightx = 1.0;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 6;
+        //gbc.insets = new Insets(1,10,5,10);
+        dashboardPanel.add(buttons.buttonsPanel, gbc);
+
+        //gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.fill = GridBagConstraints.BOTH;
+        //gbc.weighty = 0;
+        //gbc.weightx = 1.0;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 4;
+        gbc.ipady = 5;
+        //gbc.insets = new Insets(5,5,5,5);
+        dashboardPanel.add(rooms.roomsPanel, gbc);
+
+        gbc.gridx = 5;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        dashboardPanel.add(notifications.notificationsPanel,gbc);
+
+        gbc.gridx = 5;
+        gbc.gridy = 2;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 5;
+        dashboardPanel.add(heatmap.heatmapPanel, gbc);
     }
 
     /*
