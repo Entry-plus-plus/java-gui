@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.JComponent;
+import java.awt.*;
 
 public class Contact extends GUI{
     final JPanel contactPanel = new JPanel();
@@ -11,7 +13,16 @@ public class Contact extends GUI{
     public Contact() {
         setTitle("Entry++ - Contact");
 
+        //Dit is een test om een gekleurde knop te maken
+        JComponent test = new JButton("test");
+        test.setOpaque(true);
+        test.setBackground(Color.GREEN);
+        test.setForeground(Color.RED);
+        mainview.add(test);
+
+
         //settingsPanel.add(settingsLabel);
+
 
 
         /*//Dit is een uitprobeersel met grouplayout

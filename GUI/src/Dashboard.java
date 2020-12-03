@@ -42,6 +42,7 @@ public class Dashboard extends GUI{
         Rooms rooms = new Rooms();
         dashboardPanel.add(rooms.roomsPanel);
         dashboardPanel.add(notifications.notificationsPanel);
+        dashboardPanel.add(heatmap.heatmapPanel);
 
         //zet de grootte van het scherm
         //pack(); //past de grootte automatisch aan aan de elementen die er in staan

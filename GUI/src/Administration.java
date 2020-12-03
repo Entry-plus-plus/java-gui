@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Administration extends GUI{
 
@@ -24,7 +22,6 @@ public class Administration extends GUI{
 
 
     public Administration() {
-        //geeft het scherm een titel
         setTitle("Entry++ - Administration");
 
         //voegt de elementen toe aan het scherm

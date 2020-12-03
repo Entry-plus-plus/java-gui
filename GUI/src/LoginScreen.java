@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Inlogscherm extends GUI {
+public class LoginScreen extends GUI {
 
     //onderdelen van het inlogscherm worden gedeclareerd
     //Inlogscherm werkt met een .form
@@ -13,7 +13,7 @@ public class Inlogscherm extends GUI {
     private JLabel response;
 
 
-    public Inlogscherm() {
+    public LoginScreen() {
         //geeft het scherm een titel
         setTitle("Entry++ - Login");
 

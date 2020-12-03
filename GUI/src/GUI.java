@@ -5,10 +5,8 @@ import java.util.List;
 
 public class GUI extends JDialog {
 
-    //hier worden variabelen gedeclareerd zodat er naar verwezen kan worden vanuit methods en andere klassen
-    //(als je dat in de main pas doet valt het niet in de scope)
     static int numberOfRooms = 7; //deze waarde is willekeurig gekozen, mag aangepast worden
-    static Inlogscherm inlogscherm;
+    static LoginScreen inlogscherm;
     static Room[] roomsArray;
     static Notifications notifications;
     static Dashboard dashboard;
@@ -21,14 +19,14 @@ public class GUI extends JDialog {
     static List<User> users = new ArrayList<>();
     static List<User> admins = new ArrayList<>();
     static User currentUser = null;
-
-
-    //dit is een variabele die aangeeft welke window er op dit moment geopend is
     static GUI openedWindow;
+    static Heatmap heatmap = new Heatmap();
 
     //static topButtons buttonsPanel = new topButtons();
 
     public static void main(String[] args) {
+
+
 
         //maakt een verdieping aan en stopt alle kamers van die verdieping in de array roomsArray
         floor1 = new Floor(numberOfRooms);
@@ -36,8 +34,8 @@ public class GUI extends JDialog {
         //de manier om kamers aan te maken zonder een floor:
         //rooms = createRooms(numberOfRooms);
 
-        //notifications wordt geinitialiseerd zodat het gebruikt kan worden in dashboard
         notifications = new Notifications();
+        heatmap = new Heatmap();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
         viewInlogscherm();
@@ -46,19 +44,30 @@ public class GUI extends JDialog {
         //viewSettings();
         //viewAdministration();
 
+        /*JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        heatmap.doTheThing(panel);
+        frame.add(panel);
+        frame.pack();
+        //frame.setSize(1200,600);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        frame.setVisible(true);*/
+
+
+
+
         //voegt een aantal users toe waamee ingelogd kan worden
         users.add(new User("user", null, null));
         users.add(new User("Mariska", "Mariska", "van Beek"));
         admins.add(new User("admin", null, null));
     }
 
-    //met de volgende methods kan je de verschillende schermen tonen
+    //met de volgende methods kunnen de verschillende schermen geopend worden
     public static void viewInlogscherm() {
-        //maakt inlogscherm en maakt het zichtbaar
-        inlogscherm = new Inlogscherm();
+        inlogscherm = new LoginScreen();
         inlogscherm.setVisible(true);
-
-        //past aan welke window nu open is, en sluit de vorige af
         if (openedWindow != null) {
             GUI lastOpenedWindow = openedWindow;
             lastOpenedWindow.dispose();
@@ -113,10 +122,6 @@ public class GUI extends JDialog {
         lastOpenedWindow.dispose();
     }
 
-    //met deze functie kan een notificatie aangemaakt worden om in het notifications panel gezet te worden
-    //het echte aanmaken gebeurt in de class notifications
-    //deze tussenstap hier was nodig omdat je niet zomaar vanuit bijv. rooms naar notifications kan verwijzen
-    //(nouja misschien kan het wel maar mij lukt het niet :P)
     public static void createNotification(String message) {
         notifications.addNotification(message);
     }
@@ -129,4 +134,6 @@ public class GUI extends JDialog {
         }
         return roomsArray;
     }
+
+
 }

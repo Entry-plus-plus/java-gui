@@ -1,9 +1,11 @@
 import javax.swing.*;
+import java.awt.Color;
+
 
 public class Room {
     //zet aantal mensen in de kamer en max aantal mensen vast. De waarde van max is willekeurig gekozen en mag veranderd worden
     int amount = 0;
-    int max = 10;
+    int max = 15;
 
     //maakt elementen van het scherm aan
     JLabel roomName = new JLabel();
@@ -13,9 +15,15 @@ public class Room {
     JButton minusButton = new JButton("--");
     JProgressBar progressBar = new JProgressBar();
 
+    int startingXCoordinate;
+    int startingYCoordinate;
+    int height;
+    int width;
+
     public Room() {
         makeButtonsWork();
     }
+
 
     //een aantal methods die volgens mij redelijk voor zich spreken
     public int getAmount() { return amount; }
@@ -33,7 +41,7 @@ public class Room {
         updateLabelValues();
 
         //als er te veel mensen zijn komt er een melding (als er nog geen melding was)
-        if (amount > max && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
+        if (isFull() && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
             GUI.createNotification("WARNING: Too many people in " + roomName.getText());
         }
     }
@@ -61,11 +69,36 @@ public class Room {
         maxLabel.setText(""+max);
         progressBar.setMaximum(max);
         progressBar.setValue(amount);
+
+        //past kleur van progressBar aan
+        progressBar.setForeground(GUI.heatmap.convertPercentageToColor(howFull()));
+        //past kleuren van heatmap aan
+        GUI.heatmap.updateColors();
     }
 
     //zorgt dat de plus en min knop werken
     public void makeButtonsWork() {
         plusButton.addActionListener(e -> plus());
         minusButton.addActionListener(e -> minus());
+    }
+
+    public boolean isFull() {
+        if (amount > max) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        if (amount == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    //geeft terug hoe vol de ruimte is in procenten
+    public int howFull() {
+        int percentage = amount * 100 / max;
+        return percentage;
     }
 }
