@@ -19,6 +19,7 @@ public class Dashboard extends GUI{
     static JLabel totalAmountTextLabel = new JLabel("Total amount of people in building:");
     static JLabel totalAmountLabel = new JLabel("0");
 
+
     //mainview hoort bij de .form, gebruik ik op dit moment niet
     private JPanel mainview;
 
@@ -142,6 +143,7 @@ public class Dashboard extends GUI{
         GridBagConstraints gbc = new GridBagConstraints();
 
         //gbc.fill = GridBagConstraints.HORIZONTAL;
+
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.weighty = 1.0;
         gbc.weightx = 1.0;
@@ -149,9 +151,10 @@ public class Dashboard extends GUI{
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 6;
-        //gbc.insets = new Insets(1,10,5,10);
+        gbc.insets = new Insets(10,300,10,10);
         dashboardPanel.add(buttons.buttonsPanel, gbc);
 
+        gbc.insets = new Insets(10,10,10,10);
         //gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.fill = GridBagConstraints.BOTH;
         //gbc.weighty = 0;
@@ -173,6 +176,11 @@ public class Dashboard extends GUI{
         gbc.gridx = 8;
         gbc.gridy = 1;
         dashboardPanel.add(totalAmountPanel,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 5;
+        dashboardPanel.add(floors.floorsPanel, gbc);
 
         gbc.gridx = 5;
         gbc.gridy = 2;

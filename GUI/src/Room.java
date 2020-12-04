@@ -70,12 +70,17 @@ public class Room {
         progressBar.setMaximum(max);
         progressBar.setValue(amount);
 
+        for (Floor floor : GUI.floorsArray) {
+            floor.updateLabelValues();
+        }
+
         //past kleur van progressBar aan
         progressBar.setForeground(GUI.heatmap.convertPercentageToColor(howFull()));
         //past kleuren van heatmap aan
         GUI.heatmap.updateColors();
 
         Dashboard.updateTotalAmountPanel();
+
     }
 
     //zorgt dat de plus en min knop werken

@@ -11,6 +11,11 @@ public class Heatmap extends GUI{
     JPanel room3 = new JPanel();
     JPanel room4 = new JPanel();
     JPanel room5 = new JPanel();
+    JPanel room6 = new JPanel();
+    JPanel room7 = new JPanel();
+
+    JPanel heatmapFloor1;
+    JPanel heatmapFloor2;
 
 
 
@@ -32,7 +37,7 @@ public class Heatmap extends GUI{
         room5.setOpaque(true);
         room5.setBackground(Color.GREEN);
 
-        doTheThing(heatmapPanel);
+        createHeatmapFloor1(heatmapPanel);
         //uitprobeersel met gridbaglayout
 
         /*JFrame frame = new JFrame();
@@ -160,7 +165,7 @@ public class Heatmap extends GUI{
         room5.setBackground(convertPercentageToColor(roomsArray[4].howFull()));
     }
 
-    public void doTheThing(Container pane) {
+    public void createHeatmapFloor1(Container pane) {
 
         pane.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

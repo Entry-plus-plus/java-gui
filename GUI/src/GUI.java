@@ -6,11 +6,14 @@ import java.util.List;
 public class GUI extends JDialog {
 
     static int numberOfRooms = 7; //deze waarde is willekeurig gekozen, mag aangepast worden
+    static int numberOfFloors = 2;
     static LoginScreen inlogscherm;
-    static Room[] roomsArray;
+    static Room[] roomsArray = new Room[numberOfRooms];
+    static Floor[] floorsArray;
     static Notifications notifications;
     static Dashboard dashboard;
     static Floor floor1;
+    static Floor floor2;
     static Rooms rooms;
     static Settings settings;
     static Data data;
@@ -21,16 +24,25 @@ public class GUI extends JDialog {
     static User currentUser = null;
     static GUI openedWindow;
     static Heatmap heatmap = new Heatmap();
+    static Floors floors;
+    static Floor selectedFloor = floor1;
 
     //static topButtons buttonsPanel = new topButtons();
 
     public static void main(String[] args) {
 
-
-
-        //maakt een verdieping aan en stopt alle kamers van die verdieping in de array roomsArray
-        floor1 = new Floor(numberOfRooms);
-        roomsArray = floor1.rooms;
+        floor1 = new Floor(5);
+        floor2 = new Floor(2);
+        for (int i = 0; i < floor1.rooms.length; i++) {
+            roomsArray[i] = floor1.rooms[i];
+        }
+        for (int i = 0; i < floor2.rooms.length; i++) {
+            roomsArray[i + floor1.rooms.length] = floor2.rooms[i];
+        }
+        floorsArray = new Floor[numberOfFloors];
+        floorsArray[0] = floor1;
+        floorsArray[1] = floor2;
+        floors = new Floors();
         //de manier om kamers aan te maken zonder een floor:
         //rooms = createRooms(numberOfRooms);
 
