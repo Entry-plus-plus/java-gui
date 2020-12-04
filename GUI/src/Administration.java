@@ -45,7 +45,7 @@ public class Administration extends GUI{
         //zorgt dat je uitlogt als de op de logout knop drukt
         logOutButton.addActionListener(e -> {
             dispose();
-            viewInlogscherm();
+            viewLoginScreen();
         });
 
         //zorgt dat het add new user scherm wordt geopend als je op de addNewUser knop drukt

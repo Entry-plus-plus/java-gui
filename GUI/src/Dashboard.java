@@ -15,6 +15,9 @@ public class Dashboard extends GUI{
     private JLabel entryLabel;
     Rooms rooms;
     JPanel dashboardPanel = new JPanel();
+    static JPanel totalAmountPanel = new JPanel();
+    static JLabel totalAmountTextLabel = new JLabel("Total amount of people in building:");
+    static JLabel totalAmountLabel = new JLabel("0");
 
     //mainview hoort bij de .form, gebruik ik op dit moment niet
     private JPanel mainview;
@@ -38,6 +41,9 @@ public class Dashboard extends GUI{
         //dashboardPanel.add(mainview);
 
         rooms = new Rooms();
+        createTotalAmountPanel();
+        //updateTotalAmountPanel();
+
 
         /**dit is hoe de layout normaal is, niet verwijderen!!**/
         /*
@@ -113,6 +119,23 @@ public class Dashboard extends GUI{
 
     }
 
+    public static void createTotalAmountPanel() {
+        totalAmountPanel.setLayout(new BoxLayout(totalAmountPanel, BoxLayout.Y_AXIS));
+        totalAmountLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 50));
+        totalAmountTextLabel.setAlignmentX(CENTER_ALIGNMENT);
+        totalAmountLabel.setAlignmentX(CENTER_ALIGNMENT);
+        totalAmountPanel.add(totalAmountTextLabel);
+        totalAmountPanel.add(totalAmountLabel);
+    }
+
+    public static void updateTotalAmountPanel() {
+        int sum = 0;
+        for (int i = 0; i < roomsArray.length; i++) {
+            sum += roomsArray[i].amount;
+        }
+        totalAmountLabel.setText("" + sum);
+    }
+
     public void createDashboardLayout() {
         GridBagLayout dashboardLayout = new GridBagLayout();
         dashboardPanel.setLayout(dashboardLayout);
@@ -146,6 +169,10 @@ public class Dashboard extends GUI{
         gbc.gridheight = 1;
         gbc.gridwidth = 2;
         dashboardPanel.add(notifications.notificationsPanel,gbc);
+
+        gbc.gridx = 8;
+        gbc.gridy = 1;
+        dashboardPanel.add(totalAmountPanel,gbc);
 
         gbc.gridx = 5;
         gbc.gridy = 2;

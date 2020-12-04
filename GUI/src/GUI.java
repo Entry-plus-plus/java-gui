@@ -38,7 +38,7 @@ public class GUI extends JDialog {
         heatmap = new Heatmap();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
-        viewInlogscherm();
+        viewLoginScreen();
         //viewDashboard();
         //viewContact();
         //viewSettings();
@@ -65,7 +65,7 @@ public class GUI extends JDialog {
     }
 
     //met de volgende methods kunnen de verschillende schermen geopend worden
-    public static void viewInlogscherm() {
+    public static void viewLoginScreen() {
         inlogscherm = new LoginScreen();
         inlogscherm.setVisible(true);
         if (openedWindow != null) {

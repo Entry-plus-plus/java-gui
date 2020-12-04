@@ -74,6 +74,8 @@ public class Room {
         progressBar.setForeground(GUI.heatmap.convertPercentageToColor(howFull()));
         //past kleuren van heatmap aan
         GUI.heatmap.updateColors();
+
+        Dashboard.updateTotalAmountPanel();
     }
 
     //zorgt dat de plus en min knop werken
