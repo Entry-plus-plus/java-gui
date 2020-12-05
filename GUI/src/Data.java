@@ -7,6 +7,10 @@ public class Data extends GUI{
     topButtons buttons = new topButtons();
 
     public Data() {
+
+        buttons.currentButton = buttons.dataButton;
+        buttons.giveColors();
+
         setTitle("Entry++ - Data");
 
         //settingsPanel.add(settingsLabel);
@@ -16,8 +20,6 @@ public class Data extends GUI{
 
         setContentPane(mainview);
 
-        setSize(1200,600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSizeEtc(this);
     }
 }

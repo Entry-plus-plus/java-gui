@@ -8,6 +8,8 @@ public class Floors extends GUI{
     topButtons buttons = new topButtons();
 
     public Floors() {
+        giveColors();
+
         setTitle("Entry++ - Floors");
         add(floorsPanel);
         floorsPanel.setLayout(new GridLayout(numberOfFloors, 6));
@@ -20,9 +22,10 @@ public class Floors extends GUI{
             floorsPanel.add(floorsArray[i].floorButton);
             //floorsPanel.add(new JLabel(floorsArray[i].floorName.getText()));
             floorsPanel.add(floorsArray[i].amountLabel);
-            floorsPanel.add(new JLabel("/"));
+            floorsPanel.add(floorsArray[i].slashLabel);
             floorsPanel.add(floorsArray[i].maxLabel);
             floorsPanel.add(floorsArray[i].progressBar);
+            floorsArray[i].giveColors();
         }
 
         mainview.add(buttons.buttonsPanel);
@@ -31,14 +34,14 @@ public class Floors extends GUI{
         //maakt het zichtbaar
         setContentPane(mainview);
 
-        //grootte bepalen
-        setSize(1200,600);
-        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+        setSizeEtc(this);
+    }
 
-        //laat het in het midden van het scherm openen
-        setLocationRelativeTo(null);
-
-        //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    public void giveColors() {
+        if (customColors) {
+            floorsPanel.setBackground(darkColor);
+            floorsPanel.setForeground(lightColor);
+            mainview.setBackground(darkColor);
+        }
     }
 }

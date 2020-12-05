@@ -24,7 +24,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="3fb49" class="javax.swing.JLabel">
+      <component id="3fb49" class="javax.swing.JLabel" binding="usernameLabel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -32,7 +32,7 @@
           <text value="Enter Username"/>
         </properties>
       </component>
-      <component id="defff" class="javax.swing.JLabel">
+      <component id="defff" class="javax.swing.JLabel" binding="passwordLabel">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

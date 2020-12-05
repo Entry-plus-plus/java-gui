@@ -11,30 +11,21 @@ public class LoginScreen extends GUI {
     private JPanel Inlogscherm;
     private JButton loginButton;
     private JLabel response;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
 
 
     public LoginScreen() {
-        //geeft het scherm een titel
         setTitle("Entry++ - Login");
-
-        //standaardcode als je zo'n form maakt, weet eigenlijk niet precies wat het doet
         setContentPane(Inlogscherm);
 
-        //grootte van inlogscherm bepalen
-        setSize(300,200);
-        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+        setSize(300,200); //bepaalt de grootte
+        setLocationRelativeTo(null); //laat het in het midden van het scherm openen
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE); //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
+        getRootPane().setDefaultButton(loginButton);//zorgt dat je met de enter knop de login knop kan bedienen
 
-        //laat het in het midden van het scherm openen
-        setLocationRelativeTo(null);
+        giveColors();
 
-        //maakt het zichtbaar. is hier weggecomment omdat we hem zichtbaar maken in GUI
-        //setVisible(true);
-
-        //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        //zorgt dat je met de enter knop de login knop kan bedienen
-        getRootPane().setDefaultButton(loginButton);
 
         //hiermee wordt bepaald wat er gebeurt als je op login knop drukt
         //eerste deel is standaardcode, ik weet niet precies wat het doet
@@ -47,21 +38,6 @@ public class LoginScreen extends GUI {
             //de login method wordt aangeroepen
             login(username, password);
 
-            //OUDE CODE, eerst ging het zo, nu met de login method
-            //als de inloggegevens kloppen wordt het inlogscherm afgesloten en wordt het dashboard getoond
-            /*if (usernameField.getText().equals("user") && password.equals("password")) {
-                dispose();
-                viewDashboard();
-            }
-            //als er een beheerder inlogt gaat hij naar de beheerderspagina
-            else if (usernameField.getText().equals("admin") && password.equals("password")) {
-                dispose();
-                viewAdministration();
-            }
-            //als de inloggegevens niet kloppen wordt er een melding gegeven
-            else {
-                response.setText("Incorrect username or password");
-            }*/
         });
     }
     public void login(String username, String password) {
@@ -99,6 +75,21 @@ public class LoginScreen extends GUI {
         }
         //als de inloggegevens niet kloppen wordt er een bericht getoond
         response.setText("Login failed");
+    }
+
+    public void giveColors() {
+        if (customColors) {
+            Inlogscherm.setBackground(darkColor);
+            usernameLabel.setForeground(lightColor);
+            passwordLabel.setForeground(lightColor);
+            loginButton.setBackground(lightColor);
+            loginButton.setForeground(darkColor);
+            response.setForeground(lightColor);
+            usernameField.setBackground(darkColor2);
+            usernameField.setForeground(lightColor);
+            passwordField.setBackground(darkColor2);
+            passwordField.setForeground(lightColor);
+        }
     }
 }
 

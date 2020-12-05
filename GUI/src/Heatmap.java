@@ -5,6 +5,8 @@ import java.awt.*;
 public class Heatmap extends GUI{
     JPanel mainview = new JPanel();
     JPanel heatmapPanel = new JPanel();
+    JPanel heatmapPanel1 = new JPanel();
+    JPanel heatmapPanel2 = new JPanel();
 
     JPanel room1 = new JPanel();
     JPanel room2 = new JPanel();
@@ -14,17 +16,25 @@ public class Heatmap extends GUI{
     JPanel room6 = new JPanel();
     JPanel room7 = new JPanel();
 
+    JLabel room1Label = new JLabel("room 1");
+    JLabel room2Label = new JLabel("room 2");
+    JLabel room3Label = new JLabel("room 3");
+    JLabel room4Label = new JLabel("room 4");
+    JLabel room5Label = new JLabel("room 5");
+    JLabel room6Label = new JLabel("room 6");
+    JLabel room7Label = new JLabel("room 7");
+
     JPanel heatmapFloor1;
     JPanel heatmapFloor2;
 
 
 
     public Heatmap() {
-        room1.add(new JLabel("room1"));
-        room2.add(new JLabel("room2"));
-        room3.add(new JLabel("room3"));
-        room4.add(new JLabel("room4"));
-        room5.add(new JLabel("room5"));
+        room1.add(room1Label);
+        room2.add(room2Label);
+        room3.add(room3Label);
+        room4.add(room4Label);
+        room5.add(room5Label);
 
         room1.setOpaque(true);
         room1.setBackground(Color.GREEN);
@@ -38,102 +48,9 @@ public class Heatmap extends GUI{
         room5.setBackground(Color.GREEN);
 
         createHeatmapFloor1(heatmapPanel);
-        //uitprobeersel met gridbaglayout
-
-        /*JFrame frame = new JFrame();
-
-        Container pane = frame.getContentPane();
-        pane.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        pane.add(room1, gbc);
-
-        frame.pack();
-        //frame.setSize(1200,600);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        frame.setVisible(true);*/
+        createHeatmapFloor2(heatmapPanel2);
 
 
-
-
-        /*JPanel gridBagPanel = new JPanel();
-
-        GridBagLayout theLayout = new GridBagLayout();
-        gridBagPanel.setLayout(theLayout);
-        GridBagConstraints gbc = new GridBagConstraints();
-        setContentPane(gridBagPanel);
-
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        theLayout.setConstraints(room1, gbc);
-        add(room1, gbc);
-
-        /*gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        gbc.gridheight = 2;
-        theLayout.setConstraints(room1, gbc);
-        gridBagPanel.add(room1);*/
-
-        //JFrame frame = new JFrame();
-
-
-        /*setSize(1200,600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        //heatmapPanel.setSize(200,200);
-        mainview.add(gridBagPanel);
-        setContentPane(mainview);
-        setSize(1200,600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        setVisible(true);*/
-
-
-        //dit gebruikt grouplayout
-        /*GroupLayout layout = new GroupLayout(heatmapPanel);
-        heatmapPanel.setLayout(layout);
-
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(room1)
-                    .addComponent(room2))
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(room3)
-                    .addComponent(room4)
-                    .addComponent(room5))
-        );
-
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup()
-                    .addComponent(room1)
-                    .addComponent(room2))
-                .addGroup(layout.createParallelGroup()
-                    .addComponent(room3)
-                    .addComponent(room4)
-                    .addComponent(room5))
-        );*/
-
-        //heatmapPanel.setSize(200,200);
-        //mainview.add(heatmapPanel);
-        //setContentPane(heatmapPanel);
-        //setSize(1200,600);
-        //setLocationRelativeTo(null);
-        //setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public Color convertPercentageToColor (int percentage) {
@@ -217,47 +134,37 @@ public class Heatmap extends GUI{
         gbc.gridheight = 2;
         gbc.gridwidth = 2;
         pane.add(room5, gbc);
+    }
 
-        /*
-        //gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+    public void createHeatmapFloor2 (Container pane) {
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weighty = 0.5;
         gbc.weightx = 0.5;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridheight = 3;
+        gbc.gridwidth = 2;
+        pane.add(room6, gbc);
+
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weighty = 0.5;
+        gbc.weightx = 0.5;
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        pane.add(room1, gbc);
+        gbc.gridy = 2;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 4;
+        pane.add(room7, gbc);
+    }
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.weightx = 0.5;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        pane.add(room2, gbc);
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 0.5;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        pane.add(room3, gbc);
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.ipady = 40;
-        gbc.weightx = 0.0;
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        pane.add(room4, gbc);
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 0;       //reset to default
-        gbc.weighty = 1.0;   //request any extra vertical space
-        gbc.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        //gbc.insets = new Insets(10,0,0,0);  //top padding
-        gbc.gridx = 1;       //aligned with button 2
-        gbc.gridwidth = 2;   //2 columns wide
-        gbc.gridy = 2;       //third row
-        pane.add(room5, gbc);*/
-
+    public void giveColors() {
+        if (customColors) {
+            heatmapPanel.setBackground(GUI.darkColor);
+            heatmapPanel1.setBackground(GUI.darkColor);
+            heatmapPanel2.setBackground(GUI.darkColor);
+        }
     }
 
 }

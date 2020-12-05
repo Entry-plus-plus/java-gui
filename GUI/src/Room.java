@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 
 
 public class Room {
@@ -11,6 +11,7 @@ public class Room {
     JLabel roomName = new JLabel();
     JLabel amountLabel = new JLabel(""+amount);
     JLabel maxLabel = new JLabel(""+max);
+    JLabel slashLabel = new JLabel("/");
     JButton plusButton = new JButton("++");
     JButton minusButton = new JButton("--");
     JProgressBar progressBar = new JProgressBar();
@@ -21,6 +22,11 @@ public class Room {
     int width;
 
     public Room() {
+        giveColors();
+
+        amountLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
+        maxLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
+
         makeButtonsWork();
     }
 
@@ -107,5 +113,19 @@ public class Room {
     public int howFull() {
         int percentage = amount * 100 / max;
         return percentage;
+    }
+
+    public void giveColors() {
+        if (GUI.customColors) {
+            roomName.setForeground(GUI.lightColor);
+            amountLabel.setForeground(GUI.lightColor);
+            maxLabel.setForeground(GUI.lightColor);
+            slashLabel.setForeground(GUI.lightColor);
+            plusButton.setForeground(GUI.lightColor);
+            plusButton.setBackground(GUI.darkColor);
+            minusButton.setForeground(GUI.lightColor);
+            minusButton.setBackground(GUI.darkColor);
+            progressBar.setBackground(GUI.darkColor);
+        }
     }
 }

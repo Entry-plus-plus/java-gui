@@ -16,6 +16,10 @@ public class Rooms extends GUI {
 
 
     public Rooms() {
+
+        buttons.currentButton = buttons.roomsButton;
+        buttons.giveColors();
+
         //geeft het scherm een titel
         setTitle("Entry++ - Rooms");
 
@@ -35,14 +39,19 @@ public class Rooms extends GUI {
             //hier wordt de grid van links naar rechts gevuld
             roomsArray[i].setRoomName("room " + (i+1));
             roomsPanel.add(new JLabel(" "));
-            roomsPanel.add(new JLabel(roomsArray[i].roomName.getText()));
+            //roomsPanel.add(new JLabel(roomsArray[i].roomName.getText()));
+            roomsPanel.add(roomsArray[i].roomName);
+            //roomsArray[i].roomName.setText();
             roomsPanel.add(roomsArray[i].amountLabel);
-            roomsPanel.add(new JLabel("/"));
+            roomsPanel.add(roomsArray[i].slashLabel);
             roomsPanel.add(roomsArray[i].maxLabel);
             roomsPanel.add(roomsArray[i].progressBar);
             roomsPanel.add(roomsArray[i].plusButton);
             roomsPanel.add(roomsArray[i].minusButton);
+            roomsArray[i].giveColors();
         }
+
+        giveColors();
 
         //voegt de knoppen bovenaan en de panel met rooms toe aan het scherm
         mainview.add(buttons.buttonsPanel);
@@ -51,14 +60,14 @@ public class Rooms extends GUI {
         //maakt het zichtbaar
         setContentPane(mainview);
 
-        //grootte bepalen
-        setSize(1200,600);
-        //setSize(getToolkit().getScreenSize()); //dit zet het fullscreen
+        setSizeEtc(this);
+    }
 
-        //laat het in het midden van het scherm openen
-        setLocationRelativeTo(null);
-
-        //zorgt dat het scherm verwijderd wordt als je op kruisje drukt
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    public void giveColors() {
+        if (customColors) {
+            roomsPanel.setBackground(darkColor);
+            roomsPanel.setForeground(lightColor);
+            mainview.setBackground(darkColor);
+        }
     }
  }

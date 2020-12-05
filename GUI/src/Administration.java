@@ -33,14 +33,7 @@ public class Administration extends GUI{
         //maakt het zichtbaar
         setContentPane(mainview);
 
-        //bepaalt grootte
-        setSize(1200,600);
-
-        //zorgt dat het in het midden opent
-        setLocationRelativeTo(null);
-
-        //zorgt dat het scherm zich afsluit als je op kruisje drukt
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSizeEtc(this);
 
         //zorgt dat je uitlogt als de op de logout knop drukt
         logOutButton.addActionListener(e -> {

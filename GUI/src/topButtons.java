@@ -14,6 +14,7 @@ public class topButtons extends GUI {
     JButton contactButton = new JButton("Contact");
     JButton logOutButton = new JButton("Logout");
     JLabel entryLabel = new JLabel("Entry++");
+    JButton currentButton = dashboardButton;
 
     public topButtons() {
 
@@ -27,6 +28,8 @@ public class topButtons extends GUI {
         buttonsPanel.add(contactButton);
         buttonsPanel.add(new JLabel("                    "));
         buttonsPanel.add(logOutButton);
+
+        giveColors();
 
         //onderstaande methods zorgen dat de knoppen naar de juiste window gaan
 
@@ -45,5 +48,29 @@ public class topButtons extends GUI {
             currentUser = null;
             viewLoginScreen();
         });
+    }
+
+    public void giveColors() {
+        if (customColors) {
+            buttonsPanel.setBackground(darkColor);
+
+            dashboardButton.setBackground(darkColor);
+            roomsButton.setBackground(darkColor);
+            settingsButton.setBackground(darkColor);
+            dataButton.setBackground(darkColor);
+            contactButton.setBackground(darkColor);
+            logOutButton.setBackground(darkColor);
+
+            currentButton.setBackground(lightColor);
+
+            dashboardButton.setForeground(lightColor);
+            roomsButton.setForeground(lightColor);
+            settingsButton.setForeground(lightColor);
+            dataButton.setForeground(lightColor);
+            contactButton.setForeground(lightColor);
+            logOutButton.setForeground(lightColor);
+
+            currentButton.setForeground(darkColor);
+        }
     }
 }

@@ -2,7 +2,6 @@ import javax.swing.*;
 
 public class Notifications extends GUI{
 
-    //maakt een panel waar de notificaties in te zien zijn
     public JPanel notificationsPanel = new JPanel();
 
     //maakt een listModel waar de notificaties in komen
@@ -14,24 +13,31 @@ public class Notifications extends GUI{
 
     public Notifications() {
 
+
         //zet bovenaan de lijst NOTIFICATIONS om te laten zien dat het notificaties zijn
         listModel.addElement("NOTIFICATIONS:");
+        listModel.addElement("------------------------------------------------------");
 
-        //voegt alles toe
-        add(notificationsPanel);
+        //notificationsPanel.setLayout(new BoxLayout(notificationsPanel, BoxLayout.Y_AXIS));
+        //voegt de lijst toe
         notificationsPanel.add(list);
-
-        //bepaat grootte
-        //setSize(200,200);
-
-        //zorgt dat het scherm zich afsluit als je op kruisje drukt
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-
+        giveColors();
     }
 
     //voegt message toe aan de lijst met notificaties
     public void addNotification(String message) {
         listModel.addElement(message);
     }
+
+    //geeft alles de juste kleuren volgens de gekozen kleurencombinatie
+    public void giveColors () {
+        if (customColors) {
+            notificationsPanel.setBackground(darkColor);
+            notificationsPanel.setForeground(darkColor);
+            notificationsPanel.setOpaque(true);
+            list.setBackground(darkColor);
+            list.setForeground(lightColor);
+        }
+    }
 }
+
