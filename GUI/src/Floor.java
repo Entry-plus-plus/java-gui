@@ -17,22 +17,21 @@ public class Floor {
     final JProgressBar progressBar = new JProgressBar();
 
     public Floor(int numberOfRooms) {
-        giveColors();
 
-        //er wordt een Floor aangemaakt met een aantal kamers
-        //de kamers worden in een array gezet
-
+        //maakt de labels de juiste grootte
         amountLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
         maxLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
 
+        //maakt een aantal kamers
         rooms = new Room[numberOfRooms];
         for (int i = 0; i<numberOfRooms; i++) {
             rooms[i] = new Room();
         }
 
+        giveColors();
         updateLabelValues();
 
-        floorButton.addActionListener(e -> changeSelectedFloor());
+        floorButton.addActionListener(e -> changeSelectedFloor());      //zorgt dat de knop van de floor werkt
     }
 
     public void updateLabelValues() {
@@ -46,6 +45,7 @@ public class Floor {
         progressBar.setForeground(GUI.convertPercentageToColor(howFull()));
     }
 
+    //berekent amount en max door de waarden van alle kamers in de floor op te tellen
     public void updateAmountAndMax() {
         amount = 0;
         max = 0;

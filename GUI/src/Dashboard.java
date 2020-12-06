@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class Dashboard extends GUI{
 
+    //declareert en initialiseert verschillende onderdelen van het dashboardscherm
     final JPanel dashboardPanel = new JPanel();
     static final JPanel totalAmountPanel = new JPanel();
     static final JLabel totalAmountTextLabel = new JLabel("Total amount of people in building:");
@@ -12,21 +13,26 @@ public class Dashboard extends GUI{
 
     public Dashboard() {
         setTitle("Entry++ - Dashboard");
-        giveColors();
-        GUI.heatmap.updateColors();
-        buttons.currentButton = buttons.dashboardButton; //Dit is zodat de knop van dashboard een andere kleur wordt
-        setContentPane(dashboardPanel);
+
+
+        buttons.currentButton = buttons.dashboardButton;    //Dit is zodat de knop van dashboard een andere kleur wordt
+
+        setContentPane(dashboardPanel);                     //zorgt dat het dashboardpanel zichtbaar wordt
+
+        //creeert verschillende onderdelen
         rooms = new Rooms();
-        rooms.giveColors();
         floors = new Floors();
-        floors.giveColors();
         heatmap = new Heatmap();
-        heatmap.giveColors();
         createTotalAmountPanel();
+
+        giveColors();                                       //geeft alles op het dashboard de juiste kleur
+        GUI.heatmap.updateColors();                         //zorgt dat de kleuren van de heatmap overeenkomen met het aantal mensen
+
         createDashboardLayout();
         setSizeEtc(this);
     }
 
+    //maakt het scherm waar het totaal aantal mensen wordt laten zien
     public static void createTotalAmountPanel() {
         totalAmountPanel.setLayout(new BoxLayout(totalAmountPanel, BoxLayout.Y_AXIS)); //zorgt dat de elementen onder elkaar komen
         totalAmountLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 50));
@@ -45,7 +51,7 @@ public class Dashboard extends GUI{
         totalAmountLabel.setText("" + sum);
     }
 
-    //maat de layout van het dashboard en voegt alle elementen toe volgens GrdBagLayout
+    //maakt de layout van het dashboard en voegt alle elementen toe volgens GrdBagLayout
     public void createDashboardLayout() {
         GridBagLayout dashboardLayout = new GridBagLayout();
         dashboardPanel.setLayout(dashboardLayout);
@@ -100,6 +106,7 @@ public class Dashboard extends GUI{
         }
     }
 
+    //geeft alle onderdelen de juiste kleuren
     public void giveColors() {
         if (customColors) {
             dashboardPanel.setBackground(darkColor);
@@ -110,12 +117,13 @@ public class Dashboard extends GUI{
 
             buttons.giveColors();
             notifications.giveColors();
-            //rooms.giveColors();
-            //floors.giveColors();
-            //heatmap.giveColors();
+            rooms.giveColors();
+            floors.giveColors();
+            heatmap.giveColors();
         }
     }
 
+    //zorgt dat er van heatmap gewisseld wordt als er op de knop van een andere floor wordt gedrukt
     public void changeHeatmap() {
         if (selectedFloor == floor1) {
             dashboardPanel.remove(heatmap.heatmapPanel2);

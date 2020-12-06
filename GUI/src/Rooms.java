@@ -3,28 +3,19 @@ import java.awt.*;
 
 public class Rooms extends GUI {
 
-    //Rooms werkt niet met een .form
-
-    //maakt een panel waar de info over de rooms in komt te staan
-    public final JPanel roomsPanel = new JPanel();
-
-    //deze panel is voor wanneer rooms als apart scherm wordt geopend. Hier kan namelijk een knop aan toegevoegd worden
+    //deze panel is voor wanneer rooms als apart scherm wordt geopend. Hier kunnen namelijk knoppen aan toegevoegd worden
     final JPanel mainview = new JPanel();
 
-    //maakt de knoppen die aan de bovenkant komen
-    final topButtons buttons = new topButtons();
-
+    public final JPanel roomsPanel = new JPanel();      //maakt de panel waar de rooms info in komt
+    final topButtons buttons = new topButtons();        //maakt de knoppen die aan de bovenkant komen
 
     public Rooms() {
 
-        buttons.currentButton = buttons.roomsButton;
+        buttons.currentButton = buttons.roomsButton;    //Dit is zodat de knop van rooms een andere kleur wordt
         buttons.giveColors();
 
-        //geeft het scherm een titel
-        setTitle("Entry++ - Rooms");
-
-        //voegt roomsPanel toe aan de frame
-        add(roomsPanel);
+        setTitle("Entry++ - Rooms");                    //geeft het scherm een titel
+        add(roomsPanel);                                //voegt roomsPanel toe aan de frame
 
         //bepaalt de layout van roomsPanel, het is een grid met numberOfRooms aan rijen en 8 kolommen
         //als je nu dingen toevoegt aan roomsPanel, wordt van links naar rechts, boven naar beneden de grid gevuld
@@ -39,9 +30,7 @@ public class Rooms extends GUI {
             //hier wordt de grid van links naar rechts gevuld
             roomsArray[i].setRoomName("room " + (i+1));
             roomsPanel.add(new JLabel(" "));
-            //roomsPanel.add(new JLabel(roomsArray[i].roomName.getText()));
             roomsPanel.add(roomsArray[i].roomName);
-            //roomsArray[i].roomName.setText();
             roomsPanel.add(roomsArray[i].amountLabel);
             roomsPanel.add(roomsArray[i].slashLabel);
             roomsPanel.add(roomsArray[i].maxLabel);
@@ -51,7 +40,7 @@ public class Rooms extends GUI {
             roomsArray[i].giveColors();
         }
 
-        giveColors();
+        giveColors();       //alles krijgt de juiste kleuren
 
         //voegt de knoppen bovenaan en de panel met rooms toe aan het scherm
         mainview.add(buttons.buttonsPanel);

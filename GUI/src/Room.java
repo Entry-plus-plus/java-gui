@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 
-
 public class Room {
     //zet aantal mensen in de kamer en max aantal mensen vast. De waarde van max is willekeurig gekozen en mag veranderd worden
     int amount = 0;
@@ -19,24 +18,20 @@ public class Room {
     public Room() {
         giveColors();
 
+        //maakt de labels de juiste grootte
         amountLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
         maxLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
 
         makeButtonsWork();
     }
 
-
-    //een aantal methods die volgens mij redelijk voor zich spreken
-    public void emptyRoom() { amount = 0; }
-    public void setRoomName(String name) {roomName.setText(name);}
+    public void emptyRoom() { amount = 0; }                         //maakt kamer leeg. wordt momenteel niet gebruikt
+    public void setRoomName(String name) {roomName.setText(name);}  //verandert de naam van de kamer
 
     //dit is wat er gebeurt als je op de plus knop drukt
-    //in het uiteindelijke product gebeurt dit als de sensor registreert dat er iemand naar binnen loopt
     public void plus(){
-        //aantal mensen in kamer gaat omhoog
-        amount++;
 
-        //de labels op het scherm worden geupdate
+        amount++;               //aantal mensen in kamer gaat omhoog
         updateLabelValues();
 
         //als er te veel mensen zijn komt er een melding (als er nog geen melding was)
@@ -46,20 +41,17 @@ public class Room {
     }
 
     //dit is wat er gebeurt als je op de min knop drukt
-    //in het uiteindelijke product gebeurt dit als de sensor registreert dat er iemand naar buiten loopt
     public void minus() {
-        //aantal mensen in kamer gaat omlaag
-        amount--;
 
-        //kan niet negatief worden
-        if (amount < 0) {
+        amount--;               //aantal mensen in kamer gaat omlaag
+        if (amount < 0) {       //zorgt dat het niet negatief kan worden
             amount = 0;
         }
-        //als het weer bij 10 is, zijn er niet meer te veel mensen. dus de notificatie wordt verwijderd
+        //als het weer bij max is, zijn er niet meer te veel mensen. dus de notificatie wordt verwijderd
         else if (amount == max) {
             GUI.notifications.listModel.removeElement("WARNING: Too many people in " + roomName.getText());
         }
-        updateLabelValues();
+        updateLabelValues();    //de labels op het scherm worden geupdate
     }
 
     //zorgt dat de waarden op het scherm geupdate worden met nieuwe waarden
@@ -73,13 +65,9 @@ public class Room {
             floor.updateLabelValues();
         }
 
-        //past kleur van progressBar aan
-        progressBar.setForeground(GUI.convertPercentageToColor(howFull()));
-        //past kleuren van heatmap aan
-        GUI.heatmap.updateColors();
-
-        Dashboard.updateTotalAmountPanel();
-
+        progressBar.setForeground(GUI.convertPercentageToColor(howFull()));     //past kleur van progressBar aan
+        GUI.heatmap.updateColors();                                             //past kleuren van heatmap aan
+        Dashboard.updateTotalAmountPanel();                                     //past het totaal aan
     }
 
     //zorgt dat de plus en min knop werken
@@ -88,18 +76,14 @@ public class Room {
         minusButton.addActionListener(e -> minus());
     }
 
+    //geeft true terug als amount meer is dan max, dus als er te veel mensen zijn
     public boolean isFull() {
-        if (amount > max) {
-            return true;
-        }
-        return false;
+        return amount > max;
     }
 
+    //geeft true terug als er geen mensen in de ruimte zijn
     public boolean isEmpty() {
-        if (amount == 0) {
-            return true;
-        }
-        return false;
+        return amount == 0;
     }
 
     //geeft terug hoe vol de ruimte is in procenten
@@ -107,6 +91,7 @@ public class Room {
         return amount * 100 / max;
     }
 
+    //geeft alle onderdelen de juiste kleur
     public void giveColors() {
         if (GUI.customColors) {
             roomName.setForeground(GUI.lightColor);

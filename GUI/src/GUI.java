@@ -54,20 +54,7 @@ public class GUI extends JDialog {
     public static void main(String[] args) {
 
         setColors();            //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
-
-        //maakt twee floors aan, vult floorsArray met de floors en vult roomsArray met de kamers van die floors
-        floor1 = new Floor(5);
-        selectedFloor = floor1;
-        floor2 = new Floor(2);
-        for (int i = 0; i < floor1.rooms.length; i++) {
-            roomsArray[i] = floor1.rooms[i];
-        }
-        for (int i = 0; i < floor2.rooms.length; i++) {
-            roomsArray[i + floor1.rooms.length] = floor2.rooms[i];
-        }
-        floorsArray[0] = floor1;
-        floorsArray[1] = floor2;
-
+        createRoomsAndFloors();
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
 
         //initialiseert een aantal onderdelen zodat ze op het dashboard getoond kunnen worden
@@ -158,8 +145,7 @@ public class GUI extends JDialog {
 //    }
 // --Commented out by Inspection STOP (6-12-2020 17:28)
 
-    //bepaalt de grootte van het scherm, dat het in het midden van het scherm opent en dat het zich afsluit als
-    //je op kruisje drukt
+    //bepaalt de grootte van het scherm, dat het in het midden van het scherm opent en dat het zich afsluit als je op kruisje drukt
     public void setSizeEtc(GUI frame) {
         frame.setSize(1200,600);
         //pack();                                       //past de grootte automatisch aan aan de elementen die er in staan
@@ -169,6 +155,7 @@ public class GUI extends JDialog {
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    //zorgt dat de kleuren overeenkomen met de gekozen ColorPalette
     public static void setColors() {
         if (customColors) {
             darkColor = currentColorPalette.darkColor;
@@ -178,6 +165,24 @@ public class GUI extends JDialog {
         }
     }
 
+    //maakt twee floors aan, vult floorsArray met de floors en vult roomsArray met de kamers van die floors
+    public static void createRoomsAndFloors() {
+        floor1 = new Floor(5);
+        selectedFloor = floor1;
+        floor2 = new Floor(2);
+        for (int i = 0; i < floor1.rooms.length; i++) {
+            roomsArray[i] = floor1.rooms[i];
+        }
+        for (int i = 0; i < floor2.rooms.length; i++) {
+            roomsArray[i + floor1.rooms.length] = floor2.rooms[i];
+        }
+        floorsArray[0] = floor1;
+        floorsArray[1] = floor2;
+    }
+
+    //Bepaalt de kleur tussen groen en rood die overeenkomt met het percentage
+    //0% is groen(0,255,0), 50% is oranje(255,255,0) en 100% is rood(255,0,0)
+    //bij de andere percentages zit het er tussenin
     public static Color convertPercentageToColor (int percentage) {
         int red;
         int green;
