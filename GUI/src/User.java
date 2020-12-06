@@ -1,8 +1,8 @@
 public class User {
 
-    String username;
-    String firstName;
-    String lastName;
+    final String username;
+    final String firstName;
+    final String lastName;
     String password = passwordHasher.hashPassword("password");
 
     public User(String username, String firstName, String lastName) {

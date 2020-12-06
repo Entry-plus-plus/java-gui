@@ -1,29 +1,30 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Settings extends GUI{
 
-    JPanel settingsPanel = new JPanel();
+    final JPanel settingsPanel = new JPanel();
     JLabel settingsLabel = new JLabel("This is the settings Panel");
-    JPanel mainview = new JPanel();
-    topButtons buttons = new topButtons();
+    final JPanel mainview = new JPanel();
+    final topButtons buttons = new topButtons();
 
     //maakt alles aan van de panel waarmee je je wachtwoord kan wijzigen
-    JPanel changePasswordPanel = new JPanel();
-    JLabel currentPasswordLabel = new JLabel("Current Password:");
-    JLabel newPasswordLabel = new JLabel("New Password:");
-    JLabel confirmPasswordLabel = new JLabel("Confirm new Password");
-    JPasswordField currentPassword = new JPasswordField();
-    JPasswordField newPassword = new JPasswordField();
-    JPasswordField confirmPassword = new JPasswordField();
-    JButton changePasswordButton = new JButton("Change Password");
-    public static JLabel passwordChangedLabel = new JLabel(" ");
+    final JPanel changePasswordPanel = new JPanel();
+    final JLabel currentPasswordLabel = new JLabel("Current Password:");
+    final JLabel newPasswordLabel = new JLabel("New Password:");
+    final JLabel confirmPasswordLabel = new JLabel("Confirm new Password");
+    final JPasswordField currentPassword = new JPasswordField();
+    final JPasswordField newPassword = new JPasswordField();
+    final JPasswordField confirmPassword = new JPasswordField();
+    final JButton changePasswordButton = new JButton("Change Password");
+    public static final JLabel passwordChangedLabel = new JLabel(" ");
 
-    JPanel changeColorsPanel = new JPanel();
-    String[] allColors = {"HHS Colors", "Black and white", "Colorful", "Plain"};
-    JList<String> listOfColors= new JList(allColors);
-    JButton changeColorsButton = new JButton("Change colors");
+    final JPanel changeColorsPanel = new JPanel();
+    final String[] allColors = {"HHS Colors", "Black and white", "Colorful", "Christmas"};
+    final JList<String> listOfColors= new JList(allColors);
+    final JButton changeColorsButton = new JButton("Change colors");
 
     public Settings() {
 
@@ -37,17 +38,19 @@ public class Settings extends GUI{
 
         //settingsPanel.add(settingsLabel);
 
+        createSettingsLayout();
+
         //voegt elementen toe aan het scherm
-        mainview.add(buttons.buttonsPanel);
+        /*mainview.add(buttons.buttonsPanel);
         //mainview.add(settingsPanel);
         mainview.add(changePasswordPanel);
-        mainview.add(changeColorsPanel);
+        mainview.add(changeColorsPanel);*/
 
         //zorgt dat de change passwordknop wordt ingedrukt als je op de enter knop drukt
         getRootPane().setDefaultButton(changePasswordButton);
 
         //maakt het zichtbaar
-        setContentPane(mainview);
+        setContentPane(settingsPanel);
 
         setSizeEtc(this);
     }
@@ -93,38 +96,69 @@ public class Settings extends GUI{
         BoxLayout layout = new BoxLayout(changeColorsPanel, BoxLayout.Y_AXIS);
         changeColorsPanel.setLayout(layout);
 
+        listOfColors.setAlignmentX(CENTER_ALIGNMENT);
+        changePasswordButton.setAlignmentX(CENTER_ALIGNMENT);
         changeColorsPanel.add(listOfColors);
         changeColorsPanel.add(changeColorsButton);
 
-        changeColorsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String choice = listOfColors.getSelectedValue();
-                if (choice.equals("HHS Colors")) {
-                    customColors = true;
-                    currentColorPalette = HHSColors;
-                }
-                else if (choice.equals("Black and white")) {
-                    customColors = true;
-                    currentColorPalette = blackAndWhite;
-                }
-                else if (choice.equals("Colorful")) {
-                    customColors = true;
-                    currentColorPalette = colorful;
-                }
-                else if (choice.equals("Plain")) {
-                    customColors = false;
-                }
-                setColors();
-                giveColors();
+        changeColorsButton.addActionListener(e -> {
+            String choice = listOfColors.getSelectedValue();
+            if (choice.equals("HHS Colors")) {
+                customColors = true;
+                currentColorPalette = HHSColors;
             }
-
+            else if (choice.equals("Black and white")) {
+                customColors = true;
+                currentColorPalette = blackAndWhite;
+            }
+            else if (choice.equals("Colorful")) {
+                customColors = true;
+                currentColorPalette = colorful;
+            }
+            else if (choice.equals("Christmas")) {
+                customColors = true;
+                currentColorPalette = christmas;
+            }
+            setColors();
+            giveColors();
         });
+    }
+
+    public void createSettingsLayout() {
+        GridBagLayout settingsLayout = new GridBagLayout();
+        settingsPanel.setLayout(settingsLayout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.weighty = 1.0;
+        gbc.weightx = 1.0;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 6;
+        gbc.insets = new Insets(10,300,10,10);
+        settingsPanel.add(buttons.buttonsPanel, gbc);
+
+        gbc.insets = new Insets(0,150,0,0);
+        //gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 4;
+        settingsPanel.add(changePasswordPanel, gbc);
+
+        gbc.insets = new Insets(0,0,0,150);
+        gbc.gridx = 5;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 4;
+        settingsPanel.add(changeColorsPanel, gbc);
     }
 
     public void giveColors() {
         if (customColors) {
             mainview.setBackground(darkColor);
+            settingsPanel.setBackground(darkColor);
             changePasswordPanel.setBackground(darkColor);
             currentPasswordLabel.setForeground(lightColor);
             newPasswordLabel.setForeground(lightColor);

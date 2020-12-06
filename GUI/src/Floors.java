@@ -3,9 +3,9 @@ import java.awt.*;
 
 public class Floors extends GUI{
 
-    public JPanel floorsPanel = new JPanel();
-    JPanel mainview = new JPanel();
-    topButtons buttons = new topButtons();
+    public final JPanel floorsPanel = new JPanel();
+    final JPanel mainview = new JPanel();
+    final topButtons buttons = new topButtons();
 
     public Floors() {
         giveColors();

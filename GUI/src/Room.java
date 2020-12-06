@@ -5,21 +5,16 @@ import java.awt.*;
 public class Room {
     //zet aantal mensen in de kamer en max aantal mensen vast. De waarde van max is willekeurig gekozen en mag veranderd worden
     int amount = 0;
-    int max = 15;
+    final int max = 15;
 
     //maakt elementen van het scherm aan
-    JLabel roomName = new JLabel();
-    JLabel amountLabel = new JLabel(""+amount);
-    JLabel maxLabel = new JLabel(""+max);
-    JLabel slashLabel = new JLabel("/");
-    JButton plusButton = new JButton("++");
-    JButton minusButton = new JButton("--");
-    JProgressBar progressBar = new JProgressBar();
-
-    int startingXCoordinate;
-    int startingYCoordinate;
-    int height;
-    int width;
+    final JLabel roomName = new JLabel();
+    final JLabel amountLabel = new JLabel(""+amount);
+    final JLabel maxLabel = new JLabel(""+max);
+    final JLabel slashLabel = new JLabel("/");
+    final JButton plusButton = new JButton("++");
+    final JButton minusButton = new JButton("--");
+    final JProgressBar progressBar = new JProgressBar();
 
     public Room() {
         giveColors();
@@ -32,8 +27,6 @@ public class Room {
 
 
     //een aantal methods die volgens mij redelijk voor zich spreken
-    public int getAmount() { return amount; }
-    public int getMax() { return max; }
     public void emptyRoom() { amount = 0; }
     public void setRoomName(String name) {roomName.setText(name);}
 
@@ -81,7 +74,7 @@ public class Room {
         }
 
         //past kleur van progressBar aan
-        progressBar.setForeground(GUI.heatmap.convertPercentageToColor(howFull()));
+        progressBar.setForeground(GUI.convertPercentageToColor(howFull()));
         //past kleuren van heatmap aan
         GUI.heatmap.updateColors();
 
@@ -111,8 +104,7 @@ public class Room {
 
     //geeft terug hoe vol de ruimte is in procenten
     public int howFull() {
-        int percentage = amount * 100 / max;
-        return percentage;
+        return amount * 100 / max;
     }
 
     public void giveColors() {

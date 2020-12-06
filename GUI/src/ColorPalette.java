@@ -1,10 +1,10 @@
 import java.awt.*;
 
 public class ColorPalette {
-    Color darkColor;
-    Color darkColor2;
-    Color lightColor;
-    Color lightColor2;
+    final Color darkColor;
+    final Color darkColor2;
+    final Color lightColor;
+    final Color lightColor2;
 
     public ColorPalette(Color darkColor, Color darkColor2, Color lightColor, Color lightColor2) {
         this.darkColor = darkColor;

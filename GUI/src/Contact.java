@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.JComponent;
-import java.awt.*;
 
 public class Contact extends GUI{
     final JPanel contactPanel = new JPanel();

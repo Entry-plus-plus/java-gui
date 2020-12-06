@@ -6,13 +6,13 @@ import javax.swing.*;
 public class topButtons extends GUI {
 
     //Alle noppen worden gedeclareerd en geinitieerd
-    JPanel buttonsPanel = new JPanel();
-    JButton dashboardButton = new JButton("Dashboard");
-    JButton roomsButton = new JButton("Rooms");
-    JButton settingsButton = new JButton("Settings");
-    JButton dataButton = new JButton("Data");
-    JButton contactButton = new JButton("Contact");
-    JButton logOutButton = new JButton("Logout");
+    final JPanel buttonsPanel = new JPanel();
+    final JButton dashboardButton = new JButton("Dashboard");
+    final JButton roomsButton = new JButton("Rooms");
+    final JButton settingsButton = new JButton("Settings");
+    final JButton dataButton = new JButton("Data");
+    final JButton contactButton = new JButton("Contact");
+    final JButton logOutButton = new JButton("Logout");
     JLabel entryLabel = new JLabel("Entry++");
     JButton currentButton = dashboardButton;
 

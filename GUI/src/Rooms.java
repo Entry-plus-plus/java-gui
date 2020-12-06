@@ -6,13 +6,13 @@ public class Rooms extends GUI {
     //Rooms werkt niet met een .form
 
     //maakt een panel waar de info over de rooms in komt te staan
-    public JPanel roomsPanel = new JPanel();
+    public final JPanel roomsPanel = new JPanel();
 
     //deze panel is voor wanneer rooms als apart scherm wordt geopend. Hier kan namelijk een knop aan toegevoegd worden
-    JPanel mainview = new JPanel();
+    final JPanel mainview = new JPanel();
 
     //maakt de knoppen die aan de bovenkant komen
-    topButtons buttons = new topButtons();
+    final topButtons buttons = new topButtons();
 
 
     public Rooms() {

@@ -3,15 +3,17 @@ import java.awt.*;
 
 public class Dashboard extends GUI{
 
-    JPanel dashboardPanel = new JPanel();
-    static JPanel totalAmountPanel = new JPanel();
-    static JLabel totalAmountTextLabel = new JLabel("Total amount of people in building:");
-    static JLabel totalAmountLabel = new JLabel("0");
+    final JPanel dashboardPanel = new JPanel();
+    static final JPanel totalAmountPanel = new JPanel();
+    static final JLabel totalAmountTextLabel = new JLabel("Total amount of people in building:");
+    static final JLabel totalAmountLabel = new JLabel("0");
     final topButtons buttons = new topButtons();
+    final GridBagConstraints gbc = new GridBagConstraints();
 
     public Dashboard() {
         setTitle("Entry++ - Dashboard");
         giveColors();
+        GUI.heatmap.updateColors();
         buttons.currentButton = buttons.dashboardButton; //Dit is zodat de knop van dashboard een andere kleur wordt
         setContentPane(dashboardPanel);
         rooms = new Rooms();
@@ -37,8 +39,8 @@ public class Dashboard extends GUI{
     //zorgt dat de total amount geupdate wordt met de nieuwste waarde
     public static void updateTotalAmountPanel() {
         int sum = 0;
-        for (int i = 0; i < roomsArray.length; i++) {
-            sum += roomsArray[i].amount;
+        for (Room room : roomsArray) {
+            sum += room.amount;
         }
         totalAmountLabel.setText("" + sum);
     }
@@ -47,7 +49,6 @@ public class Dashboard extends GUI{
     public void createDashboardLayout() {
         GridBagLayout dashboardLayout = new GridBagLayout();
         dashboardPanel.setLayout(dashboardLayout);
-        GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.weighty = 1.0;
@@ -91,7 +92,12 @@ public class Dashboard extends GUI{
         gbc.gridy = 2;
         gbc.gridheight = 1;
         gbc.gridwidth = 5;
-        dashboardPanel.add(heatmap.heatmapPanel, gbc);
+        if (selectedFloor == floor1) {
+            dashboardPanel.add(heatmap.heatmapPanel1, gbc);
+        }
+        else if (selectedFloor == floor2) {
+            dashboardPanel.add(heatmap.heatmapPanel2, gbc);
+        }
     }
 
     public void giveColors() {
@@ -108,6 +114,18 @@ public class Dashboard extends GUI{
             //floors.giveColors();
             //heatmap.giveColors();
         }
+    }
+
+    public void changeHeatmap() {
+        if (selectedFloor == floor1) {
+            dashboardPanel.remove(heatmap.heatmapPanel2);
+            dashboardPanel.add(heatmap.heatmapPanel1, gbc);
+        }
+        else if (selectedFloor == floor2) {
+            dashboardPanel.remove(heatmap.heatmapPanel1);
+            dashboardPanel.add(heatmap.heatmapPanel2, gbc);
+        }
+        dashboard.setVisible(true);
     }
 
 }

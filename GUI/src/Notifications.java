@@ -2,14 +2,14 @@ import javax.swing.*;
 
 public class Notifications extends GUI{
 
-    public JPanel notificationsPanel = new JPanel();
+    public final JPanel notificationsPanel = new JPanel();
 
     //maakt een listModel waar de notificaties in komen
     //listModel maakt het makkelijk om notificaties toe te voegen, aan te passen, te verplaatsen en te verwijderen
-    DefaultListModel<String> listModel = new DefaultListModel<>();
+    final DefaultListModel<String> listModel = new DefaultListModel<>();
 
     //maakt een list die de waarden van listModel aanneemt (ook als listModel veranderd wordt)
-    JList list = new JList(listModel);
+    final JList list = new JList(listModel);
 
     public Notifications() {
 

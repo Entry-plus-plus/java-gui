@@ -113,7 +113,5 @@ public class Administration extends GUI{
     public void createNewAdmin(String username, String firstName, String lastName) {
         admins.add(new User(username, firstName, lastName));
     }
-    public void removeAdmin(String username) {
 
-    }
 }

@@ -5,16 +5,16 @@ import java.awt.event.ActionListener;
 
 public class Floor {
 
-    Room[] rooms;
+    final Room[] rooms;
     int amount;
     int max;
 
-    JLabel floorName = new JLabel();
-    JLabel amountLabel = new JLabel(""+amount);
-    JLabel maxLabel = new JLabel(""+max);
-    JLabel slashLabel = new JLabel("/");
-    JButton floorButton = new JButton();
-    JProgressBar progressBar = new JProgressBar();
+    final JLabel floorName = new JLabel();
+    final JLabel amountLabel = new JLabel(""+amount);
+    final JLabel maxLabel = new JLabel(""+max);
+    final JLabel slashLabel = new JLabel("/");
+    final JButton floorButton = new JButton();
+    final JProgressBar progressBar = new JProgressBar();
 
     public Floor(int numberOfRooms) {
         giveColors();
@@ -32,23 +32,8 @@ public class Floor {
 
         updateLabelValues();
 
-        floorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeSelectedFloor();
-            }
-        });
+        floorButton.addActionListener(e -> changeSelectedFloor());
     }
-
-    //geeft het totaal aan mensen op de hele verdieping terug door de hoeveelheden van alle kamers op te tellen
-    public int getAmount() {
-        int amount = 0;
-        for (Room room : rooms) {
-            amount += room.amount;
-        }
-        return amount;
-    }
-
 
     public void updateLabelValues() {
         updateAmountAndMax();
@@ -58,7 +43,7 @@ public class Floor {
         progressBar.setValue(amount);
 
         //past kleur van progressBar aan
-        progressBar.setForeground(GUI.heatmap.convertPercentageToColor(howFull()));
+        progressBar.setForeground(GUI.convertPercentageToColor(howFull()));
     }
 
     public void updateAmountAndMax() {
@@ -73,13 +58,12 @@ public class Floor {
     public void setFloorName(String name) {floorName.setText(name);}
 
     public int howFull() {
-        int percentage = amount * 100 / max;
-        return percentage;
+        return amount * 100 / max;
     }
 
     public void changeSelectedFloor() {
         GUI.selectedFloor = this;
-        System.out.println(GUI.selectedFloor.floorName.getText());
+        GUI.dashboard.changeHeatmap();
     }
 
     public void giveColors() {

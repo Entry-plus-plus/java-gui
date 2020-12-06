@@ -6,6 +6,7 @@ import java.util.List;
 
 public class GUI extends JDialog {
 
+    //alle verschillende schermen declareren
     static LoginScreen loginScreen;
     static Notifications notifications;
     static Dashboard dashboard;
@@ -17,47 +18,46 @@ public class GUI extends JDialog {
     static Heatmap heatmap;
     static GUI openedWindow;
 
-    static List<User> users = new ArrayList<>();
-    static List<User> admins = new ArrayList<>();
+    //lijsten maken waar gebruikers en admins in gezet kunnen worden
+    static final List<User> users = new ArrayList<>();
+    static final List<User> admins = new ArrayList<>();
     static User currentUser = null;
 
-    static int numberOfRooms = 7;
-    static int numberOfFloors = 2;
-    static Room[] roomsArray = new Room[numberOfRooms];
-    static Floor[] floorsArray = new Floor[numberOfFloors];
+    //kamers en verdiepingen declareren
+    static final int numberOfRooms = 7;
+    static final int numberOfFloors = 2;
+    static final Room[] roomsArray = new Room[numberOfRooms];
+    static final Floor[] floorsArray = new Floor[numberOfFloors];
     static Floor floor1;
     static Floor floor2;
-    static Floor selectedFloor = floor1;
+    static Floor selectedFloor;
     static Floors floors;
 
+    //verschillende kleuren aanmaken die gebruikt worden in het uiterlijk van de app
     static Color darkColor;
     static Color darkColor2;
     static Color lightColor;
     static Color lightColor2;
-    static Color HHSGrijs = new Color(34, 51, 67);
-    static Color HHSLichterGrijs = new Color(78,91,115);
-    static Color HHSGroen = new Color(158,167,0);
-    static Color HHSDonkerderGroen = new Color(142, 152, 6 );
-    static ColorPalette HHSColors = new ColorPalette(HHSGrijs, HHSLichterGrijs, HHSGroen, HHSDonkerderGroen);
-    static ColorPalette blackAndWhite = new ColorPalette(Color.black, Color.DARK_GRAY, Color.white, Color.lightGray);
-    static ColorPalette colorful = new ColorPalette(new Color(18,0,120), new Color(157,1,145), new Color(254,205,26), new Color(253,58,105));
+    static final Color HHSGrijs = new Color(34, 51, 67);
+    static final Color HHSLichterGrijs = new Color(78,91,115);
+    static final Color HHSGroen = new Color(158,167,0);
+    static final Color HHSDonkerderGroen = new Color(142, 152, 6 );
+    static final ColorPalette HHSColors = new ColorPalette(HHSGrijs, HHSLichterGrijs, HHSGroen, HHSDonkerderGroen);
+    static final ColorPalette blackAndWhite = new ColorPalette(Color.black, Color.DARK_GRAY, Color.white, Color.lightGray);
+    static final ColorPalette colorful = new ColorPalette(new Color(18,0,120), new Color(157,1,145), new Color(254,205,26), new Color(253,58,105));
+    static final ColorPalette christmas = new ColorPalette(new Color(22,91,51), new Color(20,107,58), new Color(234,70,48), new Color(187,37,40));
 
-    static boolean customColors = true;
-    static ColorPalette currentColorPalette = HHSColors;
+    static boolean customColors = true;                     //bij false worden de default kleuren laten zien
+    static ColorPalette currentColorPalette = HHSColors;    //keuze voor het kleurenschema waar het mee opstart
 
 
     public static void main(String[] args) {
 
-        //creeert een aantal elementen die die op het dashboard zullen komen te staan
-        heatmap = new Heatmap();
-        notifications = new Notifications();
-
-        //zorgt dat de kleuren overeenkomen met de gekozen kleuren
-        setColors();
-
+        setColors();            //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
 
         //maakt twee floors aan, vult floorsArray met de floors en vult roomsArray met de kamers van die floors
         floor1 = new Floor(5);
+        selectedFloor = floor1;
         floor2 = new Floor(2);
         for (int i = 0; i < floor1.rooms.length; i++) {
             roomsArray[i] = floor1.rooms[i];
@@ -68,12 +68,12 @@ public class GUI extends JDialog {
         floorsArray[0] = floor1;
         floorsArray[1] = floor2;
 
+        //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
+
+        //initialiseert een aantal onderdelen zodat ze op het dashboard getoond kunnen worden
+        heatmap = new Heatmap();
         floors = new Floors();
-
-        //de manier om kamers aan te maken zonder een floor:
-        //rooms = createRooms(numberOfRooms);
-
-
+        notifications = new Notifications();
 
         //voegt een aantal users toe waarmee ingelogd kan worden
         users.add(new User("user", null, null));
@@ -89,6 +89,7 @@ public class GUI extends JDialog {
     }
 
 
+    // met deze methods kunnen de verschillende schermen geopend worden
     public static void viewLoginScreen() {
         loginScreen = new LoginScreen();
         loginScreen.setVisible(true);
@@ -98,7 +99,6 @@ public class GUI extends JDialog {
         }
         openedWindow = loginScreen;
     }
-
     public static void viewDashboard(){
         dashboard = new Dashboard();
         dashboard.setVisible(true);
@@ -113,7 +113,6 @@ public class GUI extends JDialog {
         openedWindow = rooms;
         lastOpenedWindow.dispose();
     }
-
     public static void viewSettings(){
         settings = new Settings();
         settings.setVisible(true);
@@ -121,7 +120,6 @@ public class GUI extends JDialog {
         openedWindow = settings;
         lastOpenedWindow.dispose();
     }
-
     public static void viewData(){
         data = new Data();
         data.setVisible(true);
@@ -129,7 +127,6 @@ public class GUI extends JDialog {
         openedWindow = data;
         lastOpenedWindow.dispose();
     }
-
     public static void viewContact(){
         contact = new Contact();
         contact.setVisible(true);
@@ -137,7 +134,6 @@ public class GUI extends JDialog {
         openedWindow = contact;
         lastOpenedWindow.dispose();
     }
-
     public static void viewAdministration(){
         administration = new Administration();
         administration.setVisible(true);
@@ -146,24 +142,27 @@ public class GUI extends JDialog {
         lastOpenedWindow.dispose();
     }
 
+
     public static void createNotification(String message) {
         notifications.addNotification(message);
     }
 
-    //maakt een aantal kamers en geeft ze terug in de vorm van een array
-    public static Room[] createRooms(int numberOfRooms) {
-        roomsArray = new Room[numberOfRooms];
-        for (int i = 0; i<numberOfRooms; i++) {
-            roomsArray[i] = new Room();
-        }
-        return roomsArray;
-    }
+// --Commented out by Inspection START (6-12-2020 17:28):
+//    //maakt een aantal kamers en geeft ze terug in de vorm van een array
+//    public static Room[] createRooms(int numberOfRooms) {
+//        roomsArray = new Room[numberOfRooms];
+//        for (int i = 0; i<numberOfRooms; i++) {
+//            roomsArray[i] = new Room();
+//        }
+//        return roomsArray;
+//    }
+// --Commented out by Inspection STOP (6-12-2020 17:28)
 
     //bepaalt de grootte van het scherm, dat het in het midden van het scherm opent en dat het zich afsluit als
     //je op kruisje drukt
     public void setSizeEtc(GUI frame) {
         frame.setSize(1200,600);
-        //pack();       //past de grootte automatisch aan aan de elementen die er in staan
+        //pack();                                       //past de grootte automatisch aan aan de elementen die er in staan
         //setSize(getToolkit().getScreenSize());        //dit zet het fullscreen
 
         frame.setLocationRelativeTo(null);
@@ -177,5 +176,26 @@ public class GUI extends JDialog {
             lightColor = currentColorPalette.lightColor;
             lightColor2 = currentColorPalette.lightColor2;
         }
+    }
+
+    public static Color convertPercentageToColor (int percentage) {
+        int red;
+        int green;
+        int blue = 0;
+
+        if (percentage < 50) {
+            red = (int) 5.1 * percentage;
+            green = 255;
+        }
+        else if (percentage < 100) {
+            red = 255;
+            green = (int) (255 - (percentage - 50) * 5.1);
+        }
+        else {
+            red = 255;
+            green = 0;
+        }
+
+        return new Color(red, green, blue);
     }
 }
