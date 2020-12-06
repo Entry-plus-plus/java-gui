@@ -159,6 +159,7 @@ public class Settings extends GUI{
         if (customColors) {
             mainview.setBackground(darkColor);
             settingsPanel.setBackground(darkColor);
+
             changePasswordPanel.setBackground(darkColor);
             currentPasswordLabel.setForeground(lightColor);
             newPasswordLabel.setForeground(lightColor);
@@ -172,6 +173,7 @@ public class Settings extends GUI{
             changePasswordButton.setBackground(lightColor2);
             changePasswordButton.setForeground(darkColor);
             passwordChangedLabel.setForeground(lightColor);
+
             changeColorsPanel.setBackground(darkColor);
             changeColorsButton.setBackground(darkColor2);
             changeColorsButton.setForeground(lightColor);

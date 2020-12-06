@@ -7,19 +7,25 @@ public class Administration extends GUI{
     final JLabel administrationLabel = new JLabel("This is where the administrator can do administrator things");
     final JPanel mainview = new JPanel();
     final JButton logOutButton = new JButton("log out");
-    final JButton addNewUserButton = new JButton("Add new User");
 
     //maakt de elementen van het create new user scherm
     JFrame frame;
     final JPanel addNewUserPanel = new JPanel();
     final JLabel newUsernameLabel = new JLabel("Username of new user:");
-    final JTextField newUsername = new JTextField();
+    JTextField newUsername = new JTextField();
     final JLabel newFirstNameLabel = new JLabel("First name of new user:");
-    final JTextField newFirstName = new JTextField();
+    JTextField newFirstName = new JTextField();
     final JLabel newLastNameLabel = new JLabel("Last name of new user:");
-    final JTextField newLastName = new JTextField();
-    final JButton createButton = new JButton("create");
+    JTextField newLastName = new JTextField();
+    final JButton createNewUserButton = new JButton("create");
 
+    //maakt de elementen van het create new group scherm
+    final JPanel addNewGroupPanel = new JPanel();
+    final JLabel newGroupnameLabel = new JLabel("Username of new user:");
+    final JTextField newGroupName = new JTextField();
+    final JButton createNewGroupButton = new JButton("create");
+
+    Group selectedGroup;
 
     public Administration() {
         setTitle("Entry++ - Administration");
@@ -28,7 +34,15 @@ public class Administration extends GUI{
         administrationPanel.add(administrationLabel);
         mainview.add(administrationPanel);
         mainview.add(logOutButton);
-        mainview.add(addNewUserButton);
+
+        users = new Users();
+        mainview.add(users.usersPanel);
+
+        groups = new Groups();
+        mainview.add(groups.groupsPanel);
+
+        authorizations = new Authorizations();
+        mainview.add(authorizations.authorizationsPanel);
 
         //maakt het zichtbaar
         setContentPane(mainview);
@@ -41,21 +55,13 @@ public class Administration extends GUI{
             viewLoginScreen();
         });
 
-        //zorgt dat het add new user scherm wordt geopend als je op de addNewUser knop drukt
-        addNewUserButton.addActionListener(e -> {
-            //method waarmee nieuw scherm wordt geopend als popup
-            newUserFrame();
-        });
-
         //maakt een nieuwe user aan als je op de create knop drukt
-        createButton.addActionListener(e -> {
-            createNewUser(newUsername.getText(), newFirstName.getText(), newLastName.getText());
-            frame.dispose();
-        });
+
+        giveColors();
     }
 
     //maakt een scherm waarmee je een nieuwe user kan toeveogen
-    public void newUserFrame() {
+    public void createNewUserFrame() {
 
         //maakt frame en zet het juiste panel er in
         frame = new JFrame();
@@ -64,6 +70,10 @@ public class Administration extends GUI{
         //zorgt dat je de layout kan aanpassen met GroupLayout
         GroupLayout layout = new GroupLayout(addNewUserPanel);
         addNewUserPanel.setLayout(layout);
+
+        newUsername.setText("");
+        newFirstName.setText("");
+        newLastName.setText("");
 
         //bepaalt de horizontale volgorde van elementen
         layout.setHorizontalGroup(
@@ -76,7 +86,7 @@ public class Administration extends GUI{
                         .addComponent(newUsername)
                         .addComponent(newFirstName)
                         .addComponent(newLastName)
-                        .addComponent(createButton))
+                        .addComponent(createNewUserButton))
         );
 
         //bepaalt de verticale volgorde van elementen
@@ -91,27 +101,124 @@ public class Administration extends GUI{
                     .addGroup(layout.createParallelGroup()
                         .addComponent(newLastNameLabel)
                         .addComponent(newLastName))
-                    .addComponent(createButton)
+                    .addComponent(createNewUserButton)
         );
+
+        createNewUserButton.addActionListener(e -> {
+            createNewUser(newUsername.getText(), newFirstName.getText(), newLastName.getText());
+            users.fillList();
+            frame.dispose();
+        });
 
         //zorgt dat het er goed uit ziet en maakt het zichtbaar
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.getRootPane().setDefaultButton(createButton);
+        frame.getRootPane().setDefaultButton(createNewUserButton);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    //maakt een scherm waarmee je een nieuwe user kan toeveogen
+    public void createNewGroupFrame() {
+
+        //maakt frame en zet het juiste panel er in
+        frame = new JFrame();
+        frame.add(addNewGroupPanel);
+
+        newGroupName.setText("");
+
+        //zorgt dat je de layout kan aanpassen met GroupLayout
+        GroupLayout layout = new GroupLayout(addNewGroupPanel);
+        addNewGroupPanel.setLayout(layout);
+
+        //bepaalt de horizontale volgorde van elementen
+        layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newGroupnameLabel))
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newGroupName)
+                                .addComponent(createNewGroupButton))
+        );
+
+        //bepaalt de verticale volgorde van elementen
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newGroupnameLabel)
+                                .addComponent(newGroupName))
+                        .addComponent(createNewGroupButton)
+        );
+
+        createNewGroupButton.addActionListener(e -> {
+            createNewGroup(newGroupName.getText());
+            groups.fillList();
+            frame.dispose();
+        });
+
+        //zorgt dat het er goed uit ziet en maakt het zichtbaar
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.getRootPane().setDefaultButton(createNewGroupButton);
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     //voegt een nieuwe user toe aan de array van users
     public void createNewUser(String username, String firstName, String lastName) {
-        users.add(new User(username, firstName, lastName));
+        usersArrayList.add(new User(username, firstName, lastName));
     }
-    public void removeUser(String username) {
+    public void deleteUser(String username) {
+        for (User user : usersArrayList) {
+            if (user.username.equals(username)) {
+                usersArrayList.remove(user);
+                return;
+            }
+        }
+    }
 
+    public void createNewGroup(String groupName) {
+        groupsArrayList.add(new Group(groupName));
+    }
+    public void deleteGroup(String groupName) {
+        for (Group group : groupsArrayList) {
+            if (group.groupName.equals(groupName)) {
+                groupsArrayList.remove(group);
+                return;
+            }
+        }
     }
     //voegt een nieuwe user toe aan de array van admins
     public void createNewAdmin(String username, String firstName, String lastName) {
-        admins.add(new User(username, firstName, lastName));
+        adminsArrayList.add(new User(username, firstName, lastName));
     }
 
+    public void giveColors() {
+
+        administrationPanel.setBackground(darkColor);
+        administrationLabel.setForeground(lightColor);
+        mainview.setBackground(darkColor);
+        logOutButton.setBackground(darkColor);
+        logOutButton.setForeground(lightColor);
+
+        addNewUserPanel.setBackground(darkColor);
+        newUsernameLabel.setForeground(lightColor);
+        newUsername.setBackground(darkColor2);
+        newUsername.setForeground(lightColor);
+        newFirstNameLabel.setForeground(lightColor);
+        newFirstName.setBackground(darkColor2);
+        newFirstName.setForeground(lightColor);
+        newLastNameLabel.setForeground(lightColor);
+        newLastName.setBackground(darkColor2);
+        newLastName.setForeground(lightColor);
+        createNewUserButton.setBackground(lightColor2);
+        createNewUserButton.setForeground(darkColor);
+
+        addNewGroupPanel.setBackground(darkColor);
+        newGroupnameLabel.setForeground(lightColor);
+        newGroupName.setBackground(darkColor2);
+        newGroupName.setForeground(lightColor);
+        createNewGroupButton.setBackground(lightColor2);
+        createNewGroupButton.setForeground(darkColor);
+    }
 }

@@ -17,11 +17,15 @@ public class GUI extends JDialog {
     static Administration administration;
     static Heatmap heatmap;
     static GUI openedWindow;
+    static Users users;
+    static Groups groups;
+    static Authorizations authorizations;
 
     //lijsten maken waar gebruikers en admins in gezet kunnen worden
-    static final List<User> users = new ArrayList<>();
-    static final List<User> admins = new ArrayList<>();
+    static List<User> usersArrayList = new ArrayList<>();
+    static List<User> adminsArrayList = new ArrayList<>();
     static User currentUser = null;
+    static List<Group> groupsArrayList = new ArrayList<>();
 
     //kamers en verdiepingen declareren
     static final int numberOfRooms = 7;
@@ -63,9 +67,9 @@ public class GUI extends JDialog {
         notifications = new Notifications();
 
         //voegt een aantal users toe waarmee ingelogd kan worden
-        users.add(new User("user", null, null));
-        users.add(new User("Mariska", "Mariska", "van Beek"));
-        admins.add(new User("admin", null, null));
+        createUsersandAdmins();
+
+        //users = new Users();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
         viewLoginScreen();
@@ -202,5 +206,18 @@ public class GUI extends JDialog {
         }
 
         return new Color(red, green, blue);
+    }
+
+    public static void createUsersandAdmins() {
+        usersArrayList.add(new User("user", null, null));
+        usersArrayList.add(new User("Ebenezer", "Ebenezer", "Appau"));
+        usersArrayList.add(new User("Mariska", "Mariska", "van Beek"));
+        usersArrayList.add(new User("Tom", "Tom", "Daamen"));
+        usersArrayList.add(new User("Davita", "Davita", "de Jong"));
+        usersArrayList.add(new User("Bart", "Bart", "Leentvaar"));
+        usersArrayList.add(new User("Shaquille", "Shaquille", "Soekhlal"));
+        usersArrayList.add(new User("Steenbergen", "Erwin", "Steenbergem"));
+
+        adminsArrayList.add(new User("admin", null, null));
     }
 }

@@ -43,7 +43,7 @@ public class LoginScreen extends GUI {
         String hashedPassword = passwordHasher.hashPassword(password);
 
         //itereert door lijst met users
-        for (User user : users) {
+        for (User user : usersArrayList) {
 
             //kijkt of de meegegeven username voorkomt in de lijst met users
             if (user.username.equals(username)) {
@@ -61,12 +61,12 @@ public class LoginScreen extends GUI {
         }
         //werkt vergelijkbaar met vorige stuk code, maar dan in de lijst met admins.
         //Hierbij wordt niet het dashboard geopend maar de administration pagina
-        for (int i=0; i<admins.size(); i++) {
-            if (admins.get(i).username.equals(username)) {
-                if (admins.get(i).password.equals(hashedPassword)) {
+        for (int i = 0; i< adminsArrayList.size(); i++) {
+            if (adminsArrayList.get(i).username.equals(username)) {
+                if (adminsArrayList.get(i).password.equals(hashedPassword)) {
                     dispose();
                     viewAdministration();
-                    currentUser = users.get(i);
+                    currentUser = usersArrayList.get(i);
                     return;
                 }
             }

@@ -5,6 +5,9 @@ public class User {
     final String lastName;
     String password = passwordHasher.hashPassword("password");
 
+
+
+
     public User(String username, String firstName, String lastName) {
         this.username = username;
         this.firstName = firstName;
