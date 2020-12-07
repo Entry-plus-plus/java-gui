@@ -6,6 +6,15 @@ import java.util.List;
 
 public class GUI extends JDialog {
 
+    public static void database() {
+        MySQLAccessVoorbeeld aaa = new MySQLAccessVoorbeeld();
+        try {
+            aaa.readDataBase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //alle verschillende schermen declareren
     static LoginScreen loginScreen;
     static Notifications notifications;
@@ -216,8 +225,9 @@ public class GUI extends JDialog {
         usersArrayList.add(new User("Davita", "Davita", "de Jong"));
         usersArrayList.add(new User("Bart", "Bart", "Leentvaar"));
         usersArrayList.add(new User("Shaquille", "Shaquille", "Soekhlal"));
-        usersArrayList.add(new User("Steenbergen", "Erwin", "Steenbergem"));
+        usersArrayList.add(new User("Steenbergen", "Erwin", "Steenbergen"));
 
         adminsArrayList.add(new User("admin", null, null));
     }
+
 }
