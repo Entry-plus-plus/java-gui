@@ -83,11 +83,11 @@ public class GUI extends JDialog {
         //users = new Users();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
-        //viewLoginScreen();
+        viewLoginScreen();
         //viewDashboard();
         //viewContact();
         //viewSettings();
-        viewAdministration();
+        //viewAdministration();
         //viewData();
 
         //Graph graph = new Graph();
