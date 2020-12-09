@@ -22,7 +22,7 @@ public class topButtons extends GUI {
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
         //buttonsPanel.add(entryLabel);
         buttonsPanel.add(dashboardButton);
-        buttonsPanel.add(roomsButton);
+        //buttonsPanel.add(roomsButton);      //voor nu weggehaald omdat het eigenlijk dezelfde info bevat als dashboard
         buttonsPanel.add(settingsButton);
         buttonsPanel.add(dataButton);
         buttonsPanel.add(contactButton);

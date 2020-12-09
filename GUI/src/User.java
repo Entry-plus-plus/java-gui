@@ -34,13 +34,21 @@ public class User {
     JTextField officeField = new JTextField();
     JLabel telephoneNumberLabel = new JLabel("Telephone number");
     JTextField telephoneNumberField = new JTextField();
-    JLabel emailLabel = new JLabel("Email adress");
+    JLabel emailLabel = new JLabel("Email address");
     JTextField emailField = new JTextField();
 
     JPanel accountPanel = new JPanel();
+    JLabel mustChangePasswordLabel = new JLabel("User must change password at next logon");
+    JRadioButton mustChangePasswordButton = new JRadioButton();
+    JLabel PWNeverExpiresLAbel = new JLabel("Password never expires");
+    JRadioButton PWNeverExpiresButton = new JRadioButton();
+    JLabel accountDisabledLabel = new JLabel("Disable account");
+    JRadioButton accountDisabledButton = new JRadioButton();
 
     JPanel groupsPanel = new JPanel();
     JList<String> groupsList = new JList<>();
+    JButton addToGroupButton = new JButton("Add to new group");
+    JButton removeFromGroupButton = new JButton("Remove from group");
 
 
     public User(String username, String firstName, String lastName) {
@@ -54,25 +62,6 @@ public class User {
     public void createUserInfoPanel() {
         createGeneralPanel();
         userInfoPanel.add(generalPanel);
-    }
-
-    public void editUser() {
-        username = usernameField.getText();
-        firstName = firstNameField.getText();
-        lastName = lastNameField.getText();
-        office = officeField.getText();
-        telephoneNumber = telephoneNumberField.getText();
-        email = emailField.getText();
-
-        usernameField.setEditable(false);
-        firstNameField.setEditable(false);
-        lastNameField.setEditable(false);
-        officeField.setEditable(false);
-        telephoneNumberField.setEditable(false);
-        emailField.setEditable(false);
-
-        userInfoPanel.remove(GUI.users.confirmEditButton);
-        GUI.administration.setVisible(true);
     }
 
     private void createGeneralPanel() {
@@ -110,11 +99,33 @@ public class User {
     }
 
     private void createAccountPanel() {
+        accountPanel.setLayout(new GridLayout(3,2));
+
+        accountPanel.add(mustChangePasswordLabel);
 
     }
 
     private void createGroupsPanel() {
 
+    }
+
+    public void editUser() {
+        username = usernameField.getText();
+        firstName = firstNameField.getText();
+        lastName = lastNameField.getText();
+        office = officeField.getText();
+        telephoneNumber = telephoneNumberField.getText();
+        email = emailField.getText();
+
+        usernameField.setEditable(false);
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        officeField.setEditable(false);
+        telephoneNumberField.setEditable(false);
+        emailField.setEditable(false);
+
+        userInfoPanel.remove(GUI.users.confirmEditButton);
+        GUI.administration.setVisible(true);
     }
 
     //method waarmee je het wachtwoord van de user kan veranderen

@@ -1,13 +1,6 @@
 import javax.swing.*;
 import java.sql.Time;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.*;
-import javafx.stage.Stage;
-import javafx.application.Application;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -26,31 +19,7 @@ public class Data extends GUI{
     static double[] times = {0.0, 0.25, 0.50, 0.75, 1.0};
     static double[] amountsOfPeople = {0,5,20,17,32};
 
-    NumberAxis xAxis;
-    NumberAxis yAxis;
-
-    Stage stage;
-
-    XYChart.Series series = new XYChart.Series();
     public Data() {
-        /*xAxis = new NumberAxis();
-        yAxis = new NumberAxis();
-        stage = new Stage();
-
-        xAxis.setLabel("time");
-        yAxis.setLabel("Amount of people");
-
-        ObservableList timeList = series.getData();
-        for (int i = 0; i < timeStamps.length; i++) {
-            timeList.add(new XYChart.Data(timeStamps[i], amountsOfPeople[i]));
-        }
-
-        LineChart lineChart = new LineChart(xAxis, yAxis);
-
-        Scene scene = new Scene (lineChart, 800, 600);
-        lineChart.getData().add(series);
-        stage.setScene(scene);
-        stage.show();*/
 
 
         //createGraph();
@@ -66,10 +35,10 @@ public class Data extends GUI{
 
         //settingsPanel.add(settingsLabel);
 
+        mainview.setLayout(new BoxLayout(mainview, BoxLayout.Y_AXIS));
         mainview.add(buttons.buttonsPanel);
         mainview.add(dataPanel);
         mainview.add(chartPanel);
-        //mainview.add(lineChart);
 
         setContentPane(mainview);
 
