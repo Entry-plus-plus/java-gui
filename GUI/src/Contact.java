@@ -41,7 +41,7 @@ public class Contact extends GUI{
                 .addComponent(contact))
         );*/
 
-
+        giveColors();
 
         mainview.add(buttons.buttonsPanel);
         mainview.add(contactPanel);
@@ -49,5 +49,10 @@ public class Contact extends GUI{
         setContentPane(mainview);
 
         setSizeEtc(this);
+    }
+
+    public void giveColors() {
+        contactPanel.setBackground(darkColor);
+        mainview.setBackground(darkColor);
     }
 }

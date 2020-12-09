@@ -55,6 +55,8 @@ public class GUI extends JDialog {
     static ColorPalette currentColorPalette = HHSColors;    //keuze voor het kleurenschema waar het mee opstart
 
 
+    static JFrame frame = new JFrame();
+
     public static void main(String[] args) {
 
         setColors();            //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
@@ -77,6 +79,10 @@ public class GUI extends JDialog {
         //viewContact();
         //viewSettings();
         //viewAdministration();
+        //viewData();
+
+        //Graph graph = new Graph();
+        //graph.run();
     }
 
 
@@ -93,6 +99,11 @@ public class GUI extends JDialog {
     public static void viewDashboard(){
         dashboard = new Dashboard();
         dashboard.setVisible(true);
+
+        //Verbetermogelijkheid, nog verder aan werken
+        //frame.add(dashboard.dashboardPanel);
+        //frame.setVisible(true);
+
         GUI lastOpenedWindow = openedWindow;
         openedWindow = dashboard;
         lastOpenedWindow.dispose();
