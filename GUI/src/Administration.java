@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Administration extends GUI{
 
@@ -7,6 +8,9 @@ public class Administration extends GUI{
     final JLabel administrationLabel = new JLabel("This is where the administrator can do administrator things");
     final JPanel mainview = new JPanel();
     final JButton logOutButton = new JButton("log out");
+    JPanel userInfoPanel = new JPanel();
+    JPanel fillerPanel1 = new JPanel();
+    JPanel fillerPanel2 = new JPanel();
 
     //maakt de elementen van het create new user scherm
     JFrame frame;
@@ -30,19 +34,24 @@ public class Administration extends GUI{
     public Administration() {
         setTitle("Entry++ - Administration");
 
+        users = new Users();
+        groups = new Groups();
+        authorizations = new Authorizations();
+
+        mainview.setLayout(new BoxLayout(mainview, BoxLayout.Y_AXIS));
+        createAdministrationLayout();
+        mainview.add(logOutButton);
+        mainview.add(administrationPanel);
+
         //voegt de elementen toe aan het scherm
-        administrationPanel.add(administrationLabel);
+        /*administrationPanel.add(administrationLabel);
         mainview.add(administrationPanel);
         mainview.add(logOutButton);
-
-        users = new Users();
         mainview.add(users.usersPanel);
-
-        groups = new Groups();
         mainview.add(groups.groupsPanel);
 
-        authorizations = new Authorizations();
-        mainview.add(authorizations.authorizationsPanel);
+
+        mainview.add(authorizations.authorizationsPanel);*/
 
         //maakt het zichtbaar
         setContentPane(mainview);
@@ -58,6 +67,49 @@ public class Administration extends GUI{
         //maakt een nieuwe user aan als je op de create knop drukt
 
         giveColors();
+    }
+
+    public void createAdministrationLayout() {
+
+        GridLayout layout = new GridLayout(3,2);
+        administrationPanel.setLayout(layout);
+        //administrationPanel.add(fillerPanel1);
+        //administrationPanel.add(logOutButton);
+        administrationPanel.add(users.usersPanel);
+        administrationPanel.add(userInfoPanel);
+        administrationPanel.add(groups.groupsPanel);
+        administrationPanel.add(authorizations.authorizationsPanel);
+        userInfoPanel.add(fillerPanel2);
+
+
+        /*GridBagLayout layout = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.weighty = 1.0;
+        gbc.weightx = 1.0;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(100,100,100,100);
+        administrationPanel.add(logOutButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        //gbc.insets = new Insets(10,10,10,10);
+        administrationPanel.add(users.usersPanel, gbc);
+
+        gbc.gridx = 2;
+        administrationPanel.add(groups.groupsPanel, gbc);
+
+        gbc.gridy = 2;
+        administrationPanel.add(authorizations.authorizationsPanel, gbc);*/
+    }
+
+    public void createUserInfoPanel() {
+        //users.selectedUserUsername.usernameLabel;
     }
 
     //maakt een scherm waarmee je een nieuwe user kan toeveogen
@@ -172,9 +224,23 @@ public class Administration extends GUI{
         for (User user : usersArrayList) {
             if (user.username.equals(username)) {
                 usersArrayList.remove(user);
+                userInfoPanel.remove(0);
+                userInfoPanel.add(fillerPanel2);
                 return;
             }
         }
+    }
+
+    public void editUser() {
+        users.selectedUser.usernameField.setEditable(true);
+        users.selectedUser.firstNameField.setEditable(true);
+        users.selectedUser.lastNameField.setEditable(true);
+        users.selectedUser.officeField.setEditable(true);
+        users.selectedUser.telephoneNumberField.setEditable(true);
+        users.selectedUser.emailField.setEditable(true);
+
+        users.selectedUser.userInfoPanel.add(GUI.users.confirmEditButton);
+        administration.setVisible(true);
     }
 
     public void createNewGroup(String groupName) {
@@ -193,6 +259,13 @@ public class Administration extends GUI{
         adminsArrayList.add(new User(username, firstName, lastName));
     }
 
+    public void changeSelectedUser() {
+        userInfoPanel.remove(0);
+        users.selectedUser.createUserInfoPanel();
+        userInfoPanel.add(users.selectedUser.userInfoPanel);
+        administration.setVisible(true);
+    }
+
     public void giveColors() {
 
         administrationPanel.setBackground(darkColor);
@@ -200,6 +273,8 @@ public class Administration extends GUI{
         mainview.setBackground(darkColor);
         logOutButton.setBackground(darkColor);
         logOutButton.setForeground(lightColor);
+        fillerPanel1.setBackground(darkColor);
+        fillerPanel2.setBackground(darkColor);
 
         addNewUserPanel.setBackground(darkColor);
         newUsernameLabel.setForeground(lightColor);
@@ -220,5 +295,7 @@ public class Administration extends GUI{
         newGroupName.setForeground(lightColor);
         createNewGroupButton.setBackground(lightColor2);
         createNewGroupButton.setForeground(darkColor);
+
+        userInfoPanel.setBackground(darkColor);
     }
 }

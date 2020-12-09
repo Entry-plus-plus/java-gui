@@ -68,7 +68,7 @@ public class GUI extends JDialog {
 
     public static void main(String[] args) {
 
-        setColors();            //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
+        setColors();                //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
         createRoomsAndFloors();
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
 
@@ -83,11 +83,11 @@ public class GUI extends JDialog {
         //users = new Users();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
-        viewLoginScreen();
+        //viewLoginScreen();
         //viewDashboard();
         //viewContact();
         //viewSettings();
-        //viewAdministration();
+        viewAdministration();
         //viewData();
 
         //Graph graph = new Graph();
@@ -239,6 +239,12 @@ public class GUI extends JDialog {
         usersArrayList.add(new User("Steenbergen", "Erwin", "Steenbergen"));
 
         adminsArrayList.add(new User("admin", null, null));
+
+        groupsArrayList.add(new Group("group 1"));
+        groupsArrayList.add(new Group("group 2"));
+        groupsArrayList.add(new Group("group 3"));
+        groupsArrayList.add(new Group("group 4"));
+
     }
 
 }

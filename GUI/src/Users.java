@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Users extends GUI{
 
@@ -13,6 +15,10 @@ public class Users extends GUI{
     JButton addUserButton = new JButton("Add new user");
     JButton deleteUserButton = new JButton("Delete");
     JButton editUserButton = new JButton("Edit");
+    JButton confirmEditButton = new JButton("confirm");
+
+    User selectedUser;
+    String selectedUserUsername;
 
     public Users() {
 
@@ -31,7 +37,33 @@ public class Users extends GUI{
             administration.deleteUser(usersList.getSelectedValue());
             fillList();
         });
+
+        editUserButton.addActionListener(e -> {
+            administration.editUser();
+        });
+
+        confirmEditButton.addActionListener(e -> {
+            selectedUser.editUser();
+
+        });
+
+        usersList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                selectedUserUsername = usersList.getSelectedValue();
+                for (User user : usersArrayList) {
+                    if (selectedUserUsername.equals( user.username)) {
+                        selectedUser = user;
+                        GUI.administration.changeSelectedUser();
+                        return;
+                    }
+                }
+            }
+        });
     }
+
+
 
     public void createUsersLayout() {
         GridBagLayout layout = new GridBagLayout();
@@ -86,6 +118,8 @@ public class Users extends GUI{
             deleteUserButton.setForeground(darkColor);
             editUserButton.setBackground(lightColor2);
             editUserButton.setForeground(darkColor);
+            confirmEditButton.setBackground(lightColor2);
+            confirmEditButton.setForeground(darkColor);
         }
     }
 }

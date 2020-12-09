@@ -1,17 +1,120 @@
+import javax.swing.*;
+import java.awt.*;
+import java.sql.Time;
+
 public class User {
 
-    final String username;
-    final String firstName;
-    final String lastName;
+    String username;
+    String firstName;
+    String lastName;
     String password = passwordHasher.hashPassword("password");
+    Group[] groups;
+    String office;
+    String telephoneNumber;
+    String email;
+    Time[] logonHours;
+    Boolean mustChangePassword;
+    Boolean PWNeverExpires;
+    Boolean accountDisabled;
 
+    //maakt de elementen van het user info panel
+    JPanel userInfoPanel = new JPanel();
+    JButton generalButton = new JButton("General");
+    JButton accountButton = new JButton("Account");
+    JButton groupsButton = new JButton("Groups");
 
+    JPanel generalPanel = new JPanel();
+    public JLabel usernameLabel = new JLabel("Username");
+    JTextField usernameField = new JTextField();
+    JLabel firstNameLabel = new JLabel("First Name");
+    JTextField firstNameField = new JTextField();
+    JLabel lastNameLabel = new JLabel("Last Name");
+    JTextField lastNameField = new JTextField();
+    JLabel officeLabel = new JLabel("Office");
+    JTextField officeField = new JTextField();
+    JLabel telephoneNumberLabel = new JLabel("Telephone number");
+    JTextField telephoneNumberField = new JTextField();
+    JLabel emailLabel = new JLabel("Email adress");
+    JTextField emailField = new JTextField();
+
+    JPanel accountPanel = new JPanel();
+
+    JPanel groupsPanel = new JPanel();
+    JList<String> groupsList = new JList<>();
 
 
     public User(String username, String firstName, String lastName) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+
+        createUserInfoPanel();
+    }
+
+    public void createUserInfoPanel() {
+        createGeneralPanel();
+        userInfoPanel.add(generalPanel);
+    }
+
+    public void editUser() {
+        username = usernameField.getText();
+        firstName = firstNameField.getText();
+        lastName = lastNameField.getText();
+        office = officeField.getText();
+        telephoneNumber = telephoneNumberField.getText();
+        email = emailField.getText();
+
+        usernameField.setEditable(false);
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        officeField.setEditable(false);
+        telephoneNumberField.setEditable(false);
+        emailField.setEditable(false);
+
+        userInfoPanel.remove(GUI.users.confirmEditButton);
+        GUI.administration.setVisible(true);
+    }
+
+    private void createGeneralPanel() {
+        GridLayout layout = new GridLayout(6,2);
+        generalPanel.setLayout(layout);
+
+        usernameField.setText(username);
+        firstNameField.setText(firstName);
+        lastNameField.setText(lastName);
+        officeField.setText(office);
+        telephoneNumberField.setText(telephoneNumber);
+        emailField.setText(email);
+
+        usernameField.setEditable(false);
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        officeField.setEditable(false);
+        telephoneNumberField.setEditable(false);
+        emailField.setEditable(false);
+
+        generalPanel.add(usernameLabel);
+        generalPanel.add(usernameField);
+        generalPanel.add(firstNameLabel);
+        generalPanel.add(firstNameField);
+        generalPanel.add(lastNameLabel);
+        generalPanel.add(lastNameField);
+        generalPanel.add(officeLabel);
+        generalPanel.add(officeField);
+        generalPanel.add(telephoneNumberLabel);
+        generalPanel.add(telephoneNumberField);
+        generalPanel.add(emailLabel);
+        generalPanel.add(emailField);
+
+        giveColors();
+    }
+
+    private void createAccountPanel() {
+
+    }
+
+    private void createGroupsPanel() {
+
     }
 
     //method waarmee je het wachtwoord van de user kan veranderen
@@ -28,5 +131,40 @@ public class User {
                 password = hashedNew;
                 Settings.passwordChangedLabel.setText("Password changed.");
             }
+    }
+
+    public void resetPassword() {
+
+    }
+
+    public void addToGroup(Group group) {
+
+    }
+    public  void removeFromGroup (Group group) {
+
+    }
+
+    public void giveColors() {
+        userInfoPanel.setBackground(GUI.darkColor);
+        generalPanel.setBackground(GUI.darkColor);
+        usernameLabel.setForeground(GUI.lightColor);
+        usernameField.setBackground(GUI.darkColor2);
+        usernameField.setForeground(GUI.lightColor);
+        firstNameLabel.setForeground(GUI.lightColor);
+        firstNameField.setBackground(GUI.darkColor2);
+        firstNameField.setForeground(GUI.lightColor);
+        lastNameLabel.setForeground(GUI.lightColor);
+        lastNameField.setBackground(GUI.darkColor2);
+        lastNameField.setForeground(GUI.lightColor);
+        officeLabel.setForeground(GUI.lightColor);
+        officeField.setBackground(GUI.darkColor2);
+        officeField.setForeground(GUI.lightColor);
+        telephoneNumberLabel.setForeground(GUI.lightColor);
+        telephoneNumberField.setBackground(GUI.darkColor2);
+        telephoneNumberField.setForeground(GUI.lightColor);
+        emailLabel.setForeground(GUI.lightColor);
+        emailField.setBackground(GUI.darkColor2);
+        emailField.setForeground(GUI.lightColor);
+
     }
 }
