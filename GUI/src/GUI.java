@@ -7,9 +7,9 @@ import java.util.List;
 public class GUI extends JDialog {
 
     public static void database() {
-        MySQLAccessVoorbeeld aaa = new MySQLAccessVoorbeeld();
+        DBConnections aaa = new DBConnections();
         try {
-            aaa.readDataBase();
+            aaa.connectDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
