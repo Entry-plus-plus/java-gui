@@ -12,6 +12,9 @@ public class LoginScreen extends GUI {
     private JLabel usernameLabel;
     private JLabel passwordLabel;
 
+    JFrame mustChangePasswordFrame = new JFrame();
+    JLabel mustChangePasswordLabel = new JLabel("Please change your password");
+
 
     public LoginScreen() {
         setTitle("Entry++ - Login");
@@ -51,11 +54,29 @@ public class LoginScreen extends GUI {
                 //kijkt of het meegegeven wachtwoord overeenkomt met het wachtwoord van de gebruiker
                 if (user.password.equals(hashedPassword)) {
 
-                    //sluit het inlogscherm af, opent dashboard en zet currentuser op de user die net heeft ingelogd
-                    dispose();
-                    viewDashboard();
-                    currentUser = user;
-                    return;
+                    //kijkt of het account niet disabled is
+                    if (!user.accountDisabled) {
+
+                        //sluit het inlogscherm af, opent dashboard en zet currentuser op de user die net heeft ingelogd
+                        dispose();
+                        viewDashboard();
+                        currentUser = user;
+
+                        //als de admin heeft ingesteld dat het wachtwoord veranderd moet worden, komt er een popup
+                        if (user.mustChangePassword) {
+                            mustChangePasswordFrame.add(mustChangePasswordLabel);
+                            mustChangePasswordFrame.pack();
+                            mustChangePasswordFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                            mustChangePasswordFrame.setLocationRelativeTo(null);
+                            mustChangePasswordFrame.setVisible(true);
+                        }
+
+                        return;
+                    }
+                    else {
+                        response.setText("The administrator has disabled your account");
+                        return;
+                    }
                 }
             }
         }
@@ -87,6 +108,8 @@ public class LoginScreen extends GUI {
             usernameField.setForeground(lightColor);
             passwordField.setBackground(darkColor2);
             passwordField.setForeground(lightColor);
+            mustChangePasswordFrame.setBackground(darkColor);
+            mustChangePasswordLabel.setForeground(lightColor);
         }
     }
 }

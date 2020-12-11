@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class User {
 
@@ -8,20 +9,22 @@ public class User {
     String firstName;
     String lastName;
     String password = passwordHasher.hashPassword("password");
-    Group[] groups;
+    ArrayList<Group> groups = new ArrayList<>();
     String office;
     String telephoneNumber;
     String email;
     Time[] logonHours;
-    Boolean mustChangePassword;
+    Boolean mustChangePassword = false;
     Boolean PWNeverExpires;
-    Boolean accountDisabled;
+    Boolean accountDisabled = false;
 
     //maakt de elementen van het user info panel
     JPanel userInfoPanel = new JPanel();
+    JPanel buttonsPanel = new JPanel();
     JButton generalButton = new JButton("General");
     JButton accountButton = new JButton("Account");
     JButton groupsButton = new JButton("Groups");
+    JButton selectedButton = generalButton;
 
     JPanel generalPanel = new JPanel();
     public JLabel usernameLabel = new JLabel("Username");
@@ -46,7 +49,8 @@ public class User {
     JRadioButton accountDisabledButton = new JRadioButton();
 
     JPanel groupsPanel = new JPanel();
-    JList<String> groupsList = new JList<>();
+    DefaultListModel<String> listModel = new DefaultListModel<>();
+    JList<String> groupsList = new JList<>(listModel);
     JButton addToGroupButton = new JButton("Add to new group");
     JButton removeFromGroupButton = new JButton("Remove from group");
 
@@ -57,11 +61,31 @@ public class User {
         this.lastName = lastName;
 
         createUserInfoPanel();
+        makeButtonsWork();
     }
 
     public void createUserInfoPanel() {
+        userInfoPanel.setLayout(new BoxLayout(userInfoPanel, BoxLayout.Y_AXIS));
+        createButtonsPanel();
         createGeneralPanel();
+        createAccountPanel();
+        createGroupsPanel();
+        try {
+            userInfoPanel.remove(1);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+
+        }
+        userInfoPanel.add(buttonsPanel);
         userInfoPanel.add(generalPanel);
+    }
+
+    public void createButtonsPanel() {
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        buttonsPanel.add(generalButton);
+        buttonsPanel.add(accountButton);
+        buttonsPanel.add(groupsButton);
+
     }
 
     private void createGeneralPanel() {
@@ -102,10 +126,37 @@ public class User {
         accountPanel.setLayout(new GridLayout(3,2));
 
         accountPanel.add(mustChangePasswordLabel);
+        accountPanel.add(mustChangePasswordButton);
+        accountPanel.add(PWNeverExpiresLAbel);
+        accountPanel.add(PWNeverExpiresButton);
+        accountPanel.add(accountDisabledLabel);
+        accountPanel.add(accountDisabledButton);
 
+        giveColors();
     }
 
     private void createGroupsPanel() {
+        fillList();
+
+        GroupLayout layout = new GroupLayout(groupsPanel);
+        groupsPanel.setLayout(layout);
+
+        layout.setHorizontalGroup(
+                layout.createParallelGroup()
+                    .addComponent(groupsList)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addToGroupButton)
+                        .addComponent(removeFromGroupButton))
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                    .addComponent(groupsList)
+                    .addGroup(layout.createParallelGroup()
+                        .addComponent(addToGroupButton)
+                        .addComponent(removeFromGroupButton))
+        );
+
 
     }
 
@@ -141,6 +192,7 @@ public class User {
         if (hashedOld.equals(password) && hashedNew.equals(hashedConfirm)) {
                 password = hashedNew;
                 Settings.passwordChangedLabel.setText("Password changed.");
+                mustChangePassword = false;
             }
     }
 
@@ -148,15 +200,78 @@ public class User {
 
     }
 
-    public void addToGroup(Group group) {
+    public void makeButtonsWork() {
+        generalButton.addActionListener(e -> {
+            userInfoPanel.remove(1);
+            userInfoPanel.add(generalPanel);
+            GUI.administration.setVisible(true);
+        });
 
+        accountButton.addActionListener(e -> {
+            userInfoPanel.remove(1);
+            userInfoPanel.add(accountPanel);
+            GUI.administration.setVisible(true);
+        });
+
+        groupsButton.addActionListener(e -> {
+            userInfoPanel.remove(1);
+            userInfoPanel.add(groupsPanel);
+            GUI.administration.setVisible(true);
+        });
+
+        addToGroupButton.addActionListener(e -> {
+            String groupname = GUI.administration.groups.groupsList.getSelectedValue();
+            for (Group group : GUI.groupsArrayList) {
+                if (group.groupName.equals(groupname)) {
+                    addToGroup(group);
+                    return;
+                }
+            }
+        });
+
+        removeFromGroupButton.addActionListener(e -> {
+            String groupname = groupsList.getSelectedValue();
+            for (Group group : GUI.groupsArrayList) {
+                if (group.groupName.equals(groupname)) {
+                    removeFromGroup(group);
+                    return;
+                }
+            }
+        });
     }
-    public  void removeFromGroup (Group group) {
 
+    public void addToGroup(Group group) {
+        groups.add(group);
+        group.members.add(this);
+        fillList();
+        GUI.administration.setVisible(true);
+    }
+
+    public  void removeFromGroup (Group group) {
+        groups.remove(group);
+        group.members.remove(this);
+        fillList();
+        GUI.administration.setVisible(true);
+    }
+
+    public void fillList()  {
+        listModel.clear();
+        for (Group group : groups) {
+            listModel.addElement(group.groupName);
+        }
     }
 
     public void giveColors() {
         userInfoPanel.setBackground(GUI.darkColor);
+
+        buttonsPanel.setBackground(GUI.darkColor);
+        generalButton.setBackground(GUI.lightColor2);
+        generalButton.setForeground(GUI.darkColor);
+        accountButton.setBackground(GUI.lightColor2);
+        accountButton.setForeground(GUI.darkColor);
+        groupsButton.setBackground(GUI.lightColor2);
+        groupsButton.setForeground(GUI.darkColor);
+
         generalPanel.setBackground(GUI.darkColor);
         usernameLabel.setForeground(GUI.lightColor);
         usernameField.setBackground(GUI.darkColor2);
@@ -177,5 +292,20 @@ public class User {
         emailField.setBackground(GUI.darkColor2);
         emailField.setForeground(GUI.lightColor);
 
+        accountPanel.setBackground(GUI.darkColor);
+        mustChangePasswordLabel.setForeground(GUI.lightColor);
+        mustChangePasswordButton.setBackground(GUI.darkColor);
+        PWNeverExpiresLAbel.setForeground(GUI.lightColor);
+        PWNeverExpiresButton.setBackground(GUI.darkColor);
+        accountDisabledLabel.setForeground(GUI.lightColor);
+        accountDisabledButton.setBackground(GUI.darkColor);
+
+        groupsPanel.setBackground(GUI.darkColor);
+        groupsList.setBackground(GUI.darkColor);
+        groupsList.setForeground(GUI.lightColor);
+        addToGroupButton.setBackground(GUI.lightColor2);
+        addToGroupButton.setForeground(GUI.darkColor);
+        removeFromGroupButton.setBackground(GUI.lightColor2);
+        removeFromGroupButton.setForeground(GUI.darkColor);
     }
 }

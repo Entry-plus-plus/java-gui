@@ -78,7 +78,8 @@ public class Administration extends GUI{
         administrationPanel.add(users.usersPanel);
         administrationPanel.add(userInfoPanel);
         administrationPanel.add(groups.groupsPanel);
-        administrationPanel.add(authorizations.authorizationsPanel);
+        //administrationPanel.add(authorizations.authorizationsPanel);
+        administrationPanel.add(fillerPanel1);
         userInfoPanel.add(fillerPanel2);
 
 
@@ -262,6 +263,12 @@ public class Administration extends GUI{
     public void changeSelectedUser() {
         userInfoPanel.remove(0);
         users.selectedUser.createUserInfoPanel();
+        try {
+            userInfoPanel.remove(0);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+
+        }
         userInfoPanel.add(users.selectedUser.userInfoPanel);
         administration.setVisible(true);
     }
