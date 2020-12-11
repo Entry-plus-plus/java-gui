@@ -87,7 +87,7 @@ public class LoginScreen extends GUI {
                 if (adminsArrayList.get(i).password.equals(hashedPassword)) {
                     dispose();
                     viewAdministration();
-                    currentUser = usersArrayList.get(i);
+                    currentUser = adminsArrayList.get(i);
                     return;
                 }
             }

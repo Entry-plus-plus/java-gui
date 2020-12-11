@@ -26,6 +26,8 @@ public class Settings extends GUI{
     final JList<String> listOfColors= new JList(allColors);
     final JButton changeColorsButton = new JButton("Change colors");
 
+    JPanel userInfoPanel = new JPanel();
+
     public Settings() {
 
         buttons.currentButton = buttons.settingsButton;
@@ -38,7 +40,12 @@ public class Settings extends GUI{
 
         //settingsPanel.add(settingsLabel);
 
-        createSettingsLayout();
+        try {
+            createSettingsLayout();
+        }
+        catch (Exception e) {
+
+        }
 
         //voegt elementen toe aan het scherm
         /*mainview.add(buttons.buttonsPanel);
@@ -93,13 +100,28 @@ public class Settings extends GUI{
     }
 
     public void createChangeColorsPanel() {
-        BoxLayout layout = new BoxLayout(changeColorsPanel, BoxLayout.Y_AXIS);
+
+        GroupLayout layout = new GroupLayout(changeColorsPanel);
+        changeColorsPanel.setLayout(layout);
+
+        layout.setHorizontalGroup(
+                layout.createParallelGroup()
+                        .addComponent(listOfColors)
+                        .addComponent(changeColorsButton)
+        );
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(listOfColors)
+                        .addComponent(changeColorsButton)
+        );
+
+        /*BoxLayout layout = new BoxLayout(changeColorsPanel, BoxLayout.Y_AXIS);
         changeColorsPanel.setLayout(layout);
 
         listOfColors.setAlignmentX(CENTER_ALIGNMENT);
         changePasswordButton.setAlignmentX(CENTER_ALIGNMENT);
         changeColorsPanel.add(listOfColors);
-        changeColorsPanel.add(changeColorsButton);
+        changeColorsPanel.add(changeColorsButton);*/
 
         changeColorsButton.addActionListener(e -> {
             String choice = listOfColors.getSelectedValue();
@@ -132,27 +154,29 @@ public class Settings extends GUI{
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.weighty = 1.0;
         gbc.weightx = 1.0;
-        gbc.gridx = 2;
+        gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 6;
-        gbc.insets = new Insets(10,300,10,10);
+        gbc.insets = new Insets(10,100,10,10);
         settingsPanel.add(buttons.buttonsPanel, gbc);
 
-        gbc.insets = new Insets(0,150,0,0);
-        //gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.insets = new Insets(0,0,0,0);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridheight = 1;
-        gbc.gridwidth = 4;
+        gbc.gridheight = 2;
+        gbc.gridwidth = 1;
+        settingsPanel.add(currentUser.generalPanel, gbc);
+
+        //gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.gridx = 2;
         settingsPanel.add(changePasswordPanel, gbc);
 
-        gbc.insets = new Insets(0,0,0,150);
-        gbc.gridx = 5;
-        gbc.gridy = 1;
-        gbc.gridheight = 1;
-        gbc.gridwidth = 4;
+        //gbc.insets = new Insets(0,0,0,50);
+        gbc.gridx = 4;
         settingsPanel.add(changeColorsPanel, gbc);
+
+
     }
 
     public void giveColors() {
@@ -175,10 +199,10 @@ public class Settings extends GUI{
             passwordChangedLabel.setForeground(lightColor);
 
             changeColorsPanel.setBackground(darkColor);
-            changeColorsButton.setBackground(darkColor2);
-            changeColorsButton.setForeground(lightColor);
-            listOfColors.setBackground(lightColor2);
-            listOfColors.setForeground(darkColor);
+            changeColorsButton.setBackground(lightColor2);
+            changeColorsButton.setForeground(darkColor);
+            listOfColors.setBackground(darkColor2);
+            listOfColors.setForeground(lightColor);
 
             buttons.giveColors();
         }

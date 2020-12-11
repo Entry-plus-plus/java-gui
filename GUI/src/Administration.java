@@ -43,16 +43,6 @@ public class Administration extends GUI{
         mainview.add(logOutButton);
         mainview.add(administrationPanel);
 
-        //voegt de elementen toe aan het scherm
-        /*administrationPanel.add(administrationLabel);
-        mainview.add(administrationPanel);
-        mainview.add(logOutButton);
-        mainview.add(users.usersPanel);
-        mainview.add(groups.groupsPanel);
-
-
-        mainview.add(authorizations.authorizationsPanel);*/
-
         //maakt het zichtbaar
         setContentPane(mainview);
 
@@ -79,6 +69,10 @@ public class Administration extends GUI{
         administrationPanel.add(userInfoPanel);
         administrationPanel.add(groups.groupsPanel);
         //administrationPanel.add(authorizations.authorizationsPanel);
+        //administrationPanel.add(fillerPanel1);
+        settings = new Settings();
+
+        fillerPanel1.add(settings.changePasswordPanel);
         administrationPanel.add(fillerPanel1);
         userInfoPanel.add(fillerPanel2);
 

@@ -39,6 +39,8 @@ public class User {
     JTextField telephoneNumberField = new JTextField();
     JLabel emailLabel = new JLabel("Email address");
     JTextField emailField = new JTextField();
+    JButton resetPasswordButton = new JButton("Reset password");
+    JLabel passwordHasBeenResetLabel = new JLabel(" ");
 
     JPanel accountPanel = new JPanel();
     JLabel mustChangePasswordLabel = new JLabel("User must change password at next logon");
@@ -68,7 +70,7 @@ public class User {
         userInfoPanel.setLayout(new BoxLayout(userInfoPanel, BoxLayout.Y_AXIS));
         createButtonsPanel();
         createGeneralPanel();
-        createAccountPanel();
+        //createAccountPanel();
         createGroupsPanel();
         try {
             userInfoPanel.remove(1);
@@ -83,13 +85,13 @@ public class User {
     public void createButtonsPanel() {
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
         buttonsPanel.add(generalButton);
-        buttonsPanel.add(accountButton);
+        //buttonsPanel.add(accountButton);
         buttonsPanel.add(groupsButton);
 
     }
 
     private void createGeneralPanel() {
-        GridLayout layout = new GridLayout(6,2);
+        GridLayout layout = new GridLayout(7,2);
         generalPanel.setLayout(layout);
 
         usernameField.setText(username);
@@ -118,6 +120,8 @@ public class User {
         generalPanel.add(telephoneNumberField);
         generalPanel.add(emailLabel);
         generalPanel.add(emailField);
+        generalPanel.add(resetPasswordButton);
+        generalPanel.add(passwordHasBeenResetLabel);
 
         giveColors();
     }
@@ -197,7 +201,8 @@ public class User {
     }
 
     public void resetPassword() {
-
+        password = passwordHasher.hashPassword("password");
+        passwordHasBeenResetLabel.setText("Password has been reset");
     }
 
     public void makeButtonsWork() {
@@ -238,11 +243,19 @@ public class User {
                 }
             }
         });
+
+        resetPasswordButton.addActionListener(e -> {
+            resetPassword();
+        });
     }
 
     public void addToGroup(Group group) {
-        groups.add(group);
-        group.members.add(this);
+        if (!groups.contains(group)) {
+            groups.add(group);
+        }
+        if (!group.members.contains(this)) {
+            group.members.add(this);
+        }
         fillList();
         GUI.administration.setVisible(true);
     }
@@ -291,6 +304,9 @@ public class User {
         emailLabel.setForeground(GUI.lightColor);
         emailField.setBackground(GUI.darkColor2);
         emailField.setForeground(GUI.lightColor);
+        resetPasswordButton.setBackground(GUI.lightColor2);
+        resetPasswordButton.setForeground(GUI.darkColor);
+        passwordHasBeenResetLabel.setForeground(GUI.lightColor);
 
         accountPanel.setBackground(GUI.darkColor);
         mustChangePasswordLabel.setForeground(GUI.lightColor);
