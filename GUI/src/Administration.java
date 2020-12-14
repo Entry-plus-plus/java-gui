@@ -12,6 +12,16 @@ public class Administration extends GUI{
     JPanel fillerPanel1 = new JPanel();
     JPanel fillerPanel2 = new JPanel();
 
+    JButton addAdminButton = new JButton("Add new administrator");
+    JPanel addNewAdminPanel = new JPanel();
+    final JLabel newAdminUsernameLabel = new JLabel("Username of new admin:");
+    JTextField newAdminUsername = new JTextField();
+    final JLabel newAdminFirstNameLabel = new JLabel("First name of new admin:");
+    JTextField newAdminFirstName = new JTextField();
+    final JLabel newAdminLastNameLabel = new JLabel("Last name of new admin:");
+    JTextField newAdminLastName = new JTextField();
+    final JButton createNewAdminButton = new JButton("create");
+
     //maakt de elementen van het create new user scherm
     JFrame frame;
     final JPanel addNewUserPanel = new JPanel();
@@ -25,7 +35,7 @@ public class Administration extends GUI{
 
     //maakt de elementen van het create new group scherm
     final JPanel addNewGroupPanel = new JPanel();
-    final JLabel newGroupnameLabel = new JLabel("Username of new user:");
+    final JLabel newGroupnameLabel = new JLabel("name of new group:");
     final JTextField newGroupName = new JTextField();
     final JButton createNewGroupButton = new JButton("create");
 
@@ -54,6 +64,10 @@ public class Administration extends GUI{
             viewLoginScreen();
         });
 
+        addAdminButton.addActionListener(e -> {
+            createNewAdminFrame();
+        });
+
         //maakt een nieuwe user aan als je op de create knop drukt
 
         giveColors();
@@ -73,34 +87,10 @@ public class Administration extends GUI{
         settings = new Settings();
 
         fillerPanel1.add(settings.changePasswordPanel);
+        fillerPanel1.add(addAdminButton);
         administrationPanel.add(fillerPanel1);
         userInfoPanel.add(fillerPanel2);
 
-
-        /*GridBagLayout layout = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.PAGE_START;
-        gbc.weighty = 1.0;
-        gbc.weightx = 1.0;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        gbc.insets = new Insets(100,100,100,100);
-        administrationPanel.add(logOutButton, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        //gbc.insets = new Insets(10,10,10,10);
-        administrationPanel.add(users.usersPanel, gbc);
-
-        gbc.gridx = 2;
-        administrationPanel.add(groups.groupsPanel, gbc);
-
-        gbc.gridy = 2;
-        administrationPanel.add(authorizations.authorizationsPanel, gbc);*/
     }
 
     public void createUserInfoPanel() {
@@ -211,6 +201,63 @@ public class Administration extends GUI{
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public void createNewAdminFrame() {
+
+        //maakt frame en zet het juiste panel er in
+        frame = new JFrame();
+        frame.add(addNewAdminPanel);
+
+        //zorgt dat je de layout kan aanpassen met GroupLayout
+        GroupLayout layout = new GroupLayout(addNewAdminPanel);
+        addNewAdminPanel.setLayout(layout);
+
+        newAdminUsername.setText("");
+        newAdminFirstName.setText("");
+        newAdminLastName.setText("");
+
+        //bepaalt de horizontale volgorde van elementen
+        layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminUsernameLabel)
+                                .addComponent(newAdminFirstNameLabel)
+                                .addComponent(newAdminLastNameLabel))
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminUsername)
+                                .addComponent(newAdminFirstName)
+                                .addComponent(newAdminLastName)
+                                .addComponent(createNewAdminButton))
+        );
+
+        //bepaalt de verticale volgorde van elementen
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminUsernameLabel)
+                                .addComponent(newAdminUsername))
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminFirstNameLabel)
+                                .addComponent(newAdminFirstName))
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminLastNameLabel)
+                                .addComponent(newAdminLastName))
+                        .addComponent(createNewAdminButton)
+        );
+
+        createNewAdminButton.addActionListener(e -> {
+            createNewAdmin(newAdminUsername.getText(), newAdminFirstName.getText(), newAdminLastName.getText());
+            //admins.fillList();
+            frame.dispose();
+        });
+
+        //zorgt dat het er goed uit ziet en maakt het zichtbaar
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.getRootPane().setDefaultButton(createNewUserButton);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
     //voegt een nieuwe user toe aan de array van users
     public void createNewUser(String username, String firstName, String lastName) {
         usersArrayList.add(new User(username, firstName, lastName));
@@ -298,5 +345,19 @@ public class Administration extends GUI{
         createNewGroupButton.setForeground(darkColor);
 
         userInfoPanel.setBackground(darkColor);
+        addAdminButton.setBackground(lightColor2);
+        addAdminButton.setForeground(darkColor);
+        addNewAdminPanel.setBackground(darkColor);
+        newAdminUsernameLabel.setForeground(lightColor);
+        newAdminUsername.setBackground(darkColor2);
+        newAdminUsername.setForeground(lightColor);
+        newAdminFirstNameLabel.setForeground(lightColor);
+        newAdminFirstName.setBackground(darkColor2);
+        newAdminFirstName.setForeground(lightColor);
+        newAdminLastNameLabel.setForeground(lightColor);
+        newAdminLastName.setBackground(darkColor2);
+        newAdminLastName.setForeground(lightColor);
+        createNewAdminButton.setBackground(lightColor2);
+        createNewAdminButton.setForeground(darkColor);
     }
 }
