@@ -38,7 +38,7 @@ public class DBConnections {
                 String password = beheerders.getString("Password");
                 String firstname = beheerders.getString("Firstname");
                 String lastname = beheerders.getString("Lastname");
-                GUI.adminsArrayList.add(new User(beheercode, username, password, firstname, lastname));
+                GUI.adminsArrayList.add(new User(beheercode, username, password, firstname, lastname, true));
                 System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class DBConnections {
                 String password = users.getString("Password");
                 String firstname = users.getString("Firstname");
                 String lastname = users.getString("Lastname");
-                GUI.usersArrayList.add(new User(gebruikercode, username, password, firstname, lastname));
+                GUI.usersArrayList.add(new User(gebruikercode, username, password, firstname, lastname, false));
                 System.out.println(gebruikercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {

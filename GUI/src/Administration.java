@@ -280,7 +280,7 @@ public class Administration extends GUI{
             }
         }
         else {
-            usersArrayList.add(new User(userCode, username, "password", firstName, lastName));
+            usersArrayList.add(new User(userCode, username, "password", firstName, lastName, false));
         }
     }
     public void deleteUser(String username) {
@@ -319,7 +319,7 @@ public class Administration extends GUI{
     }
     //voegt een nieuwe user toe aan de array van admins
     public void createNewAdmin(String userCode, String username, String firstName, String lastName) {
-        adminsArrayList.add(new User(userCode, username, "password", firstName, lastName));
+        adminsArrayList.add(new User(userCode, username, "password", firstName, lastName, true));
     }
 
     public void changeSelectedUser() {

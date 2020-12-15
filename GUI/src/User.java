@@ -18,6 +18,7 @@ public class User {
     Boolean mustChangePassword = false;
     Boolean PWNeverExpires;
     Boolean accountDisabled = false;
+    Boolean isAdmin;
 
     //maakt de elementen van het user info panel
     JPanel userInfoPanel = new JPanel();
@@ -58,12 +59,13 @@ public class User {
     JButton removeFromGroupButton = new JButton("Remove from group");
 
 
-    public User(String userCode, String username, String password, String firstName, String lastName) {
+    public User(String userCode, String username, String password, String firstName, String lastName, Boolean isAdmin) {
         this.userCode = userCode;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isAdmin = isAdmin;
 
         createUserInfoPanel();
         makeButtonsWork();
@@ -196,15 +198,35 @@ public class User {
 
         //als OldPassword overeenkomt met het bestaande wachtwoord en het nieuwe en de confirmation komen overeen
         //dan wordt het wachtwoord veranderd en wordt er een boodschap getoond dat het gelukt is
-        if (hashedOld.equals(password) && hashedNew.equals(hashedConfirm)) {
-                password = hashedNew;
-                Settings.passwordChangedLabel.setText("Password changed.");
+        if (oldPassword.equals(oldPassword) && newPassword.equals(confirmPassword)) {
+            if (GUI.usingDatabase) {
+                try {
+                    if (isAdmin) {
+                        GUI.aaa.changePasswordAdmin(username, newPassword);
+                    }
+                    else {
+                        GUI.aaa.changePasswordUser(username, newPassword);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                password = newPassword;
                 mustChangePassword = false;
+            }
+            Settings.passwordChangedLabel.setText("Password changed.");
             }
     }
 
     public void resetPassword() {
-        password = passwordHasher.hashPassword("password");
+        if (GUI.usingDatabase) {
+            changePassword(password, "password", "password");
+        }
+        else {
+            password = "password";
+        }
         passwordHasBeenResetLabel.setText("Password has been reset");
     }
 
