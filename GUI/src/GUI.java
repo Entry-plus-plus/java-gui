@@ -12,12 +12,15 @@ public class GUI extends JDialog {
 
     public static void admins(){
         try {
-            aaa.getAllAdmins();
+//            aaa.getAllAdmins();
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
             aaa.getAllUsers();
             aaa.getAllRooms();
             aaa.getAllFloors();
+            aaa.getRoom("2345f");
+            aaa.removeEntry("2345f");
+            aaa.getRoom("2345f");
         } catch (Exception e) {
             e.printStackTrace();
         }
