@@ -16,6 +16,7 @@ public class GUI extends JDialog {
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
             aaa.getAllUsers();
+            aaa.getAllFloors();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,9 +77,12 @@ public class GUI extends JDialog {
 
 
         setColors();                //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
+        if (usingDatabase) {
 
-        createRoomsAndFloors();
-
+        }
+        else {
+            createRoomsAndFloors();
+        }
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
 
         //initialiseert een aantal onderdelen zodat ze op het dashboard getoond kunnen worden
@@ -96,9 +100,9 @@ public class GUI extends JDialog {
             createUsersandAdmins();
         }
 
-        /*for (User admin : adminsArrayList) {
+        for (User admin : adminsArrayList) {
             System.out.println("admin is called " + admin.username);
-        }*/
+        }
 
         //users = new Users();
 
