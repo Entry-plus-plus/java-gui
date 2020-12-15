@@ -28,11 +28,25 @@ public class GUI extends JFrame {
 ////            aaa.getRoom("2345f");
 ////            aaa.removeEntry("2345f");
 ////            aaa.getRoom("2345f");
-////            aaa.addUser("gebr3", "user3", "password", "user", "user3", "Neutron");
+////            aaa.addUser("gebr3", "user3", "password", "user", "user", "Neutron");
 ////            aaa.getUser("gebr3");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void update(){
+        SwingWorker updates = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                while (true) {
+                    admins();
+                    System.out.println("aaaaaA");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                }
+            }
+        };
+        updates.execute();
     }
 
     //alle verschillende schermen declareren
@@ -145,7 +159,6 @@ public class GUI extends JFrame {
     public static void viewDashboard(){
         dashboard = new Dashboard();
         dashboard.setVisible(true);
-
         //Verbetermogelijkheid, nog verder aan werken
         //frame.add(dashboard.dashboardPanel);
         //frame.setVisible(true);

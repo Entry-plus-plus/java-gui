@@ -60,6 +60,7 @@ public class LoginScreen extends GUI {
                         //sluit het inlogscherm af, opent dashboard en zet currentuser op de user die net heeft ingelogd
                         dispose();
                         viewDashboard();
+                        GUI.update();
                         currentUser = user;
 
                         //als de admin heeft ingesteld dat het wachtwoord veranderd moet worden, komt er een popup
