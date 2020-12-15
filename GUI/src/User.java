@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class User {
 
+    String userCode;
     String username;
     String firstName;
     String lastName;
-    String password = passwordHasher.hashPassword("password");
+    String password = "password";
     ArrayList<Group> groups = new ArrayList<>();
     String office;
     String telephoneNumber;
@@ -57,8 +58,10 @@ public class User {
     JButton removeFromGroupButton = new JButton("Remove from group");
 
 
-    public User(String username, String firstName, String lastName) {
+    public User(String userCode, String username, String password, String firstName, String lastName) {
+        this.userCode = userCode;
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
 

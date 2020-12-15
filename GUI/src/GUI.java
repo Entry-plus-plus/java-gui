@@ -6,6 +6,8 @@ import java.util.List;
 
 public class GUI extends JDialog {
 
+    static Boolean usingDatabase = true;
+
     static DBConnections aaa = new DBConnections();
 
     public static void admins(){
@@ -74,9 +76,14 @@ public class GUI extends JDialog {
 
     public static void main(String[] args) {
 
-        admins();
+
         setColors();                //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
-        createRoomsAndFloors();
+        if (usingDatabase) {
+
+        }
+        else {
+            createRoomsAndFloors();
+        }
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
 
         //initialiseert een aantal onderdelen zodat ze op het dashboard getoond kunnen worden
@@ -86,7 +93,17 @@ public class GUI extends JDialog {
         //settings = new Settings();
 
         //voegt een aantal users toe waarmee ingelogd kan worden
-        createUsersandAdmins();
+        if (usingDatabase) {
+            admins();
+            usersArrayList.add(new User(" ", "user", "password", " ", " "));
+        }
+        else {
+            createUsersandAdmins();
+        }
+
+        for (User admin : adminsArrayList) {
+            System.out.println("admin is called " + admin.username);
+        }
 
         //users = new Users();
 
@@ -237,16 +254,17 @@ public class GUI extends JDialog {
     }
 
     public static void createUsersandAdmins() {
-        usersArrayList.add(new User("user", null, null));
-        usersArrayList.add(new User("Ebenezer", "Ebenezer", "Appau"));
-        usersArrayList.add(new User("Mariska", "Mariska", "van Beek"));
-        usersArrayList.add(new User("Tom", "Tom", "Daamen"));
-        usersArrayList.add(new User("Davita", "Davita", "de Jong"));
-        usersArrayList.add(new User("Bart", "Bart", "Leentvaar"));
-        usersArrayList.add(new User("Shaquille", "Shaquille", "Soekhlal"));
-        usersArrayList.add(new User("Steenbergen", "Erwin", "Steenbergen"));
+        usersArrayList.add(new User("user1", "user", "password", null, null));
+        usersArrayList.add(new User("user2", "Ebenezer", "password","Ebenezer", "Appau"));
+        usersArrayList.add(new User("user3", "Mariska","password", "Mariska", "van Beek"));
+        usersArrayList.add(new User("user4", "Tom", "password","Tom", "Daamen"));
+        usersArrayList.add(new User("user5", "Davita", "password","Davita", "de Jong"));
+        usersArrayList.add(new User("user6", "Bart", "password","Bart", "Leentvaar"));
+        usersArrayList.add(new User("user7", "Shaquille", "password","Shaquille", "Soekhlal"));
+        usersArrayList.add(new User("user8", "Steenbergen", "password","Erwin", "Steenbergen"));
 
-        adminsArrayList.add(new User("admin", null, null));
+        adminsArrayList.add(new User("admin", "admin", "password",null, null));
+
 
         groupsArrayList.add(new Group("group 1"));
         groupsArrayList.add(new Group("group 2"));

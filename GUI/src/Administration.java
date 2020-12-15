@@ -142,7 +142,7 @@ public class Administration extends GUI{
         );
 
         createNewUserButton.addActionListener(e -> {
-            createNewUser(newUsername.getText(), newFirstName.getText(), newLastName.getText());
+            createNewUser(" ",newUsername.getText(), newFirstName.getText(), newLastName.getText());
             users.fillList();
             frame.dispose();
         });
@@ -245,7 +245,7 @@ public class Administration extends GUI{
         );
 
         createNewAdminButton.addActionListener(e -> {
-            createNewAdmin(newAdminUsername.getText(), newAdminFirstName.getText(), newAdminLastName.getText());
+            createNewAdmin(" ",newAdminUsername.getText(), newAdminFirstName.getText(), newAdminLastName.getText());
             //admins.fillList();
             frame.dispose();
         });
@@ -259,8 +259,8 @@ public class Administration extends GUI{
     }
 
     //voegt een nieuwe user toe aan de array van users
-    public void createNewUser(String username, String firstName, String lastName) {
-        usersArrayList.add(new User(username, firstName, lastName));
+    public void createNewUser(String userCode, String username, String firstName, String lastName) {
+        usersArrayList.add(new User(userCode, username, "password", firstName, lastName));
     }
     public void deleteUser(String username) {
         for (User user : usersArrayList) {
@@ -297,8 +297,8 @@ public class Administration extends GUI{
         }
     }
     //voegt een nieuwe user toe aan de array van admins
-    public void createNewAdmin(String username, String firstName, String lastName) {
-        adminsArrayList.add(new User(username, firstName, lastName));
+    public void createNewAdmin(String userCode, String username, String firstName, String lastName) {
+        adminsArrayList.add(new User(userCode, username, "password", firstName, lastName));
     }
 
     public void changeSelectedUser() {

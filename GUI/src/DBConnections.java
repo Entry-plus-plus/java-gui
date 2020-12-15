@@ -10,9 +10,9 @@ public class DBConnections {
     public String username;
 
     private Connection connectDatabase() {
-        String url = "jdbc:mysql://localhost/";
+        String url = "jdbc:mysql://localhost/Mysql?serverTimezone=UTC";
         String username = "root";
-        String password = "THISISASTRONGFUCKINGPASSWORDHELLYEAH";
+        String password = "password";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -78,5 +78,7 @@ public class DBConnections {
 
         }
     }
+
+
 
 }
