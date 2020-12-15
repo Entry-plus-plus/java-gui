@@ -81,6 +81,7 @@ public class GUI extends JDialog {
         heatmap = new Heatmap();
         floors = new Floors();
         notifications = new Notifications();
+        //settings = new Settings();
 
         //voegt een aantal users toe waarmee ingelogd kan worden
         createUsersandAdmins();
