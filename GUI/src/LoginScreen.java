@@ -84,7 +84,7 @@ public class LoginScreen extends GUI {
         //Hierbij wordt niet het dashboard geopend maar de administration pagina
         for (int i = 0; i< adminsArrayList.size(); i++) {
             if (adminsArrayList.get(i).username.equals(username)) {
-                if (adminsArrayList.get(i).password.equals(hashedPassword)) {
+                if (adminsArrayList.get(i).password.equals(password)) {
                     dispose();
                     viewAdministration();
                     currentUser = adminsArrayList.get(i);

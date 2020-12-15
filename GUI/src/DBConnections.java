@@ -30,11 +30,13 @@ public class DBConnections {
             beheerders = query
                     .executeQuery("select * from `entry++`.`beheerder`");
             while (beheerders.next()) {
-                String beheerderlijst = beheerders.getString("Username");
+                String username = beheerders.getString("Username");
                 String beheercode = beheerders.getString("Beheerder Beheercode");
-                String Firstname = beheerders.getString("Firstname");
-                String Lastname = beheerders.getString("Lastname");
-                System.out.println(beheercode + " " + beheerderlijst + " " + Firstname + " " + Lastname);
+                String password = beheerders.getString("Password");
+                String firstname = beheerders.getString("Firstname");
+                String lastname = beheerders.getString("Lastname");
+                GUI.adminsArrayList.add(new User(beheercode, username, password, firstname, lastname));
+                System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
             throw e;
@@ -53,10 +55,12 @@ public class DBConnections {
                     .executeQuery("select * from `entry++`.`gebruiker`");
             while (users.next()) {
                 String gebruikercode = users.getString("Gebruikerscode");
-                String gebruikerlijst = users.getString("Username");
-                String Firstname = users.getString("Firstname");
-                String Lastname = users.getString("Lastname");
-                System.out.println(gebruikercode + " " + gebruikerlijst + " " + Firstname + " " + Lastname);
+                String username = users.getString("Username");
+                String password = users.getString("Password");
+                String firstname = users.getString("Firstname");
+                String lastname = users.getString("Lastname");
+                GUI.usersArrayList.add(new User(gebruikercode, username, password, firstname, lastname));
+                System.out.println(gebruikercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
             throw e;
