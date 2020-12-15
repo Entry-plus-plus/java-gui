@@ -52,7 +52,7 @@ public class LoginScreen extends GUI {
             if (user.username.equals(username)) {
 
                 //kijkt of het meegegeven wachtwoord overeenkomt met het wachtwoord van de gebruiker
-                if (user.password.equals(hashedPassword)) {
+                if (user.password.equals(password)) {
 
                     //kijkt of het account niet disabled is
                     if (!user.accountDisabled) {
@@ -63,7 +63,7 @@ public class LoginScreen extends GUI {
                         currentUser = user;
 
                         //als de admin heeft ingesteld dat het wachtwoord veranderd moet worden, komt er een popup
-                        if (user.mustChangePassword) {
+                        /*if (user.mustChangePassword) {
                             mustChangePasswordFrame.add(mustChangePasswordLabel);
                             mustChangePasswordFrame.pack();
                             mustChangePasswordFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -71,7 +71,7 @@ public class LoginScreen extends GUI {
                             mustChangePasswordFrame.setVisible(true);
                         }
 
-                        return;
+                        return;*/
                     }
                     else {
                         response.setText("The administrator has disabled your account");
