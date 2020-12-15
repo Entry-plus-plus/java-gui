@@ -18,9 +18,11 @@ public class GUI extends JDialog {
 //            aaa.getAllUsers();
 //            aaa.getAllFloors();
 //            aaa.getAllRooms();
-            aaa.getRoom("2345f");
-            aaa.removeEntry("2345f");
-            aaa.getRoom("2345f");
+//            aaa.getRoom("2345f");
+//            aaa.removeEntry("2345f");
+//            aaa.getRoom("2345f");
+//            aaa.addUser("gebr3", "user3", "password", "user", "user3", "Neutron");
+//            aaa.getUser("gebr3");
         } catch (Exception e) {
             e.printStackTrace();
         }

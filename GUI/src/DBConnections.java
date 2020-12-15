@@ -194,6 +194,26 @@ public class DBConnections {
 
     }
 
+    public void addUser(String Gebruikerscode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`Gebruiker` (`Gebruikerscode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
+            preparedStatement.setString(1, Gebruikerscode);
+            preparedStatement.setString(2, Username);
+            preparedStatement.setString(3, Password);
+            preparedStatement.setString(4, Authorisatie);
+            preparedStatement.setString(5, Firstname);
+            preparedStatement.setString(6, Lastname);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
     public void removeEntry(String kamercode) throws Exception {
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
