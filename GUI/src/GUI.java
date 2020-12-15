@@ -6,10 +6,14 @@ import java.util.List;
 
 public class GUI extends JDialog {
 
-    public static void database() {
-        DBConnections aaa = new DBConnections();
+    static DBConnections aaa = new DBConnections();
+
+    public static void admins(){
         try {
-            aaa.connectDatabase();
+            aaa.getAllAdmins();
+            //aaa.writeResultSet(aaa.beheerders);
+            //String beheerderlijst = aaa.beheerders.getString("Username");
+            System.out.println(aaa.beheercode + " " + aaa.beheerderlijst);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,6 +72,7 @@ public class GUI extends JDialog {
 
     public static void main(String[] args) {
 
+        admins();
         setColors();                //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
         createRoomsAndFloors();
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
