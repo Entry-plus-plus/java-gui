@@ -39,7 +39,7 @@ public class DBConnections {
                 String firstname = beheerders.getString("Firstname");
                 String lastname = beheerders.getString("Lastname");
                 GUI.adminsArrayList.add(new User(beheercode, username, password, firstname, lastname, true));
-                System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
+                //System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
             throw e;
@@ -63,7 +63,7 @@ public class DBConnections {
                 String firstname = users.getString("Firstname");
                 String lastname = users.getString("Lastname");
                 GUI.usersArrayList.add(new User(gebruikercode, username, password, firstname, lastname, false));
-                System.out.println(gebruikercode + " " + username + " " + firstname + " " + lastname);
+                //System.out.println(gebruikercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
             throw e;
@@ -102,7 +102,7 @@ public class DBConnections {
             String locatieCode = verdieping.getString("Locatiecode");
             int maxMensen = verdieping.getInt("maxmensen");
             int verdiepingNummer = verdieping.getInt("Verdieping nummer gebouw");
-            System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
+            //System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -127,7 +127,7 @@ public class DBConnections {
                 int aantalKamers = verdieping.getInt("aantalkamers");
                 GUI.floorsArray[i] = new Floor(aantalKamers, locatieCode, verdiepingNummer);
                 i++;
-                System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
+                //System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
             }
         } catch (Exception e) {
             throw e;
@@ -154,7 +154,7 @@ public class DBConnections {
                 int verdieping = kamer.getInt("verdieping");
                 GUI.roomsArray[i] = new Room(aantalMensen, maxMensen, kamerNummer, kamerCode, verdieping);
                 i++;
-                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + kamerCode + " " + verdieping);
+                //System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + kamerCode + " " + verdieping);
             }
         } catch (Exception e) {
             throw e;
@@ -178,7 +178,7 @@ public class DBConnections {
             String kamerNummer = kamer.getString("Kamernummer");
             String locatieCode = kamer.getString("Locatiecode");
             String verdieping = kamer.getString("verdieping");
-            System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
+            //System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -251,7 +251,7 @@ public class DBConnections {
                 int kamerNummer = kamersInVerdieping.getInt("Kamernummer");
                 String locatieCode = kamersInVerdieping.getString("Locatiecode");
                 verdieping = kamersInVerdieping.getInt("verdieping");
-                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
+                //System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
             }
         } catch (Exception e) {
             throw e;

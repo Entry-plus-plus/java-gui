@@ -114,10 +114,6 @@ public class GUI extends JDialog {
             createUsersandAdmins();
         }
 
-        for (User admin : adminsArrayList) {
-            System.out.println("admin is called " + admin.username);
-        }
-
         //users = new Users();
 
         //Toont het inlogscherm (of een ander scherm, is handig tijdens het programmeren zelf)
