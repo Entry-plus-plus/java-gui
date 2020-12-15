@@ -72,11 +72,12 @@ public class Room {
         updateLabelValues();    //de labels op het scherm worden geupdate
 
         if (GUI.usingDatabase) {
-            try {
-                GUI.aaa.removeEntry(roomCode);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
+            if (!(amount == 0)) {
+                try {
+                    GUI.aaa.removeEntry(roomCode);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

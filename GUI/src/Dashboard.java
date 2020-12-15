@@ -125,11 +125,11 @@ public class Dashboard extends GUI{
 
     //zorgt dat er van heatmap gewisseld wordt als er op de knop van een andere floor wordt gedrukt
     public void changeHeatmap() {
-        if (selectedFloor == floor1) {
+        if (selectedFloor.floorNumber == 1) {
             dashboardPanel.remove(heatmap.heatmapPanel2);
             dashboardPanel.add(heatmap.heatmapPanel1, gbc);
         }
-        else if (selectedFloor == floor2) {
+        else if (selectedFloor.floorNumber == 2) {
             dashboardPanel.remove(heatmap.heatmapPanel1);
             dashboardPanel.add(heatmap.heatmapPanel2, gbc);
         }

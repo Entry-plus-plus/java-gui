@@ -9,6 +9,7 @@ public class Floor {
 
     String floorCode;
     String floorName;
+    int floorNumber;
     final JLabel floorNameLabel = new JLabel();
     final JLabel amountLabel = new JLabel(""+amount);
     final JLabel maxLabel = new JLabel(""+max);
@@ -18,6 +19,7 @@ public class Floor {
 
     public Floor(int numberOfRooms, String locatieCode, int floorNumber) {
 
+        this.floorNumber = floorNumber;
         this.floorName = "Floor " + floorNumber;
         this.floorCode = locatieCode;
         //maakt de labels de juiste grootte

@@ -12,12 +12,12 @@ public class GUI extends JDialog {
 
     public static void admins(){
         try {
-//            aaa.getAllAdmins();
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
+            aaa.getAllAdmins();
             aaa.getAllUsers();
-            aaa.getAllFloors();
             aaa.getAllRooms();
+            aaa.getAllFloors();
 //            aaa.getRoom("2345f");
 //            aaa.removeEntry("2345f");
 //            aaa.getRoom("2345f");
@@ -82,6 +82,7 @@ public class GUI extends JDialog {
     public static void main(String[] args) {
         if (usingDatabase) {
             admins();
+
         }
 
 
