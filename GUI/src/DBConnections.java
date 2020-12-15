@@ -194,6 +194,21 @@ public class DBConnections {
 
     }
 
+    public void removeEntry(String kamercode) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("UPDATE `entry++`.`kamer` SET `Aantal mensen` = `Aantal mensen` - 1 WHERE Kamercode = (?)");
+            preparedStatement.setString(1, kamercode);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
     // You need to close the resultSet
     private void close() {
         try {
