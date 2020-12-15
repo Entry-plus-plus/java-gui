@@ -80,14 +80,17 @@ public class GUI extends JDialog {
     static JFrame frame = new JFrame();
 
     public static void main(String[] args) {
+        if (usingDatabase) {
+            admins();
+        }
 
 
         setColors();                //zorgt dat de kleuren overeenkomen met de gekozen Colorpalette
         if (usingDatabase) {
-            createRoomsAndFloors();
+
         }
         else {
-
+            createRoomsAndFloors();
         }
         //rooms = createRooms(numberOfRooms);       //= de manier om kamers aan te maken zonder een floor
 
@@ -99,8 +102,8 @@ public class GUI extends JDialog {
 
         //voegt een aantal users toe waarmee ingelogd kan worden
         if (usingDatabase) {
-            admins();
-            usersArrayList.add(new User(" ", "user", "password", " ", " "));
+            //admins();
+            //usersArrayList.add(new User(" ", "user", "password", " ", " "));
         }
         else {
             createUsersandAdmins();
@@ -221,9 +224,9 @@ public class GUI extends JDialog {
 
     //maakt twee floors aan, vult floorsArray met de floors en vult roomsArray met de kamers van die floors
     public static void createRoomsAndFloors() {
-        floor1 = new Floor(5);
+        floor1 = new Floor(5, " ", 1);
         selectedFloor = floor1;
-        floor2 = new Floor(2);
+        floor2 = new Floor(2, " ", 2);
         for (int i = 0; i < floor1.rooms.length; i++) {
             roomsArray[i] = floor1.rooms[i];
         }

@@ -15,7 +15,7 @@ public class Floors extends GUI{
         floorsPanel.setLayout(new GridLayout(numberOfFloors, 6));
 
         for (int i = 0; i < numberOfFloors; i++) {
-            floorsArray[i].setFloorName("Floor " + (i+1));
+            floorsArray[i].setFloorNameLabel("Floor " + (i+1));
             floorsArray[i].floorButton.setText("Floor " + (i+1));
 
             floorsPanel.add(new JLabel(" "));

@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Floor {
 
@@ -9,23 +7,41 @@ public class Floor {
     int amount;
     int max;
 
-    final JLabel floorName = new JLabel();
+    String floorCode;
+    String floorName;
+    final JLabel floorNameLabel = new JLabel();
     final JLabel amountLabel = new JLabel(""+amount);
     final JLabel maxLabel = new JLabel(""+max);
     final JLabel slashLabel = new JLabel("/");
     final JButton floorButton = new JButton();
     final JProgressBar progressBar = new JProgressBar();
 
-    public Floor(int numberOfRooms) {
+    public Floor(int numberOfRooms, String locatieCode, int floorNumber) {
 
+        this.floorName = "Floor " + floorNumber;
+        this.floorCode = locatieCode;
         //maakt de labels de juiste grootte
         amountLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
         maxLabel.setFont(new Font(Font.DIALOG,  Font.PLAIN, 20));
 
         //maakt een aantal kamers
         rooms = new Room[numberOfRooms];
-        for (int i = 0; i<numberOfRooms; i++) {
-            rooms[i] = new Room();
+        if (GUI.usingDatabase) {
+            int i = 0;
+            for (Room room : GUI.roomsArray) {
+                if (room == null) {
+                    System.out.println(" SDFGHJGDF");
+                }
+                if (room.floorNumber == floorNumber) {
+                    rooms[i] = room;
+                    i++;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < numberOfRooms; i++) {
+                rooms[i] = new Room(0, 15, i, " ", floorNumber);
+            }
         }
 
         giveColors();
@@ -55,7 +71,8 @@ public class Floor {
         }
     }
 
-    public void setFloorName(String name) {floorName.setText(name);}
+    public void setFloorNameLabel(String name) {
+        floorNameLabel.setText(name);}
 
     public int howFull() {
         return amount * 100 / max;
@@ -68,7 +85,7 @@ public class Floor {
 
     public void giveColors() {
         if (GUI.customColors) {
-            floorName.setForeground(GUI.lightColor);
+            floorNameLabel.setForeground(GUI.lightColor);
             amountLabel.setForeground(GUI.lightColor);
             maxLabel.setForeground(GUI.lightColor);
             slashLabel.setForeground(GUI.lightColor);
