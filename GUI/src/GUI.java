@@ -82,7 +82,6 @@ public class GUI extends JDialog {
     public static void main(String[] args) {
         if (usingDatabase) {
             admins();
-
         }
 
 
