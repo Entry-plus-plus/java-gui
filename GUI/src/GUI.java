@@ -265,16 +265,16 @@ public class GUI extends JDialog {
     }
 
     public static void createUsersandAdmins() {
-        usersArrayList.add(new User("user1", "user", "password", null, null));
-        usersArrayList.add(new User("user2", "Ebenezer", "password","Ebenezer", "Appau"));
-        usersArrayList.add(new User("user3", "Mariska","password", "Mariska", "van Beek"));
-        usersArrayList.add(new User("user4", "Tom", "password","Tom", "Daamen"));
-        usersArrayList.add(new User("user5", "Davita", "password","Davita", "de Jong"));
-        usersArrayList.add(new User("user6", "Bart", "password","Bart", "Leentvaar"));
-        usersArrayList.add(new User("user7", "Shaquille", "password","Shaquille", "Soekhlal"));
-        usersArrayList.add(new User("user8", "Steenbergen", "password","Erwin", "Steenbergen"));
+        usersArrayList.add(new User("user1", "user", "password", null, null, false));
+        usersArrayList.add(new User("user2", "Ebenezer", "password","Ebenezer", "Appau", false));
+        usersArrayList.add(new User("user3", "Mariska","password", "Mariska", "van Beek", false));
+        usersArrayList.add(new User("user4", "Tom", "password","Tom", "Daamen", false));
+        usersArrayList.add(new User("user5", "Davita", "password","Davita", "de Jong", false));
+        usersArrayList.add(new User("user6", "Bart", "password","Bart", "Leentvaar", false));
+        usersArrayList.add(new User("user7", "Shaquille", "password","Shaquille", "Soekhlal", false));
+        usersArrayList.add(new User("user8", "Steenbergen", "password","Erwin", "Steenbergen", false));
 
-        adminsArrayList.add(new User("admin", "admin", "password",null, null));
+        adminsArrayList.add(new User("admin", "admin", "password",null, null, true));
 
 
         groupsArrayList.add(new Group("group 1"));
