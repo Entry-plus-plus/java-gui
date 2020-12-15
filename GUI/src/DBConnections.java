@@ -310,6 +310,26 @@ public class DBConnections {
 
     }
 
+    public void addAdmin(String Beheercode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`beheerder` (`Beheerder Beheercode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
+            preparedStatement.setString(1, Beheercode);
+            preparedStatement.setString(2, Username);
+            preparedStatement.setString(3, Password);
+            preparedStatement.setString(4, Authorisatie);
+            preparedStatement.setString(5, Firstname);
+            preparedStatement.setString(6, Lastname);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
     // You need to close the resultSet
     private void close() {
         try {
