@@ -117,11 +117,15 @@ public class DBConnections {
             // Result set get the result of the SQL query
             verdieping = query
                     .executeQuery("select * from `entry++`.`verdieping`");
+            int i = 0;
             while (verdieping.next()) {
                 int aantalMensen = verdieping.getInt("Aantal mensen");
                 String locatieCode = verdieping.getString("Locatiecode");
                 int maxMensen = verdieping.getInt("maxmensen");
                 int verdiepingNummer = verdieping.getInt("Verdieping nummer gebouw");
+                int aantalKamers = verdieping.getInt("aantalkamers");
+                GUI.floorsArray[i] = new Floor(aantalKamers, locatieCode, verdiepingNummer);
+                i++;
                 System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
             }
         } catch (Exception e) {
@@ -139,6 +143,7 @@ public class DBConnections {
             // Result set get the result of the SQL query
             kamer = query
                     .executeQuery("select * from `entry++`.`kamer`");
+            int i = 0;
             while (kamer.next()) {
                 String kamerCode = kamer.getString("kamercode");
                 int aantalMensen = kamer.getInt("Aantal Mensen");
@@ -146,6 +151,8 @@ public class DBConnections {
                 int kamerNummer = kamer.getInt("Kamernummer");
                 String locatieCode = kamer.getString("Locatiecode");
                 int verdieping = kamer.getInt("verdieping");
+                GUI.roomsArray[i] = new Room(aantalMensen, maxMensen, kamerNummer, locatieCode, verdieping);
+                i++;
                 System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
             }
         } catch (Exception e) {

@@ -85,8 +85,8 @@ public class Data extends GUI{
             }
         }
         for (Floor floor : floorsArray) {
-            if (!listModel.contains(floor.floorName.getText())){
-                listModel.addElement(floor.floorName.getText());
+            if (!listModel.contains(floor.floorNameLabel.getText())){
+                listModel.addElement(floor.floorNameLabel.getText());
             }
         }
         if (!listModel.contains("Whole building")) {

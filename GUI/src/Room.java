@@ -4,7 +4,10 @@ import java.awt.*;
 public class Room {
     //zet aantal mensen in de kamer en max aantal mensen vast. De waarde van max is willekeurig gekozen en mag veranderd worden
     int amount = 0;
-    final int max = 15;
+    int max = 15;
+    int roomNumber;
+    String roomCode;
+    int floorNumber;
 
     //maakt elementen van het scherm aan
     final JLabel roomName = new JLabel();
@@ -15,7 +18,14 @@ public class Room {
     final JButton minusButton = new JButton("--");
     final JProgressBar progressBar = new JProgressBar();
 
-    public Room() {
+    public Room(int amount, int max, int roomNumber, String roomCode, int floorNumber) {
+
+        this.amount = amount;
+        this.max = max;
+        this.roomNumber = roomNumber;
+        this.roomCode = roomCode;
+        this.floorNumber = floorNumber;
+
         giveColors();
 
         //maakt de labels de juiste grootte
