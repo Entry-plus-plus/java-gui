@@ -25,6 +25,8 @@ public class Administration extends GUI{
     //maakt de elementen van het create new user scherm
     JFrame frame;
     final JPanel addNewUserPanel = new JPanel();
+    JLabel newUserCodeLabel = new JLabel("Usercode of new user");
+    JTextField newUserCode = new JTextField();
     final JLabel newUsernameLabel = new JLabel("Username of new user:");
     JTextField newUsername = new JTextField();
     final JLabel newFirstNameLabel = new JLabel("First name of new user:");
@@ -108,6 +110,7 @@ public class Administration extends GUI{
         GroupLayout layout = new GroupLayout(addNewUserPanel);
         addNewUserPanel.setLayout(layout);
 
+        newUserCode.setText("");
         newUsername.setText("");
         newFirstName.setText("");
         newLastName.setText("");
@@ -116,10 +119,12 @@ public class Administration extends GUI{
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup()
+                            .addComponent(newUserCodeLabel)
                         .addComponent(newUsernameLabel)
                         .addComponent(newFirstNameLabel)
                         .addComponent(newLastNameLabel))
                     .addGroup(layout.createParallelGroup()
+                            .addComponent(newUserCode)
                         .addComponent(newUsername)
                         .addComponent(newFirstName)
                         .addComponent(newLastName)
@@ -129,6 +134,9 @@ public class Administration extends GUI{
         //bepaalt de verticale volgorde van elementen
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newUserCodeLabel)
+                                .addComponent(newUserCode))
                     .addGroup(layout.createParallelGroup()
                         .addComponent(newUsernameLabel)
                         .addComponent(newUsername))
@@ -142,7 +150,7 @@ public class Administration extends GUI{
         );
 
         createNewUserButton.addActionListener(e -> {
-            createNewUser(" ",newUsername.getText(), newFirstName.getText(), newLastName.getText());
+            createNewUser(newUserCode.getText() ,newUsername.getText(), newFirstName.getText(), newLastName.getText());
             users.fillList();
             frame.dispose();
         });
@@ -260,7 +268,20 @@ public class Administration extends GUI{
 
     //voegt een nieuwe user toe aan de array van users
     public void createNewUser(String userCode, String username, String firstName, String lastName) {
-        usersArrayList.add(new User(userCode, username, "password", firstName, lastName));
+
+        if (usingDatabase) {
+            try {
+                aaa.addUser(userCode, username, "password", null, firstName, lastName);
+                usersArrayList.clear();
+                aaa.getAllUsers();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            usersArrayList.add(new User(userCode, username, "password", firstName, lastName));
+        }
     }
     public void deleteUser(String username) {
         for (User user : usersArrayList) {
@@ -325,6 +346,9 @@ public class Administration extends GUI{
         fillerPanel2.setBackground(darkColor);
 
         addNewUserPanel.setBackground(darkColor);
+        newUserCodeLabel.setForeground(lightColor);
+        newUserCode.setBackground(darkColor2);
+        newUserCode.setForeground(lightColor);
         newUsernameLabel.setForeground(lightColor);
         newUsername.setBackground(darkColor2);
         newUsername.setForeground(lightColor);
