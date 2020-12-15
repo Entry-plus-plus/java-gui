@@ -30,6 +30,12 @@ public class Dashboard extends GUI{
 
         createDashboardLayout();
         setSizeEtc(this);
+
+        for (Room room : roomsArray) {
+            if (room.isFull() && !GUI.notifications.listModel.contains("WARNING: Too many people in " + room.roomName.getText())) {
+                GUI.createNotification("WARNING: Too many people in " + room.roomName.getText());
+            }
+        }
     }
 
     //maakt het scherm waar het totaal aantal mensen wordt laten zien
