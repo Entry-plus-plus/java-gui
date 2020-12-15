@@ -22,19 +22,42 @@ public class DBConnections {
         return conn;
     }
 
-    public String getAllAdmins() throws Exception {
+    public void getAllAdmins() throws Exception {
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
             query = conn.createStatement();
             // Result set get the result of the SQL query
             beheerders = query
                     .executeQuery("select * from `entry++`.`beheerder`");
-            beheerders.next();
-            String beheerderlijst;
-            String beheercode;
-            beheerderlijst = beheerders.getString("Username");
-            beheercode = beheerders.getString("Beheerder Beheercode");
-            return beheercode + beheerderlijst;
+            while (beheerders.next()) {
+                String beheerderlijst = beheerders.getString("Username");
+                String beheercode = beheerders.getString("Beheerder Beheercode");
+                String Firstname = beheerders.getString("Firstname");
+                String Lastname = beheerders.getString("Lastname");
+                System.out.println(beheercode + " " + beheerderlijst + " " + Firstname + " " + Lastname);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void getAllUsers() throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            query = conn.createStatement();
+            // Result set get the result of the SQL query
+            users = query
+                    .executeQuery("select * from `entry++`.`gebruiker`");
+            while (users.next()) {
+                String gebruikercode = users.getString("Gebruikerscode");
+                String gebruikerlijst = users.getString("Username");
+                String Firstname = users.getString("Firstname");
+                String Lastname = users.getString("Lastname");
+                System.out.println(gebruikercode + " " + gebruikerlijst + " " + Firstname + " " + Lastname);
+            }
         } catch (Exception e) {
             throw e;
         } finally {
