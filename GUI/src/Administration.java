@@ -294,6 +294,15 @@ public class Administration extends GUI{
     public void deleteUser(String username) {
         for (User user : usersArrayList) {
             if (user.username.equals(username)) {
+                if (usingDatabase) {
+                    try {
+                        aaa.removeUser(user.username);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 usersArrayList.remove(user);
                 userInfoPanel.remove(0);
                 userInfoPanel.add(fillerPanel2);
