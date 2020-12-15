@@ -261,6 +261,55 @@ public class DBConnections {
 
     }
 
+    public void changePasswordAdmin(String Username, String newPassword) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("UPDATE `entry++`.`beheerder` SET `Password` = (?) WHERE Username = (?);");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, Username);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void changePasswordUser(String Username, String newPassword) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("UPDATE `entry++`.`gebruiker` SET `Password` = (?) WHERE Username = (?);");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, Username);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void removeUser(String username) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("DELETE FROM `entry++`.`gebruiker` WHERE Username = (?)");
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
     // You need to close the resultSet
     private void close() {
         try {
