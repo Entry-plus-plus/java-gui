@@ -7,6 +7,7 @@ public class DBConnections {
     private ResultSet beheerders = null;
     private ResultSet users = null;
     private ResultSet verdieping = null;
+    private ResultSet kamer = null;
     private PreparedStatement preparedStatement = null;
     private String username;
 
@@ -96,10 +97,10 @@ public class DBConnections {
             preparedStatement.setString(1, verdiepingnummer);
             verdieping = preparedStatement.executeQuery();
             verdieping.next();
-            String aantalMensen = verdieping.getString("Aantal mensen");
+            int aantalMensen = verdieping.getInt("Aantal mensen");
             String locatieCode = verdieping.getString("Locatiecode");
-            String maxMensen = verdieping.getString("maxmensen");
-            String verdiepingNummer = verdieping.getString("Verdieping nummer gebouw");
+            int maxMensen = verdieping.getInt("maxmensen");
+            int verdiepingNummer = verdieping.getInt("Verdieping nummer gebouw");
             System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
         } catch (Exception e) {
             throw e;
@@ -117,12 +118,59 @@ public class DBConnections {
             verdieping = query
                     .executeQuery("select * from `entry++`.`verdieping`");
             while (verdieping.next()) {
-                String aantalMensen = verdieping.getString("Aantal mensen");
+                int aantalMensen = verdieping.getInt("Aantal mensen");
                 String locatieCode = verdieping.getString("Locatiecode");
-                String maxMensen = verdieping.getString("maxmensen");
-                String verdiepingNummer = verdieping.getString("Verdieping nummer gebouw");
+                int maxMensen = verdieping.getInt("maxmensen");
+                int verdiepingNummer = verdieping.getInt("Verdieping nummer gebouw");
                 System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
             }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void getAllRooms() throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            query = conn.createStatement();
+            // Result set get the result of the SQL query
+            kamer = query
+                    .executeQuery("select * from `entry++`.`kamer`");
+            while (kamer.next()) {
+                String kamerCode = kamer.getString("kamercode");
+                int aantalMensen = kamer.getInt("Aantal Mensen");
+                int maxMensen = kamer.getInt("Maximaal aantal mensen");
+                int kamerNummer = kamer.getInt("Kamernummer");
+                String locatieCode = kamer.getString("Locatiecode");
+                int verdieping = kamer.getInt("verdieping");
+                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void getRoom(String kamercode) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("select * from `entry++`.`kamer` where `Kamercode` = (?)");
+            preparedStatement.setString(1, kamercode);
+            kamer = preparedStatement.executeQuery();
+            kamer.next();
+            String kamerCode = kamer.getString("kamercode");
+            String aantalMensen = kamer.getString("Aantal Mensen");
+            String maxMensen = kamer.getString("Maximaal aantal mensen");
+            String kamerNummer = kamer.getString("Kamernummer");
+            String locatieCode = kamer.getString("Locatiecode");
+            String verdieping = kamer.getString("verdieping");
+            System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
         } catch (Exception e) {
             throw e;
         } finally {
