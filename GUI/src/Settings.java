@@ -167,6 +167,7 @@ public class Settings extends GUI{
         gbc.gridheight = 2;
         gbc.gridwidth = 1;
         settingsPanel.add(currentUser.generalPanel, gbc);
+        currentUser.giveColors();
 
         //gbc.fill = GridBagConstraints.VERTICAL;
         gbc.gridx = 2;
