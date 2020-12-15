@@ -13,7 +13,9 @@ public class GUI extends JDialog {
             aaa.getAllAdmins();
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
-            System.out.println(aaa.beheercode + " " + aaa.beheerderlijst);
+            aaa.getUser("gebr1");
+            System.out.println(aaa.getAllAdmins());
+            System.out.println(aaa.username);
         } catch (Exception e) {
             e.printStackTrace();
         }
