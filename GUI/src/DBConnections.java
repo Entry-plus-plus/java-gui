@@ -2,12 +2,13 @@ import java.sql.*;
 import java.util.Date;
 
 public class DBConnections {
-    public Connection connect = null;
-    public Statement query = null;
-    public ResultSet beheerders = null;
-    public ResultSet users = null;
-    public PreparedStatement preparedStatement = null;
-    public String username;
+    private Connection connect = null;
+    private Statement query = null;
+    private ResultSet beheerders = null;
+    private ResultSet users = null;
+    private ResultSet verdieping = null;
+    private PreparedStatement preparedStatement = null;
+    private String username;
 
     private Connection connectDatabase() {
         String url = "jdbc:mysql://localhost/Mysql?serverTimezone=UTC";
@@ -56,6 +57,7 @@ public class DBConnections {
                 String gebruikerlijst = users.getString("Username");
                 String Firstname = users.getString("Firstname");
                 String Lastname = users.getString("Lastname");
+                String Password = users.getString("Password");
                 System.out.println(gebruikercode + " " + gebruikerlijst + " " + Firstname + " " + Lastname);
             }
         } catch (Exception e) {
@@ -75,6 +77,49 @@ public class DBConnections {
             users = preparedStatement.executeQuery();
             users.next();
             username = users.getString("Username");
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void getFloor(String verdiepingnummer) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("select * from `entry++`.`verdieping` where `Verdieping nummer gebouw` = (?)");
+            preparedStatement.setString(1, verdiepingnummer);
+            verdieping = preparedStatement.executeQuery();
+            verdieping.next();
+            String aantalMensen = verdieping.getString("Aantal mensen");
+            String locatieCode = verdieping.getString("Locatiecode");
+            String maxMensen = verdieping.getString("maxmensen");
+            String verdiepingNummer = verdieping.getString("Verdieping nummer gebouw");
+            System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void getAllFloors() throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            query = conn.createStatement();
+            // Result set get the result of the SQL query
+            verdieping = query
+                    .executeQuery("select * from `entry++`.`verdieping`");
+            while (verdieping.next()) {
+                String aantalMensen = verdieping.getString("Aantal mensen");
+                String locatieCode = verdieping.getString("Locatiecode");
+                String maxMensen = verdieping.getString("maxmensen");
+                String verdiepingNummer = verdieping.getString("Verdieping nummer gebouw");
+                System.out.println(verdiepingNummer + " " + aantalMensen + " " + locatieCode + " " + maxMensen);
+            }
         } catch (Exception e) {
             throw e;
         } finally {
