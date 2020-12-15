@@ -60,7 +60,9 @@ public class Room {
 
     //dit is wat er gebeurt als je op de min knop drukt
     public void minus() {
-
+        if (isFull() && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
+            GUI.createNotification("WARNING: Too many people in " + roomName.getText());
+        }
         amount--;               //aantal mensen in kamer gaat omlaag
         if (amount < 0) {       //zorgt dat het niet negatief kan worden
             amount = 0;
