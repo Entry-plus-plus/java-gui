@@ -34,7 +34,7 @@ public class DBConnections {
             String beheercode;
             beheerderlijst = beheerders.getString("Username");
             beheercode = beheerders.getString("Beheerder Beheercode");
-            return beheerderlijst + beheercode;
+            return beheercode + beheerderlijst;
         } catch (Exception e) {
             throw e;
         } finally {
