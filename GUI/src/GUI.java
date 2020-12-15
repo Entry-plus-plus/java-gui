@@ -18,9 +18,9 @@ public class GUI extends JDialog {
             aaa.getAllUsers();
             aaa.getAllRooms();
             aaa.getAllFloors();
-            aaa.changePasswordAdmin("beheerder1", "password3");
-            aaa.changePasswordUser("user2", "password2");
-            aaa.removeUser("user2");
+//            aaa.changePasswordAdmin("beheerder1", "password3");
+//            aaa.changePasswordUser("user3", "password2");
+//            aaa.removeUser("user2");
 //            aaa.addAdmin("23fd6", "beheerder2", "password9000", "beherder", "Lex", "Luthor");
 //            aaa.getAllAdmins();
 //            aaa.getRoom("2345f");
