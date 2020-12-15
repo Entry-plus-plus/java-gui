@@ -26,6 +26,8 @@ public class Settings extends GUI{
     final JList<String> listOfColors= new JList(allColors);
     final JButton changeColorsButton = new JButton("Change colors");
 
+    JButton updateFromDatabaseButton = new JButton("Update from Database");
+
     JPanel userInfoPanel = new JPanel();
 
     public Settings() {
@@ -158,7 +160,7 @@ public class Settings extends GUI{
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 6;
-        gbc.insets = new Insets(10,100,10,10);
+        gbc.insets = new Insets(10,150,10,10);
         settingsPanel.add(buttons.buttonsPanel, gbc);
 
         gbc.insets = new Insets(0,0,0,0);
@@ -177,7 +179,12 @@ public class Settings extends GUI{
         gbc.gridx = 4;
         settingsPanel.add(changeColorsPanel, gbc);
 
+        gbc.gridx = 6;
+        settingsPanel.add(updateFromDatabaseButton, gbc);
 
+        updateFromDatabaseButton.addActionListener(e -> {
+            admins();
+        });
     }
 
     public void giveColors() {
@@ -204,6 +211,9 @@ public class Settings extends GUI{
             changeColorsButton.setForeground(darkColor);
             listOfColors.setBackground(darkColor2);
             listOfColors.setForeground(lightColor);
+
+            updateFromDatabaseButton.setBackground(lightColor2);
+            updateFromDatabaseButton.setForeground(darkColor);
 
             buttons.giveColors();
         }
