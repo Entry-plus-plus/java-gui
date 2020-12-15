@@ -48,6 +48,14 @@ public class Room {
         if (isFull() && !GUI.notifications.listModel.contains("WARNING: Too many people in " + roomName.getText())) {
             GUI.createNotification("WARNING: Too many people in " + roomName.getText());
         }
+        if (GUI.usingDatabase) {
+            try {
+                GUI.aaa.addEntry(roomCode);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //dit is wat er gebeurt als je op de min knop drukt
@@ -62,6 +70,15 @@ public class Room {
             GUI.notifications.listModel.removeElement("WARNING: Too many people in " + roomName.getText());
         }
         updateLabelValues();    //de labels op het scherm worden geupdate
+
+        if (GUI.usingDatabase) {
+            try {
+                GUI.aaa.removeEntry(roomCode);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //zorgt dat de waarden op het scherm geupdate worden met nieuwe waarden

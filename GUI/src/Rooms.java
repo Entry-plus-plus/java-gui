@@ -38,6 +38,7 @@ public class Rooms extends GUI {
             roomsPanel.add(roomsArray[i].plusButton);
             roomsPanel.add(roomsArray[i].minusButton);
             roomsArray[i].giveColors();
+            roomsArray[i].updateLabelValues();
         }
 
         giveColors();       //alles krijgt de juiste kleuren

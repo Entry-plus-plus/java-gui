@@ -151,9 +151,9 @@ public class DBConnections {
                 int kamerNummer = kamer.getInt("Kamernummer");
                 String locatieCode = kamer.getString("Locatiecode");
                 int verdieping = kamer.getInt("verdieping");
-                GUI.roomsArray[i] = new Room(aantalMensen, maxMensen, kamerNummer, locatieCode, verdieping);
+                GUI.roomsArray[i] = new Room(aantalMensen, maxMensen, kamerNummer, kamerCode, verdieping);
                 i++;
-                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
+                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + kamerCode + " " + verdieping);
             }
         } catch (Exception e) {
             throw e;

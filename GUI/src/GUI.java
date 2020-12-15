@@ -15,9 +15,9 @@ public class GUI extends JDialog {
 //            aaa.getAllAdmins();
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
-//            aaa.getAllUsers();
-//            aaa.getAllFloors();
-//            aaa.getAllRooms();
+            aaa.getAllUsers();
+            aaa.getAllFloors();
+            aaa.getAllRooms();
 //            aaa.getRoom("2345f");
 //            aaa.removeEntry("2345f");
 //            aaa.getRoom("2345f");
