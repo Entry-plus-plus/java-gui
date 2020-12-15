@@ -10,6 +10,7 @@ public class DBConnections {
     private ResultSet kamer = null;
     private PreparedStatement preparedStatement = null;
     private String username;
+    private ResultSet kamersInVerdieping = null;
 
     private Connection connectDatabase() {
         String url = "jdbc:mysql://localhost/Mysql?serverTimezone=UTC";
@@ -228,6 +229,30 @@ public class DBConnections {
             preparedStatement = conn.prepareStatement("UPDATE `entry++`.`kamer` SET `Aantal mensen` = `Aantal mensen` - 1 WHERE Kamercode = (?)");
             preparedStatement.setString(1, kamercode);
             preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void kamersInVerdieping(int verdieping) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            preparedStatement = conn.prepareStatement("SELECT * FROM `entry++`.`kamer` WHERE `verdieping` = (?);");
+            preparedStatement.setInt(1, verdieping);
+            kamersInVerdieping = preparedStatement.executeQuery();
+            while (kamersInVerdieping.next()) {
+                String kamerCode = kamersInVerdieping.getString("kamercode");
+                int aantalMensen = kamersInVerdieping.getInt("Aantal Mensen");
+                int maxMensen = kamersInVerdieping.getInt("Maximaal aantal mensen");
+                int kamerNummer = kamersInVerdieping.getInt("Kamernummer");
+                String locatieCode = kamersInVerdieping.getString("Locatiecode");
+                verdieping = kamersInVerdieping.getInt("verdieping");
+                System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + locatieCode + " " + verdieping);
+            }
         } catch (Exception e) {
             throw e;
         } finally {

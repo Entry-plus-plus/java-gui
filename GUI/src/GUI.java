@@ -12,11 +12,14 @@ public class GUI extends JDialog {
 
     public static void admins(){
         try {
-//            aaa.getAllAdmins();
+            aaa.getAllAdmins();
             //aaa.writeResultSet(aaa.beheerders);
             //String beheerderlijst = aaa.beheerders.getString("Username");
-//            aaa.getAllUsers();
-//            aaa.getAllFloors();
+            aaa.getAllRooms();
+            aaa.getAllUsers();
+            aaa.getAllFloors();
+            aaa.kamersInVerdieping(2);
+
 //            aaa.getAllRooms();
 //            aaa.getRoom("2345f");
 //            aaa.removeEntry("2345f");
@@ -102,7 +105,7 @@ public class GUI extends JDialog {
 
         //voegt een aantal users toe waarmee ingelogd kan worden
         if (usingDatabase) {
-            //admins();
+            admins();
             //usersArrayList.add(new User(" ", "user", "password", " ", " "));
         }
         else {
