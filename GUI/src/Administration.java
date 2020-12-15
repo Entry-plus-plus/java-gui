@@ -14,6 +14,8 @@ public class Administration extends GUI{
 
     JButton addAdminButton = new JButton("Add new administrator");
     JPanel addNewAdminPanel = new JPanel();
+    JLabel newAdminCodeLabel = new JLabel("Admncode of new user");
+    JTextField newAdminCode = new JTextField();
     final JLabel newAdminUsernameLabel = new JLabel("Username of new admin:");
     JTextField newAdminUsername = new JTextField();
     final JLabel newAdminFirstNameLabel = new JLabel("First name of new admin:");
@@ -219,6 +221,7 @@ public class Administration extends GUI{
         GroupLayout layout = new GroupLayout(addNewAdminPanel);
         addNewAdminPanel.setLayout(layout);
 
+        newAdminCode.setText("");
         newAdminUsername.setText("");
         newAdminFirstName.setText("");
         newAdminLastName.setText("");
@@ -227,10 +230,12 @@ public class Administration extends GUI{
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminCodeLabel)
                                 .addComponent(newAdminUsernameLabel)
                                 .addComponent(newAdminFirstNameLabel)
                                 .addComponent(newAdminLastNameLabel))
                         .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminCode)
                                 .addComponent(newAdminUsername)
                                 .addComponent(newAdminFirstName)
                                 .addComponent(newAdminLastName)
@@ -240,6 +245,9 @@ public class Administration extends GUI{
         //bepaalt de verticale volgorde van elementen
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup()
+                                .addComponent(newAdminCodeLabel)
+                                .addComponent(newAdminCode))
                         .addGroup(layout.createParallelGroup()
                                 .addComponent(newAdminUsernameLabel)
                                 .addComponent(newAdminUsername))
@@ -253,7 +261,7 @@ public class Administration extends GUI{
         );
 
         createNewAdminButton.addActionListener(e -> {
-            createNewAdmin(" ",newAdminUsername.getText(), newAdminFirstName.getText(), newAdminLastName.getText());
+            createNewAdmin(newAdminCode.getText() ,newAdminUsername.getText(), newAdminFirstName.getText(), newAdminLastName.getText());
             //admins.fillList();
             frame.dispose();
         });
@@ -319,7 +327,18 @@ public class Administration extends GUI{
     }
     //voegt een nieuwe user toe aan de array van admins
     public void createNewAdmin(String userCode, String username, String firstName, String lastName) {
-        adminsArrayList.add(new User(userCode, username, "password", firstName, lastName, true));
+        if (usingDatabase) {
+            try {
+                aaa.addAdmin(userCode, username, "password", null, firstName, lastName);
+                admins();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            adminsArrayList.add(new User(userCode, username, "password", firstName, lastName, true));
+        }
     }
 
     public void changeSelectedUser() {
@@ -372,6 +391,9 @@ public class Administration extends GUI{
         addAdminButton.setBackground(lightColor2);
         addAdminButton.setForeground(darkColor);
         addNewAdminPanel.setBackground(darkColor);
+        newAdminCodeLabel.setForeground(lightColor);
+        newAdminCode.setBackground(darkColor2);
+        newAdminCode.setForeground(lightColor);
         newAdminUsernameLabel.setForeground(lightColor);
         newAdminUsername.setBackground(darkColor2);
         newAdminUsername.setForeground(lightColor);
