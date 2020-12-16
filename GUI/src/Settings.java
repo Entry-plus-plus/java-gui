@@ -215,6 +215,13 @@ public class Settings extends GUI{
             updateFromDatabaseButton.setBackground(lightColor2);
             updateFromDatabaseButton.setForeground(darkColor);
 
+            try {
+                currentUser.giveColors();
+            }
+            catch (Exception e) {
+
+            }
+
             buttons.giveColors();
         }
     }
