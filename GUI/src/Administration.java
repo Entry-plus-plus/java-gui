@@ -299,7 +299,7 @@ public class Administration extends GUI{
         String encryptedPassword = Encryption.encrypt("AES/CBC/PKCS5Padding", "password", aaa.key, aaa.ivParameterSpec);
         if (usingDatabase) {
             try {
-                aaa.addUser(userCode, username, encryptedPassword, null, firstName, lastName);
+                aaa.addUser(userCode, username, "password", null, firstName, lastName);
                 usersArrayList.clear();
                 aaa.getAllUsers();
             }

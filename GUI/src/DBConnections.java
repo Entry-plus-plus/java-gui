@@ -225,7 +225,6 @@ public class DBConnections {
     }
 
     public void addUser(String Gebruikerscode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
-        IvParameterSpec ivParameterSpec = Encryption.generateIv();
         String encryptedPass = Encryption.encrypt("AES/CBC/PKCS5Padding", Password, key, ivParameterSpec);
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
