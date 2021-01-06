@@ -9,6 +9,8 @@ public class Rooms extends GUI {
     public final JPanel roomsPanel = new JPanel();      //maakt de panel waar de rooms info in komt
     final topButtons buttons = new topButtons();        //maakt de knoppen die aan de bovenkant komen
 
+    boolean usePlusMinusButtons = false;
+
     public Rooms() {
 
         buttons.currentButton = buttons.roomsButton;    //Dit is zodat de knop van rooms een andere kleur wordt
@@ -19,7 +21,12 @@ public class Rooms extends GUI {
 
         //bepaalt de layout van roomsPanel, het is een grid met numberOfRooms aan rijen en 8 kolommen
         //als je nu dingen toevoegt aan roomsPanel, wordt van links naar rechts, boven naar beneden de grid gevuld
-        roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
+        if (usePlusMinusButtons) {
+            roomsPanel.setLayout(new GridLayout(numberOfRooms, 8));
+        }
+        else {
+            roomsPanel.setLayout(new GridLayout(numberOfRooms, 6));
+        }
 
         //in GUI is er een array van Rooms gemaakt, hier wordt roomsPanel gevuld met info uit die array
         //iedere iteratie van deze for loop is een rij van de grid
@@ -35,8 +42,10 @@ public class Rooms extends GUI {
             roomsPanel.add(roomsArray[i].slashLabel);
             roomsPanel.add(roomsArray[i].maxLabel);
             roomsPanel.add(roomsArray[i].progressBar);
-            roomsPanel.add(roomsArray[i].plusButton);
-            roomsPanel.add(roomsArray[i].minusButton);
+            if (usePlusMinusButtons) {
+                roomsPanel.add(roomsArray[i].plusButton);
+                roomsPanel.add(roomsArray[i].minusButton);
+            }
             roomsArray[i].giveColors();
             roomsArray[i].updateLabelValues();
         }
