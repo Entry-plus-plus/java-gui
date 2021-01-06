@@ -68,11 +68,6 @@ public class LoginScreen extends GUI {
     public void login(String username, String password) throws Exception {
         //hasht het wachtwoord, is veiliger
         String hashedPassword = passwordHasher.hashPassword(password);
-//        String encryptedPassword = aaa.getEncryptedPassword(username);
-        System.out.println(aaa.ivParameterSpec);
-//        System.out.println(encryptedPassword + " aaaaaaaaaaaaaaaaaa");
-//        String decryptedPassword = Encryption.decrypt("AES/CBC/PKCS5Padding", encryptedPassword, aaa.key,aaa.ivParameterSpec);
-//        System.out.println(decryptedPassword);
         //itereert door lijst met users
         for (User user : usersArrayList) {
 
