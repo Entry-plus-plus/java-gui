@@ -1,4 +1,12 @@
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.swing.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginScreen extends GUI {
 
@@ -37,14 +45,34 @@ public class LoginScreen extends GUI {
             String password = passwordField.getText();
 
             //de login method wordt aangeroepen
-            login(username, password);
+            try {
+                login(username, password);
+            } catch (NoSuchPaddingException noSuchPaddingException) {
+                noSuchPaddingException.printStackTrace();
+            } catch (InvalidKeyException invalidKeyException) {
+                invalidKeyException.printStackTrace();
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+            } catch (IllegalBlockSizeException illegalBlockSizeException) {
+                illegalBlockSizeException.printStackTrace();
+            } catch (BadPaddingException badPaddingException) {
+                badPaddingException.printStackTrace();
+            } catch (InvalidAlgorithmParameterException invalidAlgorithmParameterException) {
+                invalidAlgorithmParameterException.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
         });
     }
-    public void login(String username, String password) {
+    public void login(String username, String password) throws Exception {
         //hasht het wachtwoord, is veiliger
         String hashedPassword = passwordHasher.hashPassword(password);
-
+//        String encryptedPassword = aaa.getEncryptedPassword(username);
+        System.out.println(aaa.ivParameterSpec);
+//        System.out.println(encryptedPassword + " aaaaaaaaaaaaaaaaaa");
+//        String decryptedPassword = Encryption.decrypt("AES/CBC/PKCS5Padding", encryptedPassword, aaa.key,aaa.ivParameterSpec);
+//        System.out.println(decryptedPassword);
         //itereert door lijst met users
         for (User user : usersArrayList) {
 

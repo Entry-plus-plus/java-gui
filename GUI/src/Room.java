@@ -11,7 +11,7 @@ public class Room {
 
     //maakt elementen van het scherm aan
     final JLabel roomName = new JLabel();
-    final JLabel amountLabel = new JLabel(""+amount);
+    public final JLabel amountLabel = new JLabel(""+amount);
     final JLabel maxLabel = new JLabel(""+max);
     final JLabel slashLabel = new JLabel("/");
     final JButton plusButton = new JButton("++");
@@ -90,7 +90,6 @@ public class Room {
         maxLabel.setText(""+max);
         progressBar.setMaximum(max);
         progressBar.setValue(amount);
-
         for (Floor floor : GUI.floorsArray) {
             floor.updateLabelValues();
         }

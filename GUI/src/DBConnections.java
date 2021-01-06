@@ -1,7 +1,8 @@
-import javax.swing.*;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class DBConnections {
     private Connection connect = null;
@@ -13,6 +14,22 @@ public class DBConnections {
     private PreparedStatement preparedStatement = null;
     private String username;
     private ResultSet kamersInVerdieping = null;
+    private ResultSet encryptedPasswordSet = null;
+    public static SecretKey key;
+
+    static {
+        try {
+            key = Encryption.getKeyFromPassword("reallygoodpasswordlikereallythereisnobetterpassworedinexistence", "definitleyagloballyuniquesaltnowaysomeonehasusedthisasasalt before");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static byte[] iv = { 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8 };
+    public static IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
+
 
     private Connection connectDatabase() {
         String url = "jdbc:mysql://localhost/Mysql?serverTimezone=UTC";
@@ -40,7 +57,10 @@ public class DBConnections {
                 String password = beheerders.getString("Password");
                 String firstname = beheerders.getString("Firstname");
                 String lastname = beheerders.getString("Lastname");
-                GUI.adminsArrayList.add(new User(beheercode, username, password, firstname, lastname, true));
+                System.out.println(password);
+                System.out.println(ivParameterSpec);
+                String decryptedPassword = Encryption.decrypt("AES/CBC/PKCS5Padding", password, key, ivParameterSpec);
+                GUI.adminsArrayList.add(new User(beheercode, username, decryptedPassword, firstname, lastname, true));
                 //System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
@@ -56,15 +76,15 @@ public class DBConnections {
             // Statements allow to issue SQL queries to the database
             query = conn.createStatement();
             // Result set get the result of the SQL query
-            users = query
-                    .executeQuery("select * from `entry++`.`gebruiker`");
+            users = query.executeQuery("select * from `entry++`.`gebruiker`");
             while (users.next()) {
                 String gebruikercode = users.getString("Gebruikerscode");
                 String username = users.getString("Username");
                 String password = users.getString("Password");
                 String firstname = users.getString("Firstname");
                 String lastname = users.getString("Lastname");
-                GUI.usersArrayList.add(new User(gebruikercode, username, password, firstname, lastname, false));
+                String decryptedPassword = Encryption.decrypt("AES/CBC/PKCS5Padding", password, key, ivParameterSpec);
+                GUI.usersArrayList.add(new User(gebruikercode, username, decryptedPassword, firstname, lastname, false));
                 //System.out.println(gebruikercode + " " + username + " " + firstname + " " + lastname);
             }
         } catch (Exception e) {
@@ -205,13 +225,15 @@ public class DBConnections {
     }
 
     public void addUser(String Gebruikerscode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
+        IvParameterSpec ivParameterSpec = Encryption.generateIv();
+        String encryptedPass = Encryption.encrypt("AES/CBC/PKCS5Padding", Password, key, ivParameterSpec);
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
             // Result set get the result of the SQL query
             preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`Gebruiker` (`Gebruikerscode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
             preparedStatement.setString(1, Gebruikerscode);
             preparedStatement.setString(2, Username);
-            preparedStatement.setString(3, Password);
+            preparedStatement.setString(3, encryptedPass);
             preparedStatement.setString(4, Authorisatie);
             preparedStatement.setString(5, Firstname);
             preparedStatement.setString(6, Lastname);
@@ -267,11 +289,11 @@ public class DBConnections {
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
             // Result set get the result of the SQL query
+            String encryptedPassword = Encryption.encrypt("AES/CBC/PKCS5Padding", newPassword, key, ivParameterSpec);
             preparedStatement = conn.prepareStatement("UPDATE `entry++`.`beheerder` SET `Password` = (?) WHERE Username = (?);");
-            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(1, encryptedPassword);
             preparedStatement.setString(2, Username);
             preparedStatement.executeUpdate();
-
         } catch (Exception e) {
             throw e;
         } finally {
@@ -284,8 +306,9 @@ public class DBConnections {
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
             // Result set get the result of the SQL query
+            String encryptedPassword = Encryption.encrypt("AES/CBC/PKCS5Padding", newPassword, key, ivParameterSpec);
             preparedStatement = conn.prepareStatement("UPDATE `entry++`.`gebruiker` SET `Password` = (?) WHERE Username = (?);");
-            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(1, encryptedPassword);
             preparedStatement.setString(2, Username);
             preparedStatement.executeUpdate();
 
@@ -316,10 +339,53 @@ public class DBConnections {
         try (Connection conn = this.connectDatabase()){
             // Statements allow to issue SQL queries to the database
             // Result set get the result of the SQL query
+            String encryptedPassword = Encryption.encrypt("AES/CBC/PKCS5Padding", Password, key, ivParameterSpec);
             preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`beheerder` (`Beheerder Beheercode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
             preparedStatement.setString(1, Beheercode);
             preparedStatement.setString(2, Username);
-            preparedStatement.setString(3, Password);
+            preparedStatement.setString(3, encryptedPassword);
+            preparedStatement.setString(4, Authorisatie);
+            preparedStatement.setString(5, Firstname);
+            preparedStatement.setString(6, Lastname);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }
+
+    public void addDebugAdmin(String Beheercode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            System.out.println(ivParameterSpec);
+            String encryptedPass = Encryption.encrypt("AES/CBC/PKCS5Padding", Password, key, ivParameterSpec);
+            preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`beheerder` (`Beheerder Beheercode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
+            preparedStatement.setString(1, Beheercode);
+            preparedStatement.setString(2, Username);
+            preparedStatement.setString(3, encryptedPass);
+            preparedStatement.setString(4, Authorisatie);
+            preparedStatement.setString(5, Firstname);
+            preparedStatement.setString(6, Lastname);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+
+    }    public void addDebugUser(String Gebruikerscode, String Username, String Password, String Authorisatie, String Firstname, String Lastname) throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            // Result set get the result of the SQL query
+            System.out.println(ivParameterSpec);
+            String encryptedPass = Encryption.encrypt("AES/CBC/PKCS5Padding", Password, key, ivParameterSpec);
+            preparedStatement = conn.prepareStatement("INSERT INTO `entry++`.`gebruiker` (`Gebruikerscode`, `Username`, `Password`, `Authorisatie`, `Firstname`, `Lastname`) VALUES ((?), (?), (?), (?), (?), (?));");
+            preparedStatement.setString(1, Gebruikerscode);
+            preparedStatement.setString(2, Username);
+            preparedStatement.setString(3, encryptedPass);
             preparedStatement.setString(4, Authorisatie);
             preparedStatement.setString(5, Firstname);
             preparedStatement.setString(6, Lastname);

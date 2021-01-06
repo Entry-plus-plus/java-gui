@@ -1,5 +1,12 @@
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 import javax.swing.*;
 import java.awt.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +17,7 @@ public class GUI extends JFrame {
     static Boolean usingDatabase = true;
 
     static DBConnections aaa = new DBConnections();
+
 
     public static void admins(){
 
@@ -40,8 +48,18 @@ public class GUI extends JFrame {
             @Override
             protected Object doInBackground() throws Exception {
                 while (true) {
-                    admins();
-                    System.out.println("aaaaaA");
+                    aaa.getAllAdmins();
+                    aaa.getAllUsers();
+                    aaa.getAllRooms();
+                    aaa.getAllFloors();
+                    for (Room room : GUI.roomsArray) {
+                        room.updateLabelValues();
+                        rooms = new Rooms();
+                    }
+                    for (Floor floor : GUI.floorsArray) {
+                        floor.updateLabelValues();
+                    }
+                    //System.out.println("aaaaaA");
                     TimeUnit.MILLISECONDS.sleep(500);
                 }
             }
@@ -100,8 +118,13 @@ public class GUI extends JFrame {
 
     static JFrame frame = new JFrame();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
+        Encryption.test();
+        //aaa.addDebugAdmin("23fd7","beheerder3", "password", "beheerder","beheerder","beheerder");
+        //aaa.addDebugUser("gebr1", "user1", "password", "user", "user3", "aaaaa");
+        //aaa.addDebugUser("gebr2", "user2", "password2", "user", "user3", "aaaaa");
+        //aaa.addDebugUser("gebr3", "user3", "password3", "user", "user3", "aaaaa");
         if (usingDatabase) {
             admins();
         }
@@ -297,5 +320,6 @@ public class GUI extends JFrame {
         groupsArrayList.add(new Group("group 4"));
 
     }
+
 
 }

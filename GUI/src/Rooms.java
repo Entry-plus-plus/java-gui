@@ -60,4 +60,5 @@ public class Rooms extends GUI {
             mainview.setBackground(darkColor);
         }
     }
- }
+
+}
