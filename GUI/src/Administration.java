@@ -1,5 +1,11 @@
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import java.awt.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 public class Administration extends GUI{
 
@@ -152,7 +158,21 @@ public class Administration extends GUI{
         );
 
         createNewUserButton.addActionListener(e -> {
-            createNewUser(newUserCode.getText() ,newUsername.getText(), newFirstName.getText(), newLastName.getText());
+            try {
+                createNewUser(newUserCode.getText() ,newUsername.getText(), newFirstName.getText(), newLastName.getText());
+            } catch (NoSuchPaddingException noSuchPaddingException) {
+                noSuchPaddingException.printStackTrace();
+            } catch (InvalidKeyException invalidKeyException) {
+                invalidKeyException.printStackTrace();
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+            } catch (IllegalBlockSizeException illegalBlockSizeException) {
+                illegalBlockSizeException.printStackTrace();
+            } catch (BadPaddingException badPaddingException) {
+                badPaddingException.printStackTrace();
+            } catch (InvalidAlgorithmParameterException invalidAlgorithmParameterException) {
+                invalidAlgorithmParameterException.printStackTrace();
+            }
             users.fillList();
             frame.dispose();
         });
@@ -275,11 +295,11 @@ public class Administration extends GUI{
     }
 
     //voegt een nieuwe user toe aan de array van users
-    public void createNewUser(String userCode, String username, String firstName, String lastName) {
-
+    public void createNewUser(String userCode, String username, String firstName, String lastName) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+        String encryptedPassword = Encryption.encrypt("AES/CBC/PKCS5Padding", "password", aaa.key, aaa.ivParameterSpec);
         if (usingDatabase) {
             try {
-                aaa.addUser(userCode, username, "password", null, firstName, lastName);
+                aaa.addUser(userCode, username, encryptedPassword, null, firstName, lastName);
                 usersArrayList.clear();
                 aaa.getAllUsers();
             }

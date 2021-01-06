@@ -39,19 +39,4 @@ public class Encryption {
         return new String(plainText);
     }
 
-    public static void test()
-            throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException,
-            BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
-
-        String input = "baeldung";
-        SecretKey key = generateKey(128);
-        System.out.println(key);
-        IvParameterSpec ivParameterSpec = generateIv();
-        System.out.println(ivParameterSpec);
-        String algorithm = "AES/CBC/PKCS5Padding";
-        String cipherText = encrypt(algorithm, input, key, ivParameterSpec);
-        String plainText = decrypt(algorithm, cipherText, key, ivParameterSpec);
-        System.out.println(plainText);
-    }
-
 }

@@ -120,7 +120,6 @@ public class GUI extends JFrame {
 
     public static void main(String[] args) throws Exception {
 
-        Encryption.test();
         //aaa.addDebugAdmin("23fd7","beheerder3", "password", "beheerder","beheerder","beheerder");
         //aaa.addDebugUser("gebr1", "user1", "password", "user", "user3", "aaaaa");
         //aaa.addDebugUser("gebr2", "user2", "password2", "user", "user3", "aaaaa");
