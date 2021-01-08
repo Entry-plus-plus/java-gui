@@ -11,6 +11,7 @@ public class DBConnections {
     private ResultSet users = null;
     private ResultSet verdieping = null;
     private ResultSet kamer = null;
+    private ResultSet group = null;
     private PreparedStatement preparedStatement = null;
     private String username;
     private ResultSet kamersInVerdieping = null;
@@ -207,6 +208,24 @@ public class DBConnections {
             close();
         }
 
+    }
+
+    public void getAllGroups() throws Exception {
+        try (Connection conn = this.connectDatabase()){
+            // Statements allow to issue SQL queries to the database
+            query = conn.createStatement();
+            // Result set get the result of the SQL query
+            group = query.executeQuery("select * from `entry++`.`group`");
+            while (kamer.next()) {
+                String groupName = group.getString("Name");
+                GUI.groupsArrayList.add(new Group(groupName));
+                //System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + kamerCode + " " + verdieping);
+            }
+        }catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
     }
 
     public void addEntry(String kamercode) throws Exception {

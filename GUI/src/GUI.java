@@ -28,6 +28,7 @@ public class GUI extends JFrame {
             aaa.getAllUsers();
             aaa.getAllRooms();
             aaa.getAllFloors();
+            aaa.getAllGroups();
 ////            aaa.changePasswordAdmin("beheerder1", "password3");
 ////            aaa.changePasswordUser("user3", "password2");
 ////            aaa.removeUser("user2");
@@ -52,6 +53,7 @@ public class GUI extends JFrame {
                     aaa.getAllUsers();
                     aaa.getAllRooms();
                     aaa.getAllFloors();
+                    aaa.getAllGroups();
                     for (Room room : GUI.roomsArray) {
                         room.updateLabelValues();
                         rooms = new Rooms();
