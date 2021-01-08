@@ -58,8 +58,6 @@ public class DBConnections {
                 String password = beheerders.getString("Password");
                 String firstname = beheerders.getString("Firstname");
                 String lastname = beheerders.getString("Lastname");
-                System.out.println(password);
-                System.out.println(ivParameterSpec);
                 String decryptedPassword = Encryption.decrypt("AES/CBC/PKCS5Padding", password, key, ivParameterSpec);
                 GUI.adminsArrayList.add(new User(beheercode, username, decryptedPassword, firstname, lastname, true));
                 //System.out.println(beheercode + " " + username + " " + firstname + " " + lastname);
