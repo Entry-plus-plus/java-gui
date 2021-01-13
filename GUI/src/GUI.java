@@ -1,12 +1,5 @@
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 import javax.swing.*;
 import java.awt.*;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,23 +15,11 @@ public class GUI extends JFrame {
     public static void admins(){
 
         try {
-//            //aaa.writeResultSet(aaa.beheerders);
-//            //String beheerderlijst = aaa.beheerders.getString("Username");
             aaa.getAllAdmins();
             aaa.getAllUsers();
             aaa.getAllRooms();
             aaa.getAllFloors();
             aaa.getAllGroups();
-////            aaa.changePasswordAdmin("beheerder1", "password3");
-////            aaa.changePasswordUser("user3", "password2");
-////            aaa.removeUser("user2");
-////            aaa.addAdmin("23fd6", "beheerder2", "password9000", "beherder", "Lex", "Luthor");
-////            aaa.getAllAdmins();
-////            aaa.getRoom("2345f");
-////            aaa.removeEntry("2345f");
-////            aaa.getRoom("2345f");
-////            aaa.addUser("gebr3", "user3", "password", "user", "user", "Neutron");
-////            aaa.getUser("gebr3");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,7 +42,6 @@ public class GUI extends JFrame {
                     for (Floor floor : GUI.floorsArray) {
                         floor.updateLabelValues();
                     }
-                    //System.out.println("aaaaaA");
                     TimeUnit.MILLISECONDS.sleep(500);
                 }
             }

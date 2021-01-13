@@ -214,7 +214,7 @@ public class DBConnections {
             query = conn.createStatement();
             // Result set get the result of the SQL query
             group = query.executeQuery("select * from `entry++`.`group`");
-            while (kamer.next()) {
+            while (group.next()) {
                 String groupName = group.getString("Name");
                 GUI.groupsArrayList.add(new Group(groupName));
                 //System.out.println(kamerNummer + " " + aantalMensen + " " + kamerCode + " " + maxMensen + " " + kamerCode + " " + verdieping);
